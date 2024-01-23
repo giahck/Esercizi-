@@ -1,0 +1,35 @@
+<head>
+	<nav>
+	</nav>	
+</head>
+<hr>
+<main>
+	<section>
+		<article>
+			<ul>
+			</ul>
+		</article>
+		
+	</section>
+	<section>
+				<article>
+					<ol>
+					</ol>
+				</article>
+
+				<article>
+					<table>
+					</table>
+				</article>
+
+				<article>
+					<form>
+					</form>
+				</article>
+	</section>
+
+
+</main>
+<footer>
+
+</footer
