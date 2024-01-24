@@ -1,0 +1,73 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,700;1,500;1,700&display=swap');
+body{
+ 
+        font-family: "Poppins", sans-serif;
+        font-weight: 300;
+        font-style: normal;
+      
+    margin: 0;
+    padding: 0;
+}
+
+#logo{
+    width: 15%;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.containerHeader{
+    display: flex;
+    justify-content: center;
+    background-color: #FDFBF1;
+    border-top-style: solid;
+    border-top-color: #FFD877;
+    border-width: 0.1rem;
+}
+.containerHeader p:first-child{
+    color: #004D4C;
+}
+main{
+    width: 45%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.articleUp h1{
+    text-align: center;
+    margin: 2px;
+    font-size: 2.5rem;
+}
+.articleUp h3{
+    text-align: center;
+    color: #9E9E9E;
+}
+.articlePostLink h3{
+    color: orangered;
+    margin: 0.7px;
+}
+.articlePostLink a{
+    font-size: 1.3rem;
+}
+a{
+    color: #107777;
+}
+.articlePostLink{
+    padding-left: 25px;
+    border-left-style: solid;
+    border-left-color: #FFD877;
+}
+#hr{
+    border-top: 1px solid aqua;
+}
+.ingredientiPart1 li::marker{
+    color:aqua;
+}
+.ingredientiPart2 li::marker{
+    color:rgb(17, 42, 42);
+}
+ li+li{
+    margin-top: 1.5em;
+}
+.articleBottom p:last-child{
+    padding-left: 0.5em;
+}
