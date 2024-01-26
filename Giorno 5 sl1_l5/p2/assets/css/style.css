@@ -1,0 +1,118 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap'); */
+/* BODY set*/
+body{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    /* background-color: #393d41; */
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 1.65em;
+    text-align: center;
+    color: #393d41 ;
+}
+/* font montserrat */
+h1,h3,button{
+font-family: "Montserrat", sans-serif;
+font-weight: 700;
+font-style: normal;
+}
+
+/* header */
+ header{
+    background-color: black;
+}
+header img{
+    display: block;
+    width: 175px;
+    padding: 2.18em;
+}
+header nav {
+    width: 100%;
+    display: inline-block;
+    background: url("/assets/images/banner.jpg") no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+header nav div{
+    width: 50%;
+    margin: 15vh auto;
+}
+h1,h2,h3{
+    line-height: 1.5em;
+    color: #25a2c3 ;
+}
+button{
+    border: none;
+    padding: 15px 20px;
+    font-weight:bold;
+    color: white;
+    background-color: #f04c2f ;
+    border-radius: 5px;
+    margin: 15px;
+}
+
+main .articoloLavoro{
+    padding: 2.50em;
+
+}
+main .articoloLavoro .articoloLavoroImg{
+    display: inline-block;
+
+}
+ main .articoloLavoro .articoloLavoroImg img{   
+    border-radius: 50%;
+} 
+main .articoloLavoroContent {
+    display: inline-block;
+    position: relative;
+    width: 50%;/* faccio riferimento all'imagine di sopra */
+}
+ h2,a{
+    color: white;
+}
+main .articoloCitazione{
+    margin: 0 0 2.5em;
+    width: 100%;
+    background-color: #e22d0e;
+    color: white;
+    padding: 20px 0 20px 0;
+}
+.articoloCitazione p{
+    margin-bottom: 0;
+}
+main .sezione{
+    width: 100%;
+}
+aside{
+    width: 25%;
+    height: 400px;
+    display: inline-block;
+    margin: 0 2.5em 2.5em;
+    border: 1px solid #dee1e3;
+    border-radius: 15px;
+}
+#img{
+    background-color: #25a2c3;
+    width: 500px;
+    height: 400px
+}
+aside img{
+    width: 100%;
+    height: 100%;
+}
+footer{
+    padding: 2.50em;
+    line-height: 1em;
+    color: white;
+    margin-bottom: 0;
+    background-color: #25a2c3;
+}
+footer p a{
+    color: #c8e7f0;
+}
+hr{ 
+    width: 50%;
+} 
