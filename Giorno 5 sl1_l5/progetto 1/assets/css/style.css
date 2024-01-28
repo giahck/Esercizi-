@@ -4,7 +4,6 @@ body{
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     font-style: normal;
-    /* background-color: #393d41; */
     margin: 0;
     padding: 0;
     font-size: 1.2rem;
@@ -25,7 +24,7 @@ header{
 }
 header img{
     width: 175px;
-    padding: 2.18em;
+    padding: 2.18em 0;
 }
 header nav {
     display: inline-block;
@@ -35,11 +34,24 @@ header nav {
     background-size: cover;
 
 }
+/* altezza predefinita heading */
 h1,h2,h3{
     line-height: 1.5em;
     color: #25a2c3 ;
 }
-button{
+/* link che porta alla scheda Lavora con noi */
+header nav p:last-child{
+    margin: 50px 0px;
+}
+header nav p a{
+    text-decoration: none;
+    background-color: #f04c2f ;
+    padding: 15px 30px;
+    border-radius: 0.2em;
+    font-weight:bold;
+}
+
+/* button{
     border: none;
     padding: 15px 20px;
     font-weight:bold;
@@ -47,10 +59,8 @@ button{
     background-color: #f04c2f ;
     border-radius: 5px;
     margin: 15px;
-}
-main .articoloLavoro{
-    padding: 2.50em;
-}
+} */
+/* main */
 main .articoloLavoro img{
     width: 100%;
     border-radius: 50%;
@@ -60,17 +70,18 @@ h2,a{
 }
 main .articoloCitazione{
     /* position:absolute;
-    left: 0;    nel caso fosse mettesi il pading predefinito nel main
+    left: 0;    se mettesi il pading predefinito nel main
     margin: 0; */
     margin: 0 0 2.5em;
     width: 100%;
     background-color: #e22d0e;
     color: white;
-    padding: 20px 0 20px 0;
+    padding: 20px 0;
 }
 .articoloCitazione p{
     margin-bottom: 0;
 }
+/* strutura schede */
 aside{
     margin: 0 2.5em 2.5em;
     border: 1px solid #dee1e3;
@@ -79,6 +90,7 @@ aside{
 aside img{
     width: 100%;
 }
+/* footer */
 footer{
     padding: 2.50em;
     line-height: 1em;

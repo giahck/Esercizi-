@@ -24,8 +24,10 @@
     <title>Progetto 1 settimana 1</title>
   </head>
   <body>
+    <!-- header -->
     <header>
       <img src="/assets/images/logo.png" alt="imgLogo" />
+      <!-- nav appeso un img background-->
       <nav>
         <div>
           <h1>Corso Web Developer</h1>
@@ -33,16 +35,20 @@
             Smetti di inseguire i titoli, inizia a lavorare. Mentre tutti
             vogliono arricchire il CV, tu pensa ad arricchire le tue competenze.
           </p>
-          <button>PARTIAMO!</button>
+          <p><a href="#lavoraSubito" title="linkLavora">PARTIAMO!</a></p>
+          <!-- <button>PARTIAMO!</button> -->
         </div>
       </nav>
     </header>
+    <!-- MAIN 2 articoli e una sezzione schede(aside)-->
     <main>
+      <!-- articli lavoro, con due blocchi div -->
       <article class="articoloLavoro">
-        <div class="articoloLavoroImg">
+        <!-- imaggine-->
+        <div id="articoloLavoroImg">
           <img src="/assets/images/notebook.jpg" alt="imgPromozione" />
         </div>
-
+        <!-- content -->
         <div class="articoloLavoroContent">
           <h3>Tutti ti cercano</h3>
           <p>
@@ -60,66 +66,77 @@
           </p>
         </div>
       </article>
+      <!-- articolo citazione -->
       <article class="articoloCitazione">
         <h2>Epicode garantisce</h2>
         <blockquote>
-          <q
-            ><cite
-              >3 mesi intensivi di corso che cambieranno radicalmente la tua
-              vita</cite
-            ></q
-          >
+          <q>
+            <cite>3 mesi intensivi di corso che cambieranno radicalmente la tua
+              vita</cite>
+          </q>
           <br />
           <p>Mario Rossi</p>
           <small>CEO, Epicode</small>
         </blockquote>
       </article>
-      <br>
-      <section class="sezione">
+      <br />
+      <!-- sezione schede, con 1 blocco aside con annidato un div per il contenuto-->
+      <section id="schede">
         <aside>
           <img src="/assets/images/foto1.jpg" alt="asideImg1" />
+          <div class="asideDescrizione">
             <h3>Il tuo PC</h3>
             <p>
               Se vuoi diventare developer è l’unico strumento di cui hai
               bisogno.
             </p>
-          </aside>
-          <aside>
-            <img src="/assets/images/foto2.jpg" alt="asideImg2" />
+          </div>
+        </aside>
+        <aside>
+          <img src="/assets/images/foto2.jpg" alt="asideImg2" />
+          <div class="asideDescrizione">
             <h3>Impara ora</h3>
             <p>
               Impara da chi diventerai tra qualche anno, e diventa una rockstar
               come loro.
             </p>
-          </aside>
-          <aside>
-           
-            <img src="/assets/images/foto3.jpg" alt="asideImg3" />
+          </div>
+        </aside>
+        <aside id="lavoraSubito">
+          <img src="/assets/images/foto3.jpg" alt="asideImg3" />
+          <div class="asideDescrizione">
             <h3>Lavora subito</h3>
             <p>Sappiamo cosa vogliono le aziende, perché lavoriamo con loro.</p>
-          </aside>
+          </div>
+        </aside>
       </section>
     </main>
-    <br>
+    <br />
+    <!-- footer -->
     <footer>
-      <h2>Contattaci</h2>
-      <p>
-        <i class="fa fa-phone"></i>
-        <a href="tel:+3911223456" title="contatti telefonici">(+39)11223456</a>
-      </p>
-      <p>
-        <i class="fa fa-envelope"></i>
-        <a
-          href="mailto:info@epicode.school"
-          title="contattami per informazioni/lavoro/privacy"
-          >info@epicode.school</a
-        >
-      </p>
+      <div>
+        <h2>Contattaci</h2>
+        <p>
+          <i class="fa fa-phone"></i>
+          <a href="tel:+3911223456" title="contatti telefonici"
+            >(+39)11223456</a
+          >
+        </p>
+        <p>
+          <i class="fa fa-envelope"></i>
+          <a
+            href="mailto:info@epicode.school"
+            title="contattami per informazioni/lavoro/privacy"
+            >info@epicode.school</a
+          >
+        </p>
 
-      <address>
-        <i class="fa fa-location-arrow"></i>Via Appia 1 - 00100 Roma(RM)
-      </address>
-      <hr />
+        <address>
+          <i class="fa fa-location-arrow"></i>Via Appia 1 - 00100 Roma(RM)
+        </address>
+        <br />
+        <hr />
+      </div>
       <p>
         &copy;2021. Immagini di
         <a href="https://pixabay.com/it/" target="_blank">pixabay</a>
