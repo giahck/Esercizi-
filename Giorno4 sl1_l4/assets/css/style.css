@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,500;1,300;1,500&display=swap');
+/* IMPOSTAZIONI GENERALI */
+body{
+    background-image: url("/assets/img/sfondo.png");
+    font-size: 0.85rem;
+    line-height: 1.3;
+    font-family: Poppins, 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+/* cancella gli hr */
+hr {
+    visibility: hidden;
+    }
+    /* inizio header */
+#header{
+    background:linear-gradient(rgba(0,160,198,1), rgba(3,109,134,1) );
+    margin: 15px;
+    /* margin: 20px auto; */
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 0;
+    padding: 15px 0;
+    
+}
+/* cancello e inserisco * e imposto i colori*/
+.imgP nav ul{
+    padding: 0;/* con inside potresti avere dei problemi inline */
+    list-style-position: inside;
+        list-style-type:"\22c6\0020"; 
+    
+}
+/* header nav li a::before {
+    content: "\22c6\0020";
+} */
+.imgP nav ul li a{
+    text-decoration: none;
+    color: white;
+}
+.imgP nav ul li a:hover{
+    color: red;
+}
+
+/* do le misure hai due macro contenitori 
+ci posso aggiungere anche header o magri direttamente nel body 
+nel caso fosse tutto uguale*/
+main{
+    box-shadow: 0 4px 5px #645d5d;
+}
+main,aside{
+    padding: 15px;
+    margin: 15px;
+    font-size: 14px;
+    padding: 10px ;
+    background-color: white;
+ 
+}
+/* provo nth sul p */
+.article1 p:nth-child(2){
+    color: grey;
+}
+strong{
+    color: purple;
+    font-weight:bold;
+}
+.article1 code{
+    background-color: aliceblue;
+    border: 1px solid rgb(187, 181, 181);
+    border-radius: 4px;
+}
+/* TABELLA */
+
+table {
+    margin-bottom: 2em;
+    border-collapse: collapse;
+    border-bottom: 1px solid #3f6bca;
+/* oppure puoi mettere cellspacing="0" nel tag table per il bordino bianco */
+}
+th,td{
+    padding: 10px 15px;
+}
+caption {
+    font-weight: bold;
+    font-style: italic;
+}
+thead tr {
+    background-color: #3f6bca;
+    color: #ffffff;  
+}
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+tbody tr:nth-child(even){
+    background-color: #F3F3F2;
+}
+tbody tr:last-of-type {
+    border-bottom: 2px solid #3f6bca;
+}
+iframe{
+    width: 100%;
+    height: auto;
+    border-radius: 18px;
+}
+#newSletter{
+    padding: 15px;
+    background-color: #e3e3e3;
+}
+aside h2{
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    font-weight: bold;
+}
+fieldset{
+    border: 0;
+}
+input{
+    padding: 5px 10px;
+    border-bottom: 1px dashed #333;
+}
+button{
+    padding: 5px 10px;
+    border: 0;
+    background-color: #3f6bca;
+    color: white;
+    font-weight: bold;
+}
+.containr_asaid{
+    background-color: #e3e3e3;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #c3c3c3;
+}
+.containr_asaid p:last-child{
+    vertical-align: bottom;
+    text-align: right;
+    margin: 0;
+}
+footer{
+    margin: 15px;
+    background: rgb(92, 86, 86);
+    background: linear-gradient(0deg, rgba(53,53,53,1) 0%, rgba(5,85,103,1) 68%);
+    padding: 1em;
+    text-align: center;
+}
+
+footer a {
+    color: fuchsia;
+}
+
+
+
+
+
