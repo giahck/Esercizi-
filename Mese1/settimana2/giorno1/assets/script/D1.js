@@ -28,16 +28,21 @@ document.getElementById('dataType').innerHTML=liStringa+liNumber+liBoolean+liUnd
 
 /* SCRIVI QUI LA TUA RISPOSTA */
 let myName='Gianluca';
-
+document.getElementById('myName').innerHTML=myName;
 /* ESERCIZIO 3
  Scrivi il codice necessario ad effettuare un addizione (una somma) dei numeri 12 e 20.
 */
 /* SCRIVI QUI LA TUA RISPOSTA */
 let prev=12+20;
-let num1= prompt('inserisci il primo numero: ');
+let pAdizzione=document.getElementById('addizione');
+pAdizzione.addEventListener('click',function(){
+  let num1= prompt('inserisci il primo numero: ');
 let num2= prompt('inserisci il secondo numero: ');
 let totale=+num1+ +num2;
-console.log(' questo è il risultato della somma ',totale, (prev===totale)?'è uguale a quello inserito '+prev:'non è uguale a quello inserito');
+document.getElementById('addizioneP').innerHTML=(prev===totale)?'è uguale a quello inserito '+prev:'non è uguale a quello inserito';
+});
+
+// console.log(' questo è il risultato della somma ',totale, (prev===totale)?'è uguale a quello inserito '+prev:'non è uguale a quello inserito');
 
 
 /* ESERCIZIO 4
@@ -69,7 +74,7 @@ try{
 */
 /* SCRIVI QUI LA TUA RISPOSTA */
 x -=4;
-console.log('la sotrazione risulta: '+x)
+document.getElementById('sotrazzione').innerHTML='la sotrazione risulta: '+x;
 
 /* ESERCIZIO 7
  Crea due variabili: "name1" e "name2". Assegna a name1 la stringa "john", e assegna a name2 la stringa "John" (con la J maiuscola!).
