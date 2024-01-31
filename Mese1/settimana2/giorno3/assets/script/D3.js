@@ -265,15 +265,10 @@ console.log(charactersNames);
 /* --EXTRA-- ESERCIZIO 10
   Crea una funzionalità che selezioni un elemento casuale dall'array "starWarsCharacters" e ne stampi in console le proprietà in modo discorsivo (a tuo piacimento).
 */
+stampa='';
 let num=Math.floor(Math.random() * starWarsCharacters.length);
 console.log(starWarsCharacters[num].name);
 for(prop in starWarsCharacters[num] ){
-  console.log(prop);
-  
+  stampa+="<li>" + prop+' '+starWarsCharacters[num][prop]+ "</li>";
 }
-
-stampa+="<li>" + prop+' '+starWarsCharacters[num].mass + "</li>";
-
-
-
 document.getElementById("ese10").innerHTML = stampa;
