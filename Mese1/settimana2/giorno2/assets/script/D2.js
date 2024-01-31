@@ -124,13 +124,23 @@ document.getElementById('p6').innerHTML=totalShoppingCart.totale+' questo è sco
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
-let var1=12,var2=10,var3=50;
-if(var1>var2&&var1>var3&&var2>var3)
-  document.getElementById('p7').innerHTML='ordinato var1='+var1+' var 2='+var2+' var 3='+var3;
-else if(var1<var2&&var2>var3&&var1>var3)
-  document.getElementById('p7').innerHTML='ordinato var2='+var2+' var 1='+var1+' var 3='+var3;
-else
-document.getElementById('p7').innerHTML='ordinato var3='+var3+' var 2='+var2+' var 1='+var1;
+let ordina = document.getElementById("p7");
+let var1 = 1005, var2 = 550, var3 = 1500;
+if (var1 > var2 && var1 > var3) {
+  (var2>var3)?
+          ordina.innerHTML = "ordinato var1=" + var1 + " var 2=" + var2 + " var 3=" + var3:
+          ordina.innerHTML='ordinato var1='+var1+' var 3='+var3+' var 2='+var2;
+}
+  if(var2>var1&&var2>var3){
+    (var1>var3)?
+          ordina.innerHTML='ordinato var2='+var2+' var1='+var1+' var3='+var3:
+          ordina.innerHTML='ordinato var2='+var2+' var3='+var3+' var1='+var1;
+  }
+  if(var3>var1&&var3>var2){
+    (var2>var1)?
+          ordina.innerHTML='ordinato var3='+var3+' var2='+var2+' var3='+var1:
+          ordina.innerHTML='ordinato var3='+var3+' var3='+var1+' var1='+var2;
+  }
 /* ESERCIZIO 8
   Crea un algoritmo per verificare che un valore fornito sia un numero oppure no (suggerimento: cerca su un motore di ricerca "typeof").
 */
