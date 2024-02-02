@@ -1,0 +1,150 @@
+/* Your styles here */
+body{
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8rem;
+    background-color: #E9EDEE;
+}
+nav,footer{
+    background-color: #222F3F;
+}
+nav img{
+    margin: 0.2em 0.5em;
+    width: 70px;
+}
+#toolbar {
+    background-color: #364759;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-size: 0.70em;
+}
+#toolbar ul{
+    display: inline-block;
+   margin: 0 0.5em;
+   padding: 0.2em;
+   text-align: center;
+}
+#toolbar ul li{
+    display: inline-block;
+    text-align: center;
+    padding: 2px 2px;
+}
+#toolbar ul li a{
+    color: #C9D1D6;
+    
+    padding: 2px 2px;
+    text-decoration: none;
+}
+
+#toolbar li a.active {
+    background-color: #04AA6D;
+}
+/* inizio main */
+main{
+    margin: 0;
+    padding: 0.7em;
+}
+/* primo link articolo 1*/
+#linkGift{
+    text-align: center;
+    color: #C9D1D6;
+    font-size: 0.70em;
+    background-color: #F56600;
+    /* margin: 0 0.5em; */
+    padding: 0.2em;
+    margin-bottom: 1.11em;/* 12px */
+}
+#linkGift p{
+    margin: 0;
+    padding: 2px 2px;
+}
+/* gift guide articolo 2*/
+#guideGift div{
+    position: relative;
+}
+#guideGift img:first-child{/* responsiv */
+    position: absolute;
+    width: 100%;
+    opacity: 0.7;
+    min-height: 70px;
+}
+#guideGift img:last-of-type{/* sovraposto*/
+width: 100%;
+min-height: 70px;
+
+}
+#guideGift .text{
+    position: absolute;
+    margin:0 auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+     bottom: 0.3em;  
+}
+.text h2,p{
+    line-height: 0.4em;
+ 
+    color: white;
+}
+#schede{
+    background-color: white;
+}
+/* titoli */
+.tit h3{display: inline-block;
+    font-size: 0.70em;
+    padding: 0.5em;
+    margin: 0;
+}
+.tit a{
+    display: inline-block;
+    font-size: 0.70em; text-decoration: none;
+    color: #316E7B;}
+/* schede */
+.scheda{
+  
+ display: inline-block;
+ vertical-align: top;
+    border-radius: 20px;
+ max-width: 110px;
+ margin-bottom: 1.11em;
+	padding-bottom:0.2em;
+    padding: 0.2em;
+    
+}
+.scheda img{
+    border-radius: 20px;
+    width: 100%;
+    display: inline-block;
+    min-height: 150px;
+	max-height: 150px;
+    box-shadow: 2px 2px 4px #5a5959;
+}
+/* img category */
+.shopCategory img{
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.shopCategory .tit{
+text-align: center;
+margin-bottom: 1.11em;
+
+}
+.shopCategory .tit h3{padding: 0;}
+footer{ text-align: center;}
+footer div{
+    background-color:#364759; 
+     padding: 0.5em;
+     }
+footer a{  
+    color: white;
+}
+footer img{
+     text-align: center;
+     padding: 1.5em;
+    width: 80px;
+}
