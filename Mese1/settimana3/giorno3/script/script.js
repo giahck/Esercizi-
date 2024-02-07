@@ -11,21 +11,21 @@ function insertDati(id){
         name:nome.value,
         cognome:cognome.value,
         text:text.value,
-        id:'a'+id,
+        id:id,
     };
     arrayDati.push(persona);
 }
 console.log(arrayDati);
 
 /* creo struttura visualizzazione per ogni persona un articolo*/
-function view(id){
+function view(idI,id){
     let articolo=document.createElement('article');
     let nomeV=document.createElement('h1');
     let cognomeV=document.createElement('h2'); 
     let textV=document.createElement('p'); 
-    
+    console.log(idI+'   '+id);
     articolo.setAttribute('class','articol')
-    articolo.setAttribute('id','a'+id)
+    articolo.setAttribute('id',idI)
 
     nomeV.innerText=arrayDati[id].name;
     cognomeV.innerText=arrayDati[id].cognome;
@@ -37,35 +37,40 @@ function view(id){
     
     contenitore.appendChild(articolo);
 };
-/* seleziono una persona */
+/* seleziono una persona ed ise vieni clicato compare il botonne elimina*/
 function selected(id,arrId){
-    
-   document.getElementById(id).addEventListener('click',function(){
-        if(articolo[arrId].style.backgroundColor!=='white'){
-            articolo[arrId].style.backgroundColor='white'}
-            else{console.log('sda');
+    let arrM='a'+arrId
+   document.getElementById(arrId).addEventListener('click',function(){
+                const rem=document.getElementById(arrM);/* controllo se esiste il bottone */
+        if(rem===null){
             articolo[arrId].style.backgroundColor='rgb(226, 155, 155)';
+            remuve(arrId);/* dopo selezionato mi cancelli */
+        }else{
+            articolo[arrId].style.backgroundColor='white';
+            document.getElementById(arrM).remove();
         }
-            
-    
    });
 
 }
-function remuve(){
-    
+function remuve(arrId){
+    let arrM='a'+arrId
+    articolo[arrId].innerHTML+=`<button type="button" id="${arrM}" >cancella</button>`;
+    document.getElementById(arrM).addEventListener('click',function(){
+        document.getElementById(arrId).remove();
+       
+    })
+  
 }
 
 /* bottone crea e visualizza */
 btnSubmit.addEventListener('click',function() {
-    let lunghezza=arrayDati.length;
+    let lunghezza='a'+arrayDati.length;/* id tag di ogni articolo che equivale al numero di oggetto*/
     insertDati(lunghezza);
-    view(lunghezza);
-  selected('a'+lunghezza,lunghezza);
-  remuve();
+     view(lunghezza,lunghezza.slice(1));
+   selected(length,lunghezza);
+
     
 });
 
 
 
-
-/* evento in attesa se cliccki su una persona */
