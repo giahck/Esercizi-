@@ -1,0 +1,36 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+}
+header{
+    text-align: center;
+    background-color: aquamarine;
+}
+header h1,header h2{
+    color: blueviolet;
+    margin: 0;
+    padding: 5px;
+}
+nav{
+    padding: 20px;
+}
+nav input{
+    display: block;
+    margin: 0 auto;
+}
+#contenitor{
+    text-align: center;
+    width: 400px;
+    margin: 0 auto;
+    
+}
+.articol{
+    border: solid 1px black;
+    background-color: white;
+}
+.articol h1,.articol h2{
+    display: inline-block;
+    padding: 10px;
+    
+}
