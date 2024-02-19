@@ -224,11 +224,19 @@ footer a {
         display: inline-block;
         padding: 5px;
      }
-}
-@media screen and (min-width: 768px){
-    main article h2{
+     main article section h2{
+        background-color: #A3A3A3;
+     }
+     main img{
+        border:2px solid red;
+             width: 50px;
+     }
+     main article h2{
         font-weight: bold;
     }
+}
+@media screen and (min-width: 768px){
+   
  header li{
     display: inline-block;
     padding: 10px;
@@ -241,9 +249,7 @@ footer a {
     margin: 0 auto;
     width: 500px;    
 }
-main article section h2{
-   background-color: #A3A3A3;
-}
+
 }
 @media screen and (min-width: 1200px) {
     body{
@@ -297,12 +303,13 @@ main article section h2{
         /* display: inline-block; */
         float: left;
         width: 50%; 
+        height: 200px;
     }
     main article section{
         display: inline-block;
         width: 50%;
+    
         margin: 0;
-        vertical-align: top;
     }
  aside{
     clear: both;
