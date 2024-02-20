@@ -146,11 +146,7 @@ header {
   }
 }
 
-@media screen and (min-width: 800px) {
-  header {
-    padding: 1em;
-  }
-}
+
 
 
 
@@ -202,7 +198,7 @@ header {
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1071px) {
   header {
 
     text-align: left;
@@ -226,13 +222,16 @@ header {
   header .brand p {
     margin-bottom: 0;
   }
-
+h1{
+  margin: 0;
+}
   .imgUnderLine {
-    position: absolute;
-    left: 600px;
+    position: relative;
+    left: 446px;
     z-index: 0;
-    top: 220px;
+    top: 0px;
     width: 535px;
+    transform: translateY(-50%);
   }
 
   
@@ -304,7 +303,6 @@ h1 {
   line-height: 1.2;
   font-weight: bold;
   letter-spacing: -0.03em;
-  margin-bottom: 0.7em;
 }
 
 p,
