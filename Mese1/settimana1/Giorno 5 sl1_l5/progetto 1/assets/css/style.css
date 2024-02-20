@@ -1,0 +1,106 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap'); */
+/* BODY set*/
+body{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 1.65em;
+    text-align: center;
+    color: #393d41 ;
+}
+/* font montserrat */
+h1,h3,button{
+font-family: "Montserrat", sans-serif;
+font-weight: 700;
+font-style: normal;
+}
+
+/* header */
+header{
+    background-color: black;
+}
+header img{
+    width: 175px;
+    padding: 2.18em 0;
+}
+header nav {
+    display: inline-block;
+    padding: 2em;
+    background: url("/assets/images/banner.jpg") no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+/* altezza predefinita heading */
+h1,h2,h3{
+    line-height: 1.5em;
+    color: #25a2c3 ;
+}
+/* link che porta alla scheda Lavora con noi */
+header nav p:last-child{
+    margin: 50px 0px;
+}
+header nav p a{
+    text-decoration: none;
+    background-color: #f04c2f ;
+    padding: 15px 30px;
+    border-radius: 0.2em;
+    font-weight:bold;
+}
+
+/* button{
+    border: none;
+    padding: 15px 20px;
+    font-weight:bold;
+    color: white;
+    background-color: #f04c2f ;
+    border-radius: 5px;
+    margin: 15px;
+} */
+/* main */
+main .articoloLavoro img{
+    width: 100%;
+    border-radius: 50%;
+}
+h2,a{
+    color: white;
+}
+main .articoloCitazione{
+    /* position:absolute;
+    left: 0;    se mettesi il pading predefinito nel main
+    margin: 0; */
+    margin: 0 0 2.5em;
+    width: 100%;
+    background-color: #e22d0e;
+    color: white;
+    padding: 20px 0;
+}
+.articoloCitazione p{
+    margin-bottom: 0;
+}
+/* strutura schede */
+aside{
+    margin: 0 2.5em 2.5em;
+    border: 1px solid #dee1e3;
+    border-radius: 15px;
+}
+aside img{
+    width: 100%;
+}
+/* footer */
+footer{
+    padding: 2.50em;
+    line-height: 1em;
+    color: white;
+    margin-bottom: 0;
+    background-color: #25a2c3;
+}
+footer p a{
+    color: #c8e7f0;
+}
+hr{ 
+    width: 50%;
+}
