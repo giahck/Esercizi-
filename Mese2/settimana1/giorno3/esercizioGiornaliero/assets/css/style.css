@@ -5,7 +5,7 @@ body,html{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 /* bara scelta con i link */
-header{
+header{/* faccio diventare solo ul flex per la nav header lacio libero per impostazioni*/
     padding: 10px;
     background-color: #f5ecd1;
     border-radius: 50px;
@@ -106,8 +106,7 @@ section h2{
    header{
     border-radius: 0;
     margin: 0;
-    height: 100vh;
-        overflow: auto;
+   
    }
    #container header{
     width: 25%;
@@ -121,9 +120,6 @@ section h2{
     margin: 5px 0;  
     width: 85%;   
 }
-   #container section{
-    width: 70%;
-    }
     #link1{order: 1;}
     
 }
@@ -181,28 +177,59 @@ border-radius: 50px;
     .card{
         width: 47.5%;
     }
-    .card:last-child{
+    #card5{
         display: none;
     }
 }
+
 @media screen and (min-width: 768px){
+    #containerBarOpt {
+        height: 90%;
+        justify-content:space-between;
+    }
+    #containerBarOpt ul{
+        height: 100%;
+    }
+
+    main{
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: auto;
+    }
     #containerBuyCard{
         display: flex;
         flex-wrap: nowrap;
-       
     }
+    
     .card{
+        width: 100%;
         font-size: 0.7em;
         margin-left: 15px;
     }
+    
+    #card4{display: none;}
+  
+}
+@media screen and (min-width: 992px){
+    #card4{display: block;}
+}
+@media screen and (min-width: 1200px){
+    #card5{display: block;}
+}
+#titolo{
+    color: #732104;
+    margin: 0 15px;
 }
 /* article */
 article{
+    margin: 0 15px;
     padding: 20px 15px;
     border-radius: 50px;
     background-color: #FFDF7F;
-    text-align: center;
-    color: #732104;
+    
+    color: #942c05;
 }
 article img{
     width: 100%;
