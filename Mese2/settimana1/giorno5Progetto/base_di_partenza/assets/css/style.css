@@ -19,18 +19,9 @@ header{
    background-color: #ffc017;
    position: sticky;
    top: 0;
-   /* z-index: 1; */
-    /* display: flex; */
-    /* flex-wrap: nowrap;
-    flex-direction: column; */
+   z-index: 1;
 }
-#block1{
-    background-color: #ffc017;
-}
-#block{
-    z-index: 0;
-    /* background-color: white; */
-}
+
 
 
 nav{
@@ -65,6 +56,7 @@ nav ul li{
 /* header intro Page*/
 
 #contentTextHeader{
+    background-color: #ffc017;
     position: relative;
     display: flex;
     flex-wrap: nowrap;
