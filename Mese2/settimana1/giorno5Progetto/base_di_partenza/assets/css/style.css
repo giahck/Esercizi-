@@ -13,6 +13,12 @@ a{ text-decoration: none;
     border-radius: 50px;
     background-color: #191919;
     color: white;}
+.aColor{
+    background-color: #191919;
+}
+.gColor{
+    background-color: #1a8917;
+}
 /* nav bar */
 header{
    margin: 0;
@@ -21,8 +27,6 @@ header{
    top: 0;
    z-index: 1;
 }
-
-
 
 nav{
     /* position:fixed; */
@@ -53,6 +57,7 @@ nav ul li{
     font-size: 0.8em;
     padding: 8px;
 }
+
 /* header intro Page*/
 
 #contentTextHeader{
@@ -89,7 +94,35 @@ nav ul li{
     width: 380px;
     right: 0;
     top: 50px;
+}
+/* responsiv header e 20% perciento m tagliate tablet*/
+@media screen and (max-width: 768px){
+    body,html{
+        overflow-x: hidden; 
+    }
+    #contentTextHeaderRight{ 
+        width: 300px; 
+        margin-top: 10px;
+    transform: translateX(20%); 
+    }
+    header{
+        width: 100%;
+        position: fixed;
+        top: 0;
+    }
 
+}
+@media screen and (max-width: 576px){
+    #contentNav ul li{
+        display: none;
+    }
+    #contentNav ul li:last-child {
+        display:inline;
+    }
+
+
+    #contentTextHeader{height: 312px;}
+    #contentTextHeaderRight{display: none;}
 }
 /* main */
 main{
@@ -161,6 +194,20 @@ font-weight: bold;
     font-size: 0.75em;
     color: rgb(138, 132, 125);
 }
+
+@media screen and (max-width: 768px){
+    #trending{
+        margin: 0 10px;
+    }
+    #containerTrending{
+        width: 100%;
+    }
+    .trendingBox{
+        margin: 5px;
+        width: 48.03%;/* responsiv anche al mobile 576 */
+    }
+}
+
 /* news */
 #mainDown{
     margin: 0 45px;
@@ -211,7 +258,6 @@ font-weight: bold;
 .newsLeft h2{
     font-size: 1.5em;
     font-weight: 700;
-    /* line-height: 0.9em; */
 }
 .newsLeft h3{
     font-size: 0.75em;
@@ -240,8 +286,7 @@ padding: 5px 10px;
     font-weight: bold;
 }
 #aLink{
-    /* position: sticky;
-    top: 15px; */
+  
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -260,12 +305,52 @@ padding: 5px 10px;
     
 }
 #links li{
-    
     padding: 5px;
     display: inline-block;
 
 }
+#onTopLink{
+position: sticky;
+top: 55px;}
+/* responsiv blocco news */
+@media screen and (max-width: 768px){
+#mainDown{
+    flex-direction: column-reverse;
+}
 
+#links{
+    width: 100%;
+}
+#collNewsPrincipal{
+    width: 100%;
+}
+.newsRightImg{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.newsRightImg img{
+    position: absolute;
+    width: 100%; 
+}
+}
+@media screen and (max-width: 576px){
+    #mainDown {
+        margin: 0 25px;
+        padding: 10px;
+    }
+    .trendingBox{
+        width: 100%;
+    }
+    .newsLeft{
+        font-size: 0.8em;
+        line-height: 1.4em;
+    }
+    .newsLeft p{
+        margin-top: 5px;
+        line-height: 1em;
+    }
+}
 
 
 
