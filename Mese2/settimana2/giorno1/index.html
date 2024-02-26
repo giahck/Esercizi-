@@ -15,29 +15,49 @@
     <title>giorno mese2-s2-g1</title>
   </head>
   <body>
+    <div class="fixed-top">
+      <div class="progress" role="progressbar" aria-label="Danger example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="14">
+        <div id="scrollT" class="progress-bar bg-dangerc w-50"></div>
+      </div>
+  </div>
+
     <h1 class="title text-center">BOOTSTRAP GRID ESERCIZZI</h1>
     <h2 class="title text-center">Esercizio 1</h2>
 <!-- ese1 -->
     <div class="container ">
-      <div class="row">
-      <div class="col-md-4 bg-primary text-white border border-dark p-3">Prima colonna</div>
+      <div class="row align-items-center">
+      <div class="col-md-4 bg-primary text-white border border-dark p-3 overflow-auto ese1">Prima colonna Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt consequuntur dicta animi perferendis eaque fuga quod! Alias architecto non blanditiis debitis cum eius perspiciatis doloremque accusantium, nostrum quam velit modi.</div>
       <div class="col-md-4 bg-primary text-white border border-dark p-3">Seconda colonna</div>
-      <div class="col-md-4 bg-primary text-white border border-dark p-3">Terza colonna</div>
+      <div class="col-md-4 bg-primary text-white border border-dark p-3 text-center">
+        <div class="dropup-center dropup">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Centered dropup
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#ese2">esercizio 2</a></li>
+            <li><a class="dropdown-item" href="#ese3">esercizio 3</a></li>
+            <li><a class="dropdown-item" href="#ese4">esercizio 4</a></li>
+            <li><a class="dropdown-item" href="#ese5">esercizio 5</a></li>
+            <li><a class="dropdown-item" href="#ese6">esercizio 6</a></li>
+          </ul>
+        </div>
+
+      </div>
     </div>
     </div>
     <!-- ese2 -->
-    <h2 class="title text-center">Esercizio 2</h2>
+    <h2 class="title text-center" id="ese2">Esercizio 2</h2>
    <div class="container-fluid">
     <div class="row">
     <div class="col-md-4 bg-warning border border-dark p-3">Prima colonna</div>
     <div class="col-md-4 bg-warning  border border-dark p-3">Seconda colonna</div>
-    <div class="col-md-4 bg-warning  border border-dark p-3">Terza colonna</div>
+    <div class="col-md-4 bg-warning  border border-dark p-3">terza colonna </div>
     </div>
   </div>
 <!-- ese3 -->
-<h2 class="title text-center">Esercizio 3</h2>
+<h2 class="title text-center" >Esercizio 3</h2>
 <div class="container-fluid">
-  <div class="row">
+  <div class="row" id="ese3">
       <div class="col-sm-4 bg-success border border-dark text-white p-3">Prima colonna</div>
       <div class="col-sm-4 bg-success border border-dark text-white p-3">Seconda colonna</div>
       <div class="col-sm-4 bg-success border border-dark text-white p-3">Terza colonna</div>
@@ -47,9 +67,13 @@
       <div class="col-md-4 bg-success border border-dark text-white p-3">Prima colonna</div>
       <div class="col-md-4 bg-success border border-dark text-white p-3">Seconda colonna</div>
       <div class="col-md-4 bg-success border border-dark text-white p-3">Terza colonna</div>
-      <div class="col-lg-4 bg-success border border-dark text-white p-3">Prima colonna</div>
-      <div class="col-lg-4 bg-success border border-dark text-white p-3">Seconda colonna</div>
-      <div class="col-lg-4 bg-success border border-dark text-white p-3">Terza colonna</div>
+    </div>
+      <div class="row">
+        <div class="col-lg-4 bg-success border border-dark text-white p-3">Prima colonna</div>
+        <div class="col-lg-4 bg-success border border-dark text-white p-3">Seconda colonna</div>
+        <div class="col-lg-4 bg-success border border-dark text-white p-3">Terza colonna</div>
+      </div>
+      <div class="row">
       <div class="col-xl-4 bg-success border border-dark text-white p-3">Prima colonna</div>
       <div class="col-xl-4 bg-success border border-dark text-white p-3">Seconda colonna</div>
       <div class="col-xl-4 bg-success border border-dark text-white p-3">Terza colonna</div>
@@ -61,14 +85,14 @@
 <!-- ese4 -->
 <h2 class="title text-center">Esercizio 4</h2>
 <div class="container-fluid ">
-  <div class="row">
+  <div class="row" id="ese4">
   <div class="col-md-3 bg-danger text-white border border-dark p-3">Prima colonna</div>
   <div class="col-md-6 bg-danger text-white border border-dark p-3">Seconda colonna</div>
   <div class="col-md-3 bg-danger text-white border border-dark p-3">Terza colonna</div>
 </div>
 </div>
 <!-- ese5 -->
-<h2 class="title text-center">Esercizio 5</h2>
+<h2 class="title text-center" id="ese5">Esercizio 5</h2>
 <div class="container-fluid mb-5">
   <div class="row">
   <div class="col-md-7 bg-info text-white border border-dark p-3">
@@ -83,16 +107,16 @@
 </div>
 
 <!-- ese6 -->
-<h2 class="title text-center ">Esercizio 4</h2>
+<h2 class="title text-center " id="ese6">Esercizio 4</h2>
 <div class="container-fluid">
-  <div class="row ">
-    <div class="d-flex justify-content-start"><!-- provo d-flex -->
+  <div class="row">
+    <div class="d-flex justify-content-end"><!-- provo d-flex -->
   <div class="col-md-3 bg-dark text-white p-3">Prima colonna</div>
   <div class="col-md-3 bg-dark text-white p-3 offset-md-2">Seconda colonna</div>
 </div>
 </div>
 </div>
-
+<script src="./assets/script/script.js"></script>
     <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
