@@ -1,0 +1,7 @@
+@mixin posizione($display,$justfy){
+    display:$display;
+    justify-content: $justfy;
+    align-items: center;
+    flex-wrap: nowrap;
+    
+}

@@ -1,0 +1,78 @@
+@import '../mixins/flex';
+@import '../mixins/point';
+@import '_media';
+@import 'colori';
+@import 'font';
+header{
+    background-color: $hero-color;
+    padding: 15px 50px;
+    position: relative;
+    
+
+nav{
+    
+    img{
+        width: 50px;
+        height: 50px;
+    }
+
+   @include posizione(flex,space-between);
+   ul{
+   
+        @include posizione(flex,space-between);
+        list-style-type: none;
+        li{
+            padding: 10px;
+            font-size: $fontNav;
+            a{
+                @include point();
+                color: $light-color;
+                text-decoration: none;
+            }
+        }
+     }
+}
+h1{
+    font-weight: 700;
+    color:$text-color;
+    letter-spacing: -2px;
+}
+#paragrafHeader{
+    width: 60%;
+}
+#imgHeader{
+    position: absolute;
+    @include posizione(flex,center);
+    width: 300px;
+    bottom: 0;
+    right: 0;
+    img{
+        border: 1px solid;
+        border-color: orange;
+        box-shadow: -1px 0px 100px -12px #4F4941;
+        transform: translate(-50px, 50px);
+     
+        border-radius: $radiusImg;
+    }
+}
+@for $i from 1 through 3 {
+    button:nth-of-type(#{$i}) {
+        font-size: $fontButton;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+        }
+}
+
+button:nth-of-type(1) {
+    background-color: $primary-color;
+   
+    }
+button:nth-of-type(2) {
+background-color: $secondary-color;
+}
+button:nth-of-type(3) {
+background-color: $tertiary-color;
+}
+}

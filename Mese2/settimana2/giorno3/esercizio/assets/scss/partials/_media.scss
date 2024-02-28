@@ -1,0 +1,14 @@
+@media screen and (min-width: 400px) {
+    #imgHeader img{
+        width: 40%; 
+        transform: translateX(500px);  
+    }
+}
+@media screen and (min-width: 576px) {
+    #imgHeader img{width: 60%;}}
+    
+    @media screen and (min-width: 767px) {
+        #imgHeader img{
+            width: 100%;   
+        }
+    }
