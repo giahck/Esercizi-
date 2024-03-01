@@ -6,15 +6,15 @@
     <meta name="description" content="Netflix" />
     <meta name="author" content="Gianluca Giacchetta" />
     <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-    crossorigin="anonymous"
-  />
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="./assets/css/normalize.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
@@ -23,7 +23,13 @@
   <body>
     <nav class="navbar bg-transparent">
       <div class="container">
-        <a class="navbar-brand" href="index.html"><img src="./Netflix-assets/assets/netflix_logo.png" alt="logoNetflix" width="100" height="50"></a>
+        <a class="navbar-brand" href="index.html"
+          ><img
+            src="./Netflix-assets/assets/netflix_logo.png"
+            alt="logoNetflix"
+            width="100"
+            height="50"
+        /></a>
       </div>
     </nav>
     <main id="profile">
@@ -31,59 +37,96 @@
         <div class="row justify-content-center">
           <div class="col-6">
             <h2>Edit Profile</h2>
-            <hr>
+            <hr />
           </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-sm-8 col-lg-2 text-sm-center">
-            <img src="./assets/img/avatar.png" alt="img" width="80%" class="img-fluid border-0">
+            <img
+              src="./assets/img/avatar.png"
+              alt="img"
+              width="80%"
+              class="img-fluid border-0"
+            />
           </div>
           <div class="col-sm-6 col-lg-4 col-xl-5">
             <div class="form-floating">
-              <textarea class="form-control rounded-0" placeholder="Epicoder #1" id="floatingTextarea">Epicoder#1</textarea>
+              <textarea
+                class="form-control rounded-0"
+                placeholder="Epicoder #1"
+                id="floatingTextarea"
+              >
+            Epicoder#1</textarea
+              >
               <label for="floatingTextarea">WrIte to NaMe</label>
             </div>
 
             <h3>Language</h3>
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 Italy
-              </button>              
+              </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">English</a></li>
                 <li><a class="dropdown-item" href="#">Spanish</a></li>
                 <li><a class="dropdown-item" href="#">German</a></li>
               </ul>
             </div>
-            <hr>
+            <hr />
             <h3>Maturity Setting</h3>
-            <button type="button" class="btn btn-secondary btn-outline-light border-0 btn-outline-WHITE">ALL MATURITY SETTINGS</button>
+            <button
+              type="button"
+              class="btn btn-secondary btn-outline-light border-0 btn-outline-WHITE"
+            >
+              ALL MATURITY SETTINGS
+            </button>
             <p>Show files for all Maturity setting for this profile</p>
-            <button type="button" class="btn btn-outline-light ">EDIT</button>
-            <hr>
+            <button type="button" class="btn btn-outline-light">EDIT</button>
+            <hr />
             <h3>Autoplay Controls</h3>
             <div class="form-check fs-3">
-              <input class="form-check-input bg-transparent" type="checkbox" value="" id="flexCheckDefault">
+              <input
+                class="form-check-input bg-transparent"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+              />
               <label class="form-check-label" for="flexCheckDefault">
                 Autoplay next episode in a series on all devices
               </label>
             </div>
             <div class="form-check fs-3">
-              <input class="form-check-input bg-transparent " type="checkbox" value="" id="flexCheckChecked" checked>
+              <input
+                class="form-check-input bg-transparent"
+                type="checkbox"
+                value=""
+                id="flexCheckChecked"
+                checked
+              />
               <label class="form-check-label" for="flexCheckChecked">
                 Autoplay next episode in a series on all devices
               </label>
             </div>
-            <hr>
-            <button type="button" class="btn btn-outline-light fs-4 m-1">SAVE</button>
-            <button type="button" class="btn btn-outline-light fs-4 m-1">CANCEL</button>
-            <button type="button" class="btn btn-outline-light fs-4 m-1 ">DELETE PROFILE</button>
+            <hr />
+            <button type="button" class="btn btn-outline-light fs-4 m-1">
+              SAVE
+            </button>
+            <button type="button" class="btn btn-outline-light fs-4 m-1">
+              CANCEL
+            </button>
+            <button type="button" class="btn btn-outline-light fs-4 m-1">
+              DELETE PROFILE
+            </button>
           </div>
         </div>
       </div>
     </main>
 
-    
     <script src="./assets/script/script.js"></script>
   </body>
 </html>
