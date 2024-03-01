@@ -11,12 +11,7 @@ nav{
       }
 }
 main{
-   .carousel-inner img{
-        &:hover{
-            animation:scale-in-hor-center .5s cubic-bezier(.25,.46,.45,.94) both
-        }
-        @keyframes scale-in-hor-center{0%{transform:scaleX(0);opacity:1}100%{transform:scaleX(1);opacity:1;width:250px;}}
-    }
+  
        
         .imgContent{
             height: 100px;
@@ -30,26 +25,41 @@ main{
         }
         @media screen and (min-width: 768px){
             .imgContent{
-                 height: 70px;
+                 height: 80px;
                 width: 100%;
+            
+                &:hover{
+                    animation:scale-in-hor-center .5s cubic-bezier(.25,.46,.45,.94) both
+                }
+                @keyframes scale-in-hor-center{0%{transform:scaleX(0);opacity:1}100%{transform:scaleX(1);opacity:1;width:250px; transform: translateX(-100px);}}
             }
+                
+
         }
         @media screen and (min-width: 992px){
             .imgContent{
                  height: 90px;
                 width: 100%;
+                &:hover{
+                animation:scale-in-ver-center .5s cubic-bezier(.25,.46,.45,.94) both
+                }
+                @keyframes scale-in-ver-center{0%{transform:scaleY(0);opacity:1}100%{transform:scaleY(1);opacity:1; height: 180px;width: 250px;opacity:1;width:250px; transform: translate(-50px,-50px);}}
             }
         }
         @media screen and (min-width: 1200px){
             .imgContent{
                 height: 100px;
                 width: 100%;
+               &:hover{ animation:tilt-in-fwd-tr .6s cubic-bezier(.25,.46,.45,.94) both;}
             }
+            @keyframes tilt-in-fwd-tr{0%{transform:rotateY(20deg) rotateX(35deg) translate(300px,-300px) skew(-35deg,10deg);opacity:0}80%{transform:rotateY(0) rotateX(360deg) translate(0,0) skew(0deg,0deg);opacity:1}100%{width: 250px; height: 350px;}}
         }
         @media screen and (min-width: 1440px){
             .imgContent{
                 height: 140px;
                 width: 100%;
+                &:hover{animation:swing-in-top-fwd 3s cubic-bezier(.175,.885,.32,1.275) both}
+                @keyframes swing-in-top-fwd{0%{transform:rotateX(-100deg);transform-origin:top;opacity:0}100%{transform:rotateX(0deg);transform-origin:top;opacity:1}}
             }
         }
     
