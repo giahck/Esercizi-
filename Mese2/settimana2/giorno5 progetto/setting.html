@@ -24,79 +24,215 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Netflix</title>
   </head>
-  <body id="setting">
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark p-0">
-      <div class="container-fluid ">
-        <a class="navbar-brand" href="index.html"><img src="./Netflix-assets/assets/netflix_logo.png" alt="logoNetflix" width="100" height="50"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="index.htmlnavbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <a class="navbar-brand" href="#">
+        <div class="container-fluid ">
+          <a class="navbar-brand" href="index.html"><img src="./Netflix-assets/assets/netflix_logo.png" alt="logoNetflix" width="100" height="50"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="#">
+              
+            </a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-6">
+              
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">TV Shows</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">MOVIES</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Recently Added</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">My List</a>
+              </li>
+            </ul>
             
-          </a>
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-6">
-            
-            <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">TV Shows</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">MOVIES</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Recently Added</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">My List</a>
-            </li>
-          </ul>
-          
-            <div class="mx-lg-2">
-              <i class="bi bi-search"></i>
-            </div>
-            <!-- dropDown for scelta utente basic pre config-->
-            <div id="utente">
-            <div class="dropdown">
-              <a class="btn btn-secondary utente dropdown-toggle bg-transparent border-0 p-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Kids
-              </a>
-            
-              <ul class="dropdown-menu ">
-                <li><a class="dropdown-item" href="#">Name1</a></li>
-                <li><a class="dropdown-item" href="#">Name2</a></li>
-                <li><a class="dropdown-item" href="#">Name3</a></li>
-              </ul>
-            </div>
-          </div>
-          <!-- icona campana -->
-              <i class="bi bi-bell-fill mx-lg-2"></i>
-               <!-- dropDown action-->
-              <div class="dropdown  col-lg-mx-2">
-                <img src="./assets/img/avatar.png" width="40" height="40" class="btn btn-secondary dropdown-toggle bg-transparent border-0 p-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-               
-                </img>
-                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
-                  <li class="d-flex">
-                    <img src="./assets/img/avatar.png" width="40" height="40" >
-                    <a class="dropdown-item" href="#">#Epicoder1</a>
-                  </li>
-                  <li><a class="dropdown-item" href="setting.html">Menager Profile</a></li>
-                  <li><a class="dropdown-item" href="#">Help Center</a></li>
-                  <li><a class="dropdown-item" href="account.html">Account</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">signout Netflix</a></li>
+              <div class="mx-lg-2">
+                <i class="bi bi-search"></i>
+              </div>
+              <!-- dropDown for scelta utente basic pre config-->
+              <div id="utente">
+              <div class="dropdown">
+                <a class="btn btn-secondary utente dropdown-toggle bg-transparent border-0 p-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Kids
+                </a>
+              
+                <ul class="dropdown-menu ">
+                  <li><a class="dropdown-item" href="#">Name1</a></li>
+                  <li><a class="dropdown-item" href="#">Name2</a></li>
+                  <li><a class="dropdown-item" href="#">Name3</a></li>
                 </ul>
-              </div> 
-          </div>
-     
-      </div>
-    </nav>
-
-    <main>
-        <h2>Account</h2>
+              </div>
+            </div>
+            <!-- icona campana -->
+                <i class="bi bi-bell-fill mx-lg-2"></i>
+                 <!-- dropDown action-->
+                <div class="dropdown  col-lg-mx-2">
+                  <img src="./assets/img/avatar.png" width="40" height="40" class="btn btn-secondary dropdown-toggle bg-transparent border-0 p-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                 
+                  </img>
+                  <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
+                    <li class="d-flex">
+                      <img src="./assets/img/avatar.png" width="40" height="40" >
+                      <a class="dropdown-item" href="#">#Epicoder1</a>
+                    </li>
+                    <li><a class="dropdown-item" href="setting.html">Menager Profile</a></li>
+                    <li><a class="dropdown-item" href="account.html">Account</a></li>
+                    <li><a class="dropdown-item" href="#">Help Center</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">signout Netflix</a></li>
+                  </ul>
+                </div> 
+            </div>
+       
+        </div>
+      </nav>
+    <main id="setting">
+       
+        <div class="container">
+            <h2>Account</h2>
+            <hr>
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>MEMBERSHIP & BILLING</h3>
+                    <button type="button" class="btn btn-light rounded-0 fs-5">Cancel Membership</button>
+                </div>
+                <div class="col-md-9 d-flex justify-content-between">
+                    <div>
+                        <h4 class="fw-bolder">epicoder@gmail.com</h4>
+                        <h3 class="fs-6">password:*******</h5>
+                        <h3 class="fs-6">Phone:123456789</h5>
+                    </div>
+                    <div>
+                        <ul class="text-end">
+                            <li>
+                                <a href="javascript:void(0)">Change account email</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">change password</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">Change phone number</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container">
+            <div class="row">
+                <div class=" col-md-9 offset-md-3">
+                    
+                    <span class="d-flex justify-content-between">
+                    <span class="d-flex">  <i class="bi bi-paypal"></i>
+                        <p class="fw-bolder fst-italic"><span class="text-primary">Pay</span><span class="text-info bg-dar">Pal</span></p>
+                        <h4 class="fw-bolder ms-2">epicoder@gmail.com</h4></span>
+                    <div>
+                        <ul class="text-end">
+                            <li>
+                                <a href="javascript:void(0)">update payment</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">Billing details</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">Redeem giftcard or promo code</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">where to buy gift cards?</a>
+                            </li>
+                        </ul>
+                    </div>
+                </span>
+                </div>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>PLAN DETAILS</h3>
+                </div>
+                <div class="col-md-9 d-flex justify-content-between">
+                    <div>
+                      <span class="d-flex"><p class="fw-bolder me-1">Standard</p><i class="bi bi-badge-hd"></i></span>
+                    </div>
+                    <div>
+                        <ul class="text-end">
+                            <li>
+                                <a href="javascript:void(0)">Change Planl</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <h3>PLAN DETAILS</h3>
+                   <ul>
+                    <li>
+                        <a href="javascript:void(0)">Parent Controls</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Test Partecipation</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Manage download</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">Active a device</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">signou all devices</a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>MY PROFILE</h3>
+                </div>
+            
+                <div class="col-md-9 justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <img src="./assets/img/avatar.png" alt="imgAvatar" width="45">
+                            <p class="m-0 fw-bolder">Epicoder#1</p>
+                        </div>
+                        <div>
+                            <ul>
+                                <li><a href="javascript:void(0)">Manage profile</a></li>
+                                <li><a href="javascript:void(0)">Add profile email</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-md-3 offset-md-3 ">
+                        <ul class="mb-0">
+                            <li><a href="javascript:void(0)">Language</a></li>
+                            <li><a href="javascript:void(0)">Playback settings</a></li>
+                            <li><a href="javascript:void(0)">Subtitle appearence</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <ul>
+                            <li><a href="javascript:void(0)">viwewing activyti</a></li>
+                            <li><a href="javascript:void(0)">Ratings</a></li>
+                        </ul>
+                    </div>
+                </div>
+            
+        </div>
     </main>
     <script src="./assets/script/script.js"></script>
   </body>
