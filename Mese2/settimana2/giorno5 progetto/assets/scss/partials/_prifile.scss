@@ -1,0 +1,18 @@
+#profile{
+    line-height: 1.8em;
+    h3{ 
+        font-size:normal;
+        margin-top: 10px;
+        padding: 5px;
+        color: rgb(41, 41, 48);
+    }
+    button,.form-check input{
+        border-radius: 0;
+    }
+   .dropdown button{
+        background-color: transparent;
+    }
+    p{
+        margin-top: 10px;
+    }
+}

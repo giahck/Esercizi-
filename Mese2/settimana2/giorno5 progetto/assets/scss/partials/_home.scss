@@ -1,0 +1,63 @@
+nav{
+    color: white;
+    #utente .dropdown-toggle::after {
+        display: none;
+      }
+      .dropdown-menu{
+        background-color: black ;
+        a{
+            color: white;
+        }
+      }
+}
+main{
+    
+       
+        .imgContent{
+            height: 100px;
+            width: 100%;
+        }
+        @media screen and (min-width: 576px){
+            .imgContent{
+                height: 250px;
+                width: 100%;
+            }
+        }
+        @media screen and (min-width: 768px){
+            .imgContent{
+                 height: 70px;
+                width: 100%;
+            }
+        }
+        @media screen and (min-width: 992px){
+            .imgContent{
+                 height: 90px;
+                width: 100%;
+            }
+        }
+        @media screen and (min-width: 1200px){
+            .imgContent{
+                height: 100px;
+                width: 100%;
+            }
+        }
+        @media screen and (min-width: 1440px){
+            .imgContent{
+                height: 120px;
+                width: 100%;
+            }
+        }
+    
+}
+footer{
+    
+    line-height: 1.8em;
+    ul{
+        padding: 0;
+        list-style-type: none;
+    }
+    a{
+        color: white;
+        text-decoration: none;
+    }
+}

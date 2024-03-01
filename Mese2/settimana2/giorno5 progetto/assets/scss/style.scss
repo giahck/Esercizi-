@@ -1,0 +1,10 @@
+body,html{
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    background-color: black;
+    color: white;
+    font-family: "Rubik", sans-serif;
+}
+@import 'partials/home';
+@import 'partials/prifile';
