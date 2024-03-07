@@ -9,9 +9,6 @@ const baseURL = "https://api.pexels.com/v1/search?query=";
 let foto = [];
 
 
-
-
-
 async function loadImg(quantita, nomeFoto) {
   try {
     let lod = await fetch(baseURL + `${nomeFoto}&per_page=${quantita}`, {
@@ -29,10 +26,10 @@ async function loadImg(quantita, nomeFoto) {
   } catch (error) {
     /* se inerore riapri la pagina iniziale */
     console.log(error);
-    //  location.href = 'pexels-start.html';
+     location.href = 'pexels-start.html';
   }
 }
-
+window.onload=()=>{
 /* se spingo load */
 btnLoad.addEventListener("click", (e) => {
   e.preventDefault();
@@ -59,7 +56,7 @@ btnLoadSecond.addEventListener("click", (e) => {
   const album = document.getElementById("none");
   album.remove();
 });
-
+}
 function html() {
   const row = document.createElement("div");
   row.setAttribute("class", "row");
@@ -67,7 +64,7 @@ function html() {
   container.appendChild(row);
   console.log(foto.photos);
   for (elem of foto.photos) {
-    const url = new URL(`http://127.0.0.1:5500/pexels-start.html/profile?${elem.id}`);
+    const url = new URL(`http://127.0.0.1:5500/profile.html?foto=${elem.id}`);
     // const card=document.createElement('div')
     row.innerHTML += ` <div class="col-md-4">
    <div class="card mb-4 shadow-sm">
@@ -87,6 +84,7 @@ function html() {
        >
          <div class="btn-group">
            <button
+           data-bs-toggle="modal" data-bs-target="#staticBackdrop${elem.id}"
              type="button"
              class="btn btn-sm btn-outline-secondary"
            >
@@ -102,6 +100,28 @@ function html() {
          </div>
          <small class="text-muted">${elem.id}</small>
        </div>
+
+       <!-- Modal -->
+       <div class="modal fade" id="staticBackdrop${elem.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         <div class="modal-dialog">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+             <img src="${elem.src.original}" style="width: 100%" />
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              
+             </div>
+           </div>
+         </div>
+       </div>
+
+
+
      </div>
    </div>
  </div>`;
@@ -124,3 +144,4 @@ btnSearch.addEventListener('click',function(e){
         loadImg(9,value)
     }
 })
+
