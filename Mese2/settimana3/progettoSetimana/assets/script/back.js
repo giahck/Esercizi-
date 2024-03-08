@@ -5,7 +5,7 @@ const urlProdotto = document.getElementById("url");
 const descriptionProdotto = document.getElementById("description");
 const submit = document.getElementById("save");
 const reset = document.getElementById("reset");
-
+const linkRegex = /https?:\/\/(?:www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?/;/* controllo il link */
 const baseUrl = "https://striveschool-api.herokuapp.com/api/product/";
 const KEY =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZDU5MDJkN2IxMTAwMTkwZTZkY2MiLCJpYXQiOjE3MDk4ODg5MTIsImV4cCI6MTcxMTA5ODUxMn0.jru2zUmCeGFbBWxER1VOVHqY3wrttGuck5V0I-JcuIE";
@@ -17,8 +17,8 @@ reindirizzo = (error) => {
     }, 2000);
   };
 function visualizza(lista) {
-  console.log(lista.price);
-  console.log(lista);
+//   console.log(lista.price);
+//   console.log(lista);
   nameProdotto.value = lista.name;
   brandProdotto.value = lista.brand;
   urlProdotto.value = lista.imageUrl;
@@ -44,14 +44,17 @@ function visualizza(lista) {
           Authorization: KEY,
         },
       }).then(elem=>{
-        console.log(elem);
         if (elem.ok) {
             location.href = "index.html";
+        }
+        else{
+            
+        controlloCampi(lista);
         }
       })
     } catch (error) {
       console.log(error);
-      // location.href = "index.html";
+      reindirizzo(' non è valido');
     }
   });
   
@@ -77,86 +80,87 @@ document.getElementById('inserisciDelete').innerHTML+=button;
             });
           } catch (error) {
             console.log(error);
+            reindirizzo('delete not work ');
           }
-
-
-        
     })
     
 
 }
 async function modifiedProduct(id) {
-  // console.log(id);
-  
-
   document.querySelector("legend").innerText = "Modifica Prodotto";
-  
+  console.log(id);
   try {
-    let load = await fetch(baseUrl, {
+    let load = await fetch(baseUrl+id, {
       headers: {
         Authorization: KEY,
       },
     });
     list = await load.json();
-    
-    // console.log(list);
+    console.log(list);
     /* se è uguale a zero dopo che ho pasato id prova a rinserire un nuovo articolo */
     if (list.length === 0) {
       location.href = "back-office.html";
     } else{
-     settingDelete(list[0]._id);
-     visualizza(list[0]);}
+     settingDelete(list._id);
+     visualizza(list);}
   } catch (error) {
     console.log(error);
-    // location.href = "";
+    reindirizzo('modifiche non è valido');
   }
 }
-/* {
-    "name": "",
-    "description": "",
-    "brand": "",
-    "imageUrl": "",
-    "price": ""
-} */
+
+
 controlloCampi=(lista)=>{/* ho fatto in modo che se non c'è il valore correto diventa il bordo rosso */
-    console.log(lista);
+
     for(let obj in lista){
        
-        console.log(lista[obj]);
         switch (obj) {
             case 'name':
+                if (lista[obj]==='') nameProdotto.setAttribute('class','border border-danger form-control');
                 document.getElementById('name').addEventListener('blur', function() {
-                if(!this.value)
+                if(!this.value){
                     nameProdotto.setAttribute('class','border border-danger form-control');
+                }
                     else
                     nameProdotto.setAttribute('class','form-control');                   
                 })
                 break;
             case 'brand':
-                
+                if (lista[obj]==='')     brandProdotto.setAttribute('class','border border-danger form-control');
+                document.getElementById('brand').addEventListener('blur', function() {
+            (!this.value)? brandProdotto.setAttribute('class','border border-danger form-control'): brandProdotto.setAttribute('class','form-control');                   
+                    })
                 break;
-            case 'price':
-                
-                break;
-            case 'brand':
-                
+            case 'price':/* faccio un controllo del prezzo se sta a zero non va bene  */
+                document.getElementById('price').addEventListener('blur', function() {
+                   
+                if (+this.value===0) 
+                priceProdotto.setAttribute('class','border border-danger form-control');
+                        else
+                priceProdotto.setAttribute('class','form-control');  
+            });
                 break;
             case 'imageUrl':
+               if(!linkRegex.test( document.getElementById('url').value)){
+                submit.disabled=true;
+               urlProdotto.setAttribute('class','border border-danger form-control');
+               document.getElementById('url').addEventListener('blur', function() {
+                submit.disabled=false;
+
+               })
                 
+            }
+               else{
+              urlProdotto.setAttribute('class','form-control'); 
+            }
                 break;
             case 'description':
-                
+                /* l'ho lascio opzionale */
                 break;
         
             // default:
             //     break;
         }
-
-
-
-    // if (lista=='') {
-    //     lista[obj].setAttribute('class','border border-danger form-control')
-    // }
 }
 }
 function addProduct() {
@@ -174,26 +178,23 @@ function addProduct() {
       price: priceProdotto.value,
     };
     controlloCampi(baseListPost);
-    // try {/* doppio controllo */
-    //   console.log(JSON.stringify(baseListPost));
-    //   let post = await fetch(baseUrl, {
-    //     method: "POST",
-    //     body: JSON.stringify(baseListPost),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: KEY,
-    //     },
-    //   }).then(elem=>{
-    //     console.log(elem);
-    //     if (!elem.ok) {
-    //         console.log(elem);
-    //        reindirizzo('aggiungi non è valido');
-    //     }else/* buon fine */
-    //     location.href = "index.html";
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {/* doppio controllo */
+      let post = await fetch(baseUrl, {
+        method: "POST",
+        body: JSON.stringify(baseListPost),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: KEY,
+        },
+      }).then(elem=>{
+        if (!elem.ok) {
+           reindirizzo('aggiungi non è valido');
+        }else/* buon fine */
+        location.href = "index.html";
+      });
+    } catch (error) {
+      console.log(error);
+    }
   });
 }
 
