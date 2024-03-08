@@ -1,0 +1,21 @@
+body,html{
+    padding: 0;
+    margin: 0;
+    font-family: "Spectral", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+main img{
+    box-shadow: inset -6px 8px 50px -32px #4F4F4F,0px -4px 51px -6px #636363;
+}
+.price{
+    display: flex;
+    p{
+        background-color: black;
+        color: yellow;
+        margin: 0;
+        padding: 2px 4px;
+        border-radius: 20px;
+    }
+
+}
