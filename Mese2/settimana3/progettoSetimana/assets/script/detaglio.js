@@ -50,7 +50,7 @@ visualizza=async(id)=>{
     }
   } catch (error) {
     // console.log(error);
-    // reindirizzo(error);
+    reindirizzo(error);
   }
 }
 
