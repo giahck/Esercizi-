@@ -15,7 +15,7 @@ function visualizza() {
   for (elem of list) {
     // console.log(elem);
     container.lastChild.innerHTML += `
-    <div class='col-sm-6 col-md-4 col-lg-3 col-xl-2'> 
+    <div class='col-sm-6 col-md-4 col-lg-3 col-xxl-2'> 
         <div class="card mt-3" style="width: 100%;">
         <img class="card-img-top" src="${elem.imageUrl}" style="height: 250px;" alt="Card image cap">
         <div class="card-body">
@@ -27,9 +27,9 @@ function visualizza() {
         <li class="list-group-item"><span class='fw-bold'>Price: </span>${elem.price}$</li>
         <li class="list-group-item"><span class='fw-bold'>Id Article: </span>${elem._id}</li>
         </ul>
-        <div class="card-body d-flex">
-        <a href="back-office.html?id=${elem._id}" class="card-link">modifica</a>
-        <a href="dettaglio.html?id=${elem._id}" class="card-link">Scopri INFO</a>
+        <div class="card-body d-flex justify-content-between">
+        <a href="back-office.html?id=${elem._id}" class="card-link">Modifica</a>
+        <a href="dettaglio.html?id=${elem._id}" class="card-link">INFO</a>
         </div>
     </div>
     </div>
@@ -37,6 +37,9 @@ function visualizza() {
   }
 }
 async function visualProd() {
+  document
+    .querySelector(".spinner")
+    .setAttribute("class", " spinner d-flex justify-content-center");
   try {
     let load = await fetch(baseUrl, {
       headers: {
@@ -44,10 +47,12 @@ async function visualProd() {
       },
     });
     list = await load.json();
+    document.querySelector(".spinner").remove();
     console.log(list);
     /* se non c'è nessun articolo passa subito al Post */
-    if (list.length === 0) {/* controllo esterno se per qualche motivo l'arry è vuoto rindirizza alla funzione di Post */
-        reindirizzo('vuoto carica il prodotto non trovo nulla');
+    if (list.length === 0) {
+      /* controllo esterno se per qualche motivo l'arry è vuoto rindirizza alla funzione di Post */
+      reindirizzo("vuoto carica il prodotto non trovo nulla");
     } else visualizza();
   } catch (error) {
     console.log(error);
@@ -57,5 +62,6 @@ async function visualProd() {
 window.addEventListener("load", init);
 function init() {
   /* visualizza prodotti */
+
   visualProd();
 }
