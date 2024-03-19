@@ -5,9 +5,9 @@ const ricarica = document.querySelector('.ricarica') as HTMLInputElement;
 const btnRicarica = document.getElementById('btnricarica') as HTMLButtonElement;
 
 interface Abbonamento{
-    credito?:number,
-    numeroChiamate?:number
-    getAbbonamento(ricarica:number):number;
+    credito:number,
+    numeroChiamate:number
+  
 }
 type Person={
     nome:string;
@@ -17,14 +17,14 @@ type Person={
 
 class Utente implements Abbonamento{
     persona:Person
-    credito?: number;
-    numeroChiamate:number|undefined
+    credito: number=0;
+    numeroChiamate:number=0
     constructor(_persona:Person){
         this.persona=_persona;
     }
-    getAbbonamento(ricarica:number) { 
+    getAbbonamento(ricarica:number):void { 
         this.credito=ricarica;
-        return this.credito||0;
+     
     }
 }
 let nuovoAbbonato: Utente
@@ -42,9 +42,10 @@ let nuovoAbbonato: Utente
 });
 
 
-btnRicarica.addEventListener('click', () => {
+btnRicarica.addEventListener('click', (e) => {
+    e.preventDefault();
     console.log(ricarica.value);
-    nuovoAbbonato.getAbbonamento(parseInt(btnRicarica.value))
+    nuovoAbbonato.getAbbonamento(Number(ricarica.value))
     console.log(nuovoAbbonato.credito)
 });
 

@@ -5,11 +5,12 @@ const ricarica = document.querySelector('.ricarica');
 const btnRicarica = document.getElementById('btnricarica');
 class Utente {
     constructor(_persona) {
+        this.credito = 0;
+        this.numeroChiamate = 0;
         this.persona = _persona;
     }
     getAbbonamento(ricarica) {
         this.credito = ricarica;
-        return this.credito || 0;
     }
 }
 let nuovoAbbonato;
@@ -22,8 +23,9 @@ btnregister.addEventListener('click', function (e) {
     else
         console.log('non inserito');
 });
-btnRicarica.addEventListener('click', () => {
+btnRicarica.addEventListener('click', (e) => {
+    e.preventDefault();
     console.log(ricarica.value);
-    nuovoAbbonato.getAbbonamento(parseInt(btnRicarica.value));
+    nuovoAbbonato.getAbbonamento(Number(ricarica.value));
     console.log(nuovoAbbonato.credito);
 });
