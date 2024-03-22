@@ -27,7 +27,8 @@ const routers :Route[]=[{
     AppComponent,
     HomeComponent,
     NavComponent,
-    BodyHomeComponent
+    BodyHomeComponent,
+    AutoSaloneComponent
   ],
   imports: [
     BrowserModule,

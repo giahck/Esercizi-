@@ -16,5 +16,5 @@ export interface Autosalone1 {
       id: number;
       name: string;
     };
-  };
+  }
 }

@@ -1,20 +1,20 @@
-<div class="container">
+<div class="container" *ngIf="isloaded">
+    <h2 class="text-center">Macchine in bacheca del 2018 {{catalogo2[0].make_model_trim.make_model.make.name}} </h2><!-- se metto la data esce tutta la descrizione della macchina nell obj -->
   <div class="row">
-    <div class="col-3" *ngFor="let key of catalogo">
-      <div class="card" style="width: 18rem">
+    <div class="col-lg-4 col-md-5 col-xl-3 col-sm-12 justify-content-center d-flex p-0" *ngFor="let key of catalogo2">
+      <div class="card m-1" style="width: 18rem">
         <div class="card-body">
           <!-- <h5 class="card-title">key</h5> -->
-          <h6 class="card-subtitle mb-2 text-muted">{{key.created}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{key.make_model_trim.make_model.make.name}}</h6>
           <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            {{key.make_model_trim.description}}
           </p>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">An item</li>
-            <li class="list-group-item">A second item</li>
-            <li class="list-group-item">A third item</li>
+            <li class="list-group-item">Porte {{key.doors}}</li>
+            <li class="list-group-item">Cargo capacity {{key.cargo_capacity}}</li>
+            <li class="list-group-item">Type {{key.type}}</li>
           </ul>
-          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">vai alla macchina</a>
           <a href="#" class="card-link">Another link</a>
         </div>
       </div>
