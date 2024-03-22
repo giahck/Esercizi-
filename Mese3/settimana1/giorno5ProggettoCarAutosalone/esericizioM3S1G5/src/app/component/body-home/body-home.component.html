@@ -1,0 +1,30 @@
+
+<div>
+    <h2>inserisci modello</h2>
+    <input type="text" [(ngModel)]="articolo">
+    <button (click)="submit()">Submit</button>
+</div>
+<div class="container">
+  
+    <div class="row  justify-content-center" *ngFor="let key of stringa; let i = index">
+        
+    <div class="col-md-3 d-flex flex-nowrap card text-center p-0 m-1" style="width: 18rem;">
+        <img src="./../../../assets/logo{{key.name}}.jpg" class="card-img-top p-0 mx-0" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{key.name}}</h5>
+            <p class="card-text">riccore anno {{key.anno}}</p>
+            <a [routerLink]="['/salone',key.data[i].make_id]" routerLinkActive="router-link-active"  class="btn btn-primary">Vai al Salone</a>
+        </div>
+    </div>
+    <div class="col-md-3" *ngFor="let data of key.data">
+        <div class="card text-center d-flex flex-nowrap   p-0 m-1" style="width: 18rem;">
+            <img src="./../../../assets/{{data.name}}.jpg" class="card-img-top p-0 mx-0" alt="...">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{data.name}}</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a [routerLink]="['/salone',data.id]" routerLinkActive="router-link-active" class="btn btn-primary">vai alla macchina</a>
+            </div>
+          </div>
+    </div>
+</div>
+</div>
