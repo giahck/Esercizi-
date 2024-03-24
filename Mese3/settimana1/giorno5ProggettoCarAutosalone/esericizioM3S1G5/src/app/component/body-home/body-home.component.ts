@@ -1,5 +1,6 @@
 import { InfMachina } from './../interface/inf-machina';
 import { Component, Input, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-body-home',
@@ -8,17 +9,30 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BodyHomeComponent {
   @Input() articolo!: string;
+  imputS!:string;
   stringa: InfMachina[] = [
     { name: 'Mercedes-Benz',anno: 2017, data: [] },
     { name: 'Fiat', anno: 2018, data: [] },
     { name: 'Volvo',anno: 2019, data: [] },
 ];
-  constructor() {
+  constructor(private http: HttpClient) {
     this.controller();
   }
   submit() {
-    console.log('Submit clicked:', this.articolo);
+    const data = { data: this.imputS };
+    this.http.post<any>(`http://localhost:4200/macchina/${15}`, data)
+      .subscribe(
+        function (response) {
+          // Handle response here if needed
+          console.log('Response:', response);
+        },
+        function (error) {
+          // Handle errors here
+          console.error('Error:', error);
+        }
+      );
   }
+  
 
   async controller() {
   

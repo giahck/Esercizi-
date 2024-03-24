@@ -14,7 +14,7 @@
             <li class="list-group-item">Cargo capacity {{key.cargo_capacity}}</li>
             <li class="list-group-item">Type {{key.type}}</li>
           </ul>
-          <a href="#" class="card-link">vai alla macchina</a>
+          <a [routerLink]="['/macchina',key.make_model_trim.make_model.id]" routerLinkActive="active" class="card-link">vai alla macchina</a>
           <a href="#" class="card-link">Another link</a>
         </div>
       </div>
