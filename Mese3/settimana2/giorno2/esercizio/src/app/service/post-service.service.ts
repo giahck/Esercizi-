@@ -1,15 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Poster } from '../interface/poster.interface';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class PostServiceService {
+export class PostServiceService implements OnInit{
 post:Poster[]=[];
 /* postlenght:Poster[]=[]; */
- constructor() { 
+ constructor(private http:HttpClient) { 
  
      /* this.init(); */
   }
+  ngOnInit(): void {
+    this.fetch();
+  }
+  
 /*   async init(): Promise<void> {
     const response = await fetch('../../assets/db.json');
     const data = await response.json();
