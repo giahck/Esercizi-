@@ -3,7 +3,7 @@
       <strong class="d-inline-block mb-2 text-primary-emphasis text-uppercase">{{key.tags}}</strong>
       <h3 class="mb-0">{{key.title}}</h3>
       <div class="mb-1 text-body-secondary">Reactions: {{key.reactions}}</div>
-      <p class="card-text mb-auto">{{key.body}}...</p>
+      <p class="card-text mb-auto">{{ key.body.slice(0, 150) }}...</p>
       <a routerLink="/post/{{key.id}}">
         Continue reading
       </a>

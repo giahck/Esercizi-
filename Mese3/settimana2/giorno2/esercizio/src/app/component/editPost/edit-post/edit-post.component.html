@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-header">Featured</div>
+  <div class="card-body" *ngIf="this.visibile; else  invisibile">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <p class="card-text">{{ post.body }}</p>
+    <button class="btn btn-primary" (click)="editPost()">Edit</button>
+</div>
+<ng-template  #invisibile>
+    <ng-content></ng-content>
+    <button class="btn btn-primary" (click)="editPost()">Edit</button>
+  </ng-template>
+</div>
+
+

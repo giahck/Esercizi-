@@ -13,6 +13,7 @@ import { PostInactiveComponent } from './component/post-inactive/post-inactive.c
 import { DeteailComponent } from './component/deteail/deteail.component';
 import { EditBodyComponent } from './component/edit-body/edit-body.component';
 import { FormsModule } from '@angular/forms';
+import { RightHomeComponent } from './component/right-home/right-home.component';
 const routers :Route[]=[{
   path:'',
   component:HomeComponent,
@@ -45,7 +46,8 @@ const routers :Route[]=[{
     PostActiveComponent,
     PostInactiveComponent,
     DeteailComponent,
-    EditBodyComponent
+    EditBodyComponent,
+    RightHomeComponent
   ],
   imports: [
     BrowserModule,

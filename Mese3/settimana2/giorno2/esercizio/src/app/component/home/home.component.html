@@ -1,8 +1,24 @@
-<div class="container" *ngIf="attivo">
+<div class="container-fluid" *ngIf="attivo">
   <div class="row">
-    <div class="col-8">
+    <div class="col-6">
       <app-jumbotron [data]="postSingole"></app-jumbotron>
       <app-satic-home [data]="postDuble"></app-satic-home>
     </div>
+    <div class="col-6">
+        <app-right-home [data]="postRight"></app-right-home>
+    </div>
+  </div>
+  <div class="col-12">
+    <app-edit-post #EditPost [post]="key" *ngFor="let key of post">
+      
+      <input
+      type="texta"
+      [(ngModel)]="key.title"
+      class="card-title form-control"
+      />
+      <textarea [(ngModel)]="key.body" id="" cols="10" rows="5" class="card-text form-control"></textarea>
+      
+
+    </app-edit-post>
   </div>
 </div>

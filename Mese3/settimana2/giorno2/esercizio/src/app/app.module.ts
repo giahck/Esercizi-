@@ -12,6 +12,8 @@ import { PostInattiviComponent } from './component/post-inattivi/post-inattivi.c
 import { JumbotronComponent } from './component/jumbotron/jumbotron.component';
 import { BoardDirective } from './directives/board.directive';
 import { SaticHomeComponent } from './component/satic-home/satic-home.component';
+import { RightHomeComponent } from './component/right-home/right-home.component';
+import { EditPostComponent } from './component/editPost/edit-post/edit-post.component';
 const routers :Route[]=[{
   path:'',
   component:HomeComponent,
@@ -38,7 +40,9 @@ const routers :Route[]=[{
     PostInattiviComponent,
     JumbotronComponent,
     BoardDirective,
-    SaticHomeComponent
+    SaticHomeComponent,
+    RightHomeComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,
