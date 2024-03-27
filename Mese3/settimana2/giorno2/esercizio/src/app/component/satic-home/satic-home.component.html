@@ -1,0 +1,11 @@
+<section class="row mb-5" >
+    <div class="col-12 col-sm-6 p-4 d-flex flex-column" *ngFor="let key of data">
+      <strong class="d-inline-block mb-2 text-primary-emphasis text-uppercase">{{key.tags}}</strong>
+      <h3 class="mb-0">{{key.title}}</h3>
+      <div class="mb-1 text-body-secondary">Reactions: {{key.reactions}}</div>
+      <p class="card-text mb-auto">{{key.body}}...</p>
+      <a routerLink="/post/{{key.id}}">
+        Continue reading
+      </a>
+    </div>
+  </section>

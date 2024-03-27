@@ -6,18 +6,22 @@ import { PostInterface } from './../../interface/post-interface';
   styleUrls: ['./front.component.scss']
 })
 export class FrontComponent {
+  
   post:PostInterface[]=[];
+  inviaDate:PostInterface[]=[];
 constructor(){
 this.getFetch();
 }
 async getFetch(){
   const response = await fetch('../../assets/db.json');
   const data = await response.json();
+  this.inviaDate=data;
   let random=Math.floor(Math.random()*(data.length-2))
   for(let i=0; i<2;i++){
     this.post.push(data[random+i])
   }
-  console.log(this.post);
+  console.log(this.inviaDate);
 }
+
 
 }

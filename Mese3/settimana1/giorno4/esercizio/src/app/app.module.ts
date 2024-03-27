@@ -11,6 +11,8 @@ import { RhigtFrontComponent } from './component/rhigt-front/rhigt-front.compone
 import { PostActiveComponent } from './component/post-active/post-active.component';
 import { PostInactiveComponent } from './component/post-inactive/post-inactive.component';
 import { DeteailComponent } from './component/deteail/deteail.component';
+import { EditBodyComponent } from './component/edit-body/edit-body.component';
+import { FormsModule } from '@angular/forms';
 const routers :Route[]=[{
   path:'',
   component:HomeComponent,
@@ -42,10 +44,12 @@ const routers :Route[]=[{
     RhigtFrontComponent,
     PostActiveComponent,
     PostInactiveComponent,
-    DeteailComponent
+    DeteailComponent,
+    EditBodyComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(routers)
   ],
   providers: [],

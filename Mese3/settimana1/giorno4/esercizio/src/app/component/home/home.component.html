@@ -5,7 +5,19 @@
             <app-front></app-front>
         </div>
         <div class="col-4">
-            <app-rhigt-front></app-rhigt-front>
+            <app-rhigt-front ></app-rhigt-front>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-edit-body *ngFor="let key of posts" #EditBody  [post]="post" >
+                <div class="d-flex flex-column">
+                    
+                    <input type="text" [(ngModel)]="key.title" class="card-title form-control">
+                     <textarea cols="30" rows="5" class="card-text form-control" [(ngModel)]="key.body"></textarea>
+                    <button class="btn btn-success mt-2" >SAVE</button>
+                  </div>
+            </app-edit-body>
         </div>
     </div>
 </div>
