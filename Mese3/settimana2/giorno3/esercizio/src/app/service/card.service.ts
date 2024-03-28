@@ -13,6 +13,7 @@ export class CardService {
   
   getCard(): Observable<Product[]> {
     return this.http.get<Card>(this.apiURL).pipe(
+
       map((response: Card) => response.products),
       catchError((err) => {
         return throwError(this.getErrorMessage(err.status));
@@ -44,6 +45,8 @@ export class CardService {
         return elem
         
       }); */
+      
+
       const index = this.carrello.findIndex(prd => prd.id === id)
     if(this.carrello[index].amount === 1) {
       this.carrello.splice(index, 1)

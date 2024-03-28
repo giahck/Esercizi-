@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { scan } from 'rxjs';
 import { Card, Carello } from 'src/app/module/card.interface';
 
 import { CardService } from 'src/app/service/card.service';
@@ -16,6 +17,8 @@ ngOnInit(): void {
 }
 
 decrementaCarell(id:number){
+
+
 this.productSrv.decrementaCarello(id);
 }
 }

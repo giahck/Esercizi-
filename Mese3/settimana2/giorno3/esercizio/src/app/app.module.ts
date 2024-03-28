@@ -7,11 +7,16 @@ import { NavBarComponent } from './component/nav-bar/nav-bar.component';
 import { HomeComponent } from './component/home/home.component';
 import { HomeBodyComponent } from './component/home-body/home-body.component';
 import { CarellaComponent } from './component/carella/carella.component';
+import { FavComponent } from './component/fav/fav.component';
 
 const routes: Route[] = [
   {
       path: '',
       component: HomeComponent,
+  },
+  {
+      path: 'fav',
+      component: FavComponent,
   }
 ]
 @NgModule({
@@ -20,7 +25,8 @@ const routes: Route[] = [
     NavBarComponent,
     HomeBodyComponent,
     HomeComponent,
-    CarellaComponent
+    CarellaComponent,
+    FavComponent
   ],
   imports: [
     BrowserModule,
