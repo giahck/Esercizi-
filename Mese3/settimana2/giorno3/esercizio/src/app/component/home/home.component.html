@@ -1,0 +1,20 @@
+<div *ngIf="value">
+  <div class="container-fluid">
+    <div class="row">
+      <app-carella class="col-2 text-center"></app-carella>
+      <div class="col-10">
+        <div class="container-fluid">
+          <div class="row">
+            
+              <app-home-body
+              class="col-sm-4"
+                *ngFor="let item of products"
+                [product]="item"
+              ></app-home-body>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

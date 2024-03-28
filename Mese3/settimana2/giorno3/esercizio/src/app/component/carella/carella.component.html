@@ -1,0 +1,9 @@
+<ol class="list-group list-group-numbered">
+    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let key of carello">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">{{key.title}}</div>
+        Amount: {{key.amount}}
+      </div>
+      <button (click)="decrementaCarell(key.id)">del</button>
+    </li>
+  </ol>
