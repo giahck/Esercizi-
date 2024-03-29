@@ -1,0 +1,53 @@
+<div class="container-fluid" >
+  <h1 class="text-center">Todo list</h1>
+  <div class="row">
+    <div class="col-4">
+      <div *ngIf="personActive; else person">
+        <h3 class="fs-5">nomi degli inscritti</h3>
+        <div>
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" [(ngModel)]="userSearch" (input)="onSearch()">
+        </div>
+        <div *ngFor="let key of userFilter">
+          <div
+            class="d-flex flex-nowrap align-items-center"
+            (click)="singleUser(key.id)"
+          >
+            <h2>{{ key.firstName }} {{ key.lastName }}</h2>
+            <img src="{{ key.image }}" alt="imgPerson" class="w-25" />
+          </div>
+        </div>
+      </div>
+      <ng-template #person>
+        <h3>Non sei registrato</h3>
+        <a
+          class="btn btn-primary"
+          tabindex="-1"
+          role="button"
+          aria-disabled="true"
+          [routerLink]="['/register']"
+          routerLinkActive="router-link-active"
+          >Primary link</a
+        >
+      </ng-template>
+    </div>
+    <div class="col-8">
+      <div *ngIf="acttiveTodo">
+        <button class="btn btn-dark" (click)="activeTodof()">non completi</button>
+        <button class="btn btn-dark" (click)="dactiveTodof()">completi</button>
+        <button class="btn btn-dark" (click)="activeTodoaAll() ">tutti</button>
+        
+        <div *ngIf="activeTodo" >
+          <div *ngFor="let key of todo" >
+              <h1  (click)="exchange(key.id)" *ngIf="key.completed " class="text-info">{{key.todo}}</h1>
+            </div>
+        </div>
+        <div *ngIf="dactiveTodo" >
+          <div *ngFor="let key of todo">
+              <h1 (click)="exchange(key.id)" *ngIf="!key.completed" class="text-danger">{{key.todo}}</h1>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
