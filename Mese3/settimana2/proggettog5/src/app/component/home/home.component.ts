@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   user: User[] = [];
   todo: Todo[] = [];
+  userVisual!:User;
   userFilter:User[]=[]
   userSearch:string='';
   constructor(private userSrv:PersoneService) {
@@ -26,16 +27,18 @@ export class HomeComponent implements OnInit {
       this.user=elem
       this.onSearch()
       this.personActive = this.user.length > 0;
-      
     })
    this.userSrv.todoS.subscribe((elem:Todo[])=>{
     this.todo=elem
+    this.activeTodoaAll();    
    })
    
   }
-  singleUser(id:number){
+  singleUser(id:number,key:User){
     this.userSrv.getTodoVisual(id)
+    this.userVisual=key
     this.acttiveTodo=true
+
   }
   activeTodof(){
     this.activeTodo = true;
@@ -49,7 +52,7 @@ export class HomeComponent implements OnInit {
     this.activeTodo=true
     this.dactiveTodo = true;
   }
-  exchange(id:number){//potrei restituure direttamente id dellaray ma se cancello mi si sfasa tutto
+  exchange(id:number){//potrei restituure direttamente id dellaray ma se cancello mi si sfasa tutto 
     this.userSrv.exchangeTodo(id)
   }
   onSearch() {
