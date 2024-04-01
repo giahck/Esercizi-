@@ -1,7 +1,7 @@
 <div class="container-fluid" >
   <h1 class="text-center">Todo list</h1>
   <div class="row">
-    <div class="col-4">
+    <div class="col-4"><!-- if se abilitato allora é stato caricato l'utente -->
       <div *ngIf="personActive; else person">
         <h3 class="fs-5">nomi degli inscritti</h3>
         <div>
@@ -11,7 +11,7 @@
         <div *ngFor="let key of userFilter">
           <div
             class="d-flex flex-nowrap align-items-center"
-            (click)="singleUser(key.id)"
+            (click)="singleUser(key.id,key)"
           >
             <h2>{{ key.firstName }} {{ key.lastName }}</h2>
             <img src="{{ key.image }}" alt="imgPerson" class="w-25" />
@@ -38,13 +38,30 @@
         <button class="btn btn-dark" (click)="activeTodoaAll() ">tutti</button>
         
         <div *ngIf="activeTodo" >
+          <h4>Fai tap su tutto il blocco per cambiare di stato</h4>
+          <!-- <h2  (click)="exchange(key.id)" *ngIf="key.completed " class="text-info">{{key.completed}}</h2> -->
+          <div class="card" style="width: 18rem;" >
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">{{userVisual.firstName}} {{userVisual.lastName}}</li>
           <div *ngFor="let key of todo" >
-              <h1  (click)="exchange(key.id)" *ngIf="key.completed " class="text-info">{{key.todo}}</h1>
+        
+                  <span (click)="exchange(key.id)" *ngIf="key.completed ">
+                  <li class="list-group-item text-bg-info" ngClass="">{{key.todo}}</li>
+                  <li class="list-group-item">{{userVisual.title}}</li>
+                </span>
+              </div>
+            </ul>
             </div>
         </div>
         <div *ngIf="dactiveTodo" >
           <div *ngFor="let key of todo">
-              <h1 (click)="exchange(key.id)" *ngIf="!key.completed" class="text-danger">{{key.todo}}</h1>
+            <div class="card m-2" style="width: 18rem;" (click)="exchange(key.id)" *ngIf="!key.completed " >
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{userVisual.firstName}} {{userVisual.lastName}}</li>
+                <li class="list-group-item text-bg-danger" ngClass="">{{key.todo}}</li>
+                <li class="list-group-item">{{userVisual.title}}</li>
+              </ul>
+            </div>
             </div>
         </div>
       </div>
