@@ -19,14 +19,14 @@ export class AppComponent implements OnInit {
       name: (''),
       cognome: (''),
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]],
       passwordConfirm: ['', [Validators.required]],
       gender:this.fb.control('')
     }, { validator: this.passwordMatchValidator });
 
-    this.formSub.valueChanges.subscribe((status) => {
+   /*  this.formSub.valueChanges.subscribe((status) => {
       console.log('Stato del form: ', status);
-    });
+    }); */
     
   }
 
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     return { passwordMatch: password === passwordConfirm };
   }
 
-  getUser(name: string): any {
+  getUser(name: string){
     return this.formSub.get(name);
   }
 
