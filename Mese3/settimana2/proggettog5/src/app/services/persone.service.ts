@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+/* import { NgForm } from '@angular/forms'; */
 import { Router } from '@angular/router';
 import { Observable, Observer, BehaviorSubject, map } from 'rxjs';
 import { Todo, User } from '../models/interface/interfac';
@@ -15,7 +15,7 @@ export class PersoneService /* implements OnInit */ {
   sub!: Subscription;
   todoS = new BehaviorSubject<Todo[]>([]);
   private personeSubject = new BehaviorSubject<User[]>(this.persone);
-  constructor(private router: Router, private httpSrv: HttpRequestService) {}
+  constructor(private router: Router, private httpSrv: HttpRequestService,) {}
 
  
   get getUser() {
@@ -26,8 +26,8 @@ export class PersoneService /* implements OnInit */ {
     this.todoS.next(this.todo);
   }
 
-  getTodoVisual(id: number) {
-console.log(id);
+  getTodoVisual(id: number) { //carico i dati della todo dopo che ho clicatto sul nome
+
 
     this.httpSrv.getTodo().subscribe((elem: Todo[]) => {
       this.todo = elem.filter((el) => el.userId === +id);
@@ -35,7 +35,7 @@ console.log(id);
     });
   }
 
-  exchangeTodo(id:number){
+  exchangeTodo(id:number){//restituisce l'arrey con il todo cambiato 
     this.todo!=this.todo.map(elem=>{
       if(elem.id==id){
         elem.completed=!elem.completed
@@ -52,10 +52,10 @@ console.log(id);
 
   //register non é attivo funziona ma é fine a sestesso per un eventuale pusch nella registrazione
 
-  pushPerson(myForm: NgForm) {
+ /*  pushPerson(myForm: NgForm) { */
     /* this.persone.push(myForm.value as User); */
 
-    this.router.navigate(['/']);
+ /*    this.router.navigate(['/']);
     this.pullPersone;
     console.log(this.persone);
   }
@@ -66,5 +66,5 @@ console.log(id);
   }
   getPersone(): Observable<User[]> {
     return this.personeSubject.asObservable();
-  }
+  } */
 }

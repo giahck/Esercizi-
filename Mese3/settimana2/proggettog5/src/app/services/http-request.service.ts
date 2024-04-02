@@ -14,5 +14,15 @@ export class HttpRequestService {
 getTodo() {
   return this.http.get<Todo[]>(this.apiURLTodo);
 }
+postUser(user:User){
+  this.http.post(this.apiURLUser,user) .subscribe(
+    response => {
+      console.log('Data saved successfully:', response);
+    },
+    error => {
+      console.error('Error saving data:', error);
+    }
+  )
+}
 
 }

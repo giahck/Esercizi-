@@ -4,3 +4,5 @@ la parte funzionale si svolge tutto sulla home, e con i due service
 vengono attivati tre pulsanti uno che visualizza tutti i post uno che visualizza solo quelli disattivi e uno solo quelli attivi, clicando sopra al post il post diventa o disattivo o attivo in base a come é stato caricato gia clicato(se é rosso e dissattivo se é blue é attivo),
 nella nav clicando su login e poi register si va nella paggina di registrazione ma non é ancora funzionante, arrivano solo i dati inseriti ma fitizzi
 la prima cosa che fa é caricare i dati! tramite httprequest dal serivice http-request, i dati vengono caricati nel secondo service persona e poi da li vengono richiamati sulla home
+
+
