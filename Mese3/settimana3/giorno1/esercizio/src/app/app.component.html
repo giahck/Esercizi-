@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <form [formGroup]="formSub">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nome</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+          />
+          <label for="cognome" class="form-label">Cognome</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cognome"
+            formControlName="cognome"
+          />
+
+          <label for="username" class="form-label">username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            formControlName="username"
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+          <span
+            *ngIf="getUser('username')?.invalid && getUser('username')?.touched"
+          >
+            <ng-container>
+              <strong class="text-danger"
+                >Campo username obbligatorio</strong
+              ></ng-container
+            >
+          </span>
+        </div>
+        <div class="mb-3">
+          <div>
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              formControlName="password"
+            />
+            <span
+              *ngIf="
+                getUser('password')?.invalid && getUser('password')?.touched
+              "
+            >
+              <ng-container>
+                <strong class="text-danger"
+                  >Campo username obbligatorio</strong
+                ></ng-container
+              ></span
+            >
+          </div>
+          <div>
+            <label for="passwordConfirm" class="form-label"
+              >conferma Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="passwordConfirm"
+              formControlName="passwordConfirm"
+            />
+            <span *ngIf="!getPasswordConfirm().passwordMatch">
+              <ng-container>
+                <strong class="text-danger">Passwords do not match</strong>
+              </ng-container>
+            </span>
+          </div>
+        </div>
+        <div class="radio" *ngFor="let gender of genere">
+          <input type="radio" formControlName="gender" [value]="gender" />
+          <label>{{ gender }}</label>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="formSub.invalid"
+          (click)="submit()"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
