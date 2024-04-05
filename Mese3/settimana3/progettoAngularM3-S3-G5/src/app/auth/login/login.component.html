@@ -1,0 +1,44 @@
+<!-- login.component.html -->
+<div class="container-fluid mt-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-sm-8 col-md-6 ">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <!-- Email input -->
+          <div class="mb-4">
+            <input
+              type="email"
+              id="form2Example1"
+              class="form-control"
+              formControlName="email"
+            />
+            <label class="form-label" for="form2Example1">Email address</label>
+            <div *ngIf="controllo('email')?.invalid && controllo('email')?.touched">
+                <ng-container>
+                    <strong class="text-danger">Campo email obbligatorio </strong>
+                </ng-container>
+            </div>
+
+          </div>
+  
+          <!-- Password input -->
+          <div class="mb-4">
+            <input
+              type="password"
+              id="form2Example2"
+              class="form-control"
+              formControlName="password"
+            />
+            <label class="form-label" for="form2Example2">Password</label>
+            <div *ngIf="controllo('password')?.invalid && controllo('password')?.touched">
+                <ng-container>
+                    <strong class="text-danger">Campo password obbligatorio minimo 6 carateri </strong>
+                </ng-container>
+            </div>
+          </div>
+          <strong *ngIf="registerVar" class="text-danger">{{errori}} </strong><br>
+          <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-rounded" mdbRipple>Submit</button>
+          <button *ngIf="registerVar" class="btn btn-primary btn-rounded" mdbRipple [routerLink]="['/register']">registrati</button>
+        </form>
+      </div>
+    </div>
+  </div>
