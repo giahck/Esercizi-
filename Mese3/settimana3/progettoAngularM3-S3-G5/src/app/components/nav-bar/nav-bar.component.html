@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
   <!-- Container wrapper -->
   <div class="container">
     <!-- Navbar brand -->
@@ -13,6 +13,16 @@
       />
     </a>
 
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="buttonsNav.toggle()"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
     <!-- Collapsible wrapper -->
     <div
       class="collapse navbar-collapse"
@@ -20,32 +30,84 @@
       mdbCollapse
       #buttonsNav="mdbCollapse"
     >
-      <!-- Left links -->
+      <!-- home -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['']">HOME</a>
         </li>
+        <li class="nav-item" *ngIf="log">
+          <a class="nav-link" [routerLink]="['/movie']" routerLinkActive="active">MOVIES</a>
+        </li>
+        <li class="nav-item" *ngIf="log">
+          <a class="nav-link" [routerLink]="['/favorite']" routerLinkActive="active">Favorite</a>
+        </li>
+        
       </ul>
+
       <!-- Left links -->
 
       <div class="d-flex align-items-center">
-        <a *ngIf="!log"
-          class="btn btn-link px-3 me-2"
-          [routerLink]="['/login']"
-          routerLinkActive="active"
-        >
-          Login
-        </a>
-        <button *ngIf="log"
-          class="btn btn-link px-3 me-2"
-          type="button"
-          (click)="logout()"
-        >
-          Logaut
-        </button>
-        <button type="button" class="btn btn-primary me-3" *ngIf="!log" [routerLink]="['/register']">
-          Sign up for free
-        </button>
+        <ul class="navbar-nav">
+          <!-- Avatar -->
+          <li mdbDropdown class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle d-flex align-items-center"
+              
+              id="navbarDropdownMenuLink"
+              role="button"
+              mdbDropdownToggle
+              aria-expanded="false"
+            >
+              <img
+                src="https://mdbootstrap.com/img/Photos/Avatars/img (31).webp"
+                class="rounded-circle"
+                height="22"
+                alt=""
+                loading="lazy"
+              />
+            </a>
+            <ul
+              mdbDropdownMenu
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <li>
+                <a class="dropdown-item" *ngIf="log">My profile</a>
+              </li>
+              <li *ngIf="!log">
+                <!-- button submit -->
+                <button
+                  type="button"
+                  class="btn btn-link px-3 me-2"
+                  [routerLink]="['/register']"
+                >
+                  Registrati
+                </button>
+              </li>
+
+              <li *ngIf="!log">
+                <!-- login -->
+                <a
+                  class="btn btn-link px-3 me-2"
+                  [routerLink]="['/login']"
+                  routerLinkActive="active"
+                >
+                  Login
+                </a>
+              </li>
+              <li *ngIf="log">
+                <!-- button logaout -->
+                <button
+                  class="btn btn-link px-3 me-2"
+                  type="button"
+                  (click)="logout()"
+                >
+                  Logaut
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
     <!-- Collapsible wrapper -->

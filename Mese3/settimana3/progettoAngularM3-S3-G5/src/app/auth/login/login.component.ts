@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { FavoriteService } from 'src/app/services/favorite.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -29,6 +30,7 @@ constructor(private authSrv:AuthService,private router: Router) {}
       this.authSrv.login(this.loginForm.value).subscribe(
         (data) => {
           console.log(data);
+          
           this.router.navigate(['/']);
         },
         (err) => {

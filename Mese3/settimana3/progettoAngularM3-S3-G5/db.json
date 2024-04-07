@@ -16,7 +16,7 @@
     },
     {
       "email": "gianluca.giacchetta@gmail.com",
-      "password": "$2a$10$mnDpoigQFti4SkGKZffpS.Jh5E6bhUu3v6uJAMomV2WUVMuQv8XmC",
+      "password": "$2a$10$Nq9kEsjwj5/eY5pb8FDjqeC.IstHqcgkTz1DsX15yytdxgidS5khi",
       "name": "gianluca",
       "surname": "giacchetta",
       "id": 4
@@ -27,16 +27,6 @@
       "userId": 2,
       "movieId": 460465,
       "id": 6
-    },
-    {
-      "userId": 3,
-      "movieId": 804435,
-      "id": 9
-    },
-    {
-      "userId": 3,
-      "movieId": 399566,
-      "id": 10
     },
     {
       "userId": 2,
@@ -52,6 +42,31 @@
       "userId": 2,
       "movieId": 615457,
       "id": 27
+    },
+    {
+      "userId": 4,
+      "movieId": 424,
+      "id": 28
+    },
+    {
+      "userId": 4,
+      "movieId": 278,
+      "id": 29
+    },
+    {
+      "userId": 4,
+      "movieId": 724089,
+      "id": 30
+    },
+    {
+      "userId": 4,
+      "movieId": 240,
+      "id": 31
+    },
+    {
+      "userId": 4,
+      "movieId": 696374,
+      "id": 32
     }
   ],
   "genres": [

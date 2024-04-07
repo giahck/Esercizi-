@@ -1,0 +1,63 @@
+<mdb-carousel class="container" *ngIf="coruselfilm && coruselfilm.length > 0">
+  <h2>Movies popular</h2>
+  <mdb-carousel-item *ngFor="let key of coruselfilm">
+    <div class="row">
+      <img
+        *ngFor="let opt of key"
+        src="{{ url + opt.poster_path }}"
+        class="col-3"
+        alt="..."
+      />
+    </div>
+  </mdb-carousel-item>
+</mdb-carousel>
+<mdb-carousel
+  class="container"
+  *ngIf="coruselfilmTop && coruselfilmTop.length > 0"
+>
+  <h2>Movies TopTread</h2>
+  <mdb-carousel-item *ngFor="let key of coruselfilmTop">
+    <div class="row m-2">
+      <!--  <img *ngFor="let opt of key"
+                  src="{{url+opt.poster_path}}"
+                  class="col-2 w-25"
+                  alt="..."
+                /> -->
+      <div *ngFor="let opt of key" class="col-6 col-sm-4 p-0">
+        <div class="card m-2">
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img
+                src="{{ url + opt.poster_path }}"
+                class="img-fluid rounded-start"
+                alt="..." 
+              />
+            </div>
+            <div class="col-md-6">
+              <div class="card-body p-1">
+                <h5 class="card-title">{{ opt.title }}</h5>
+               
+                <span class="d-flex">
+                  <a
+                    type="button"
+                    class="btn btn-sm btn-danger"
+                    mdbPopover="{{opt.overview}}"
+                    mdbPopoverTitle="{{ opt.title }}"
+                  >
+                    Leggi
+                  </a>
+                  <button type="button" class="btn btn-sm btn-info mx-2" (click)="favorit(opt.id)" mdbRipple>mi piace</button>
+                </span>
+                  <p><strong>lenguage:</strong> {{opt.original_language}}</p>
+
+                <p class="card-text position-absolute bottom-0">
+                  <small class="text-muted ">Relase {{opt.release_date}}</small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mdb-carousel-item>
+</mdb-carousel>
