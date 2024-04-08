@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
@@ -21,16 +22,35 @@ const routes: Routes = [
   },
   {
     path: 'favorite',
-    loadChildren: () =>import('./components/favorite/favorite.module').then(m => m.FavoriteModule), 
+    loadChildren: () =>
+      import('./components/favorite/favorite.module').then(
+        (m) => m.FavoriteModule
+      ),
     canActivate: [AuthGuard],
   },
   {
     path: 'movie',
     loadChildren: () =>
       import('./components/mouvie/mouvie.module').then((m) => m.MouvieModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'favorite',
+    loadChildren: () =>
+      import('./components/favorite/favorite.module').then(
+        (m) => m.FavoriteModule
+      ),
       canActivate: [AuthGuard],
   },
-  { path: 'favorite', loadChildren: () => import('./components/favorite/favorite.module').then(m => m.FavoriteModule) },
+  { path: 'profile', loadChildren: () => import('./components/profile/profile/profile.module').then(m => m.ProfileModule) }/* ,
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./components/profile/profile.component').then(
+        (m) => m.ProfileComponent,
+      ),
+      canActivate: [AuthGuard],
+  }, */
 ];
 
 @NgModule({

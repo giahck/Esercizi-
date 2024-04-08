@@ -71,8 +71,8 @@
               class="dropdown-menu"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <li>
-                <a class="dropdown-item" *ngIf="log">My profile</a>
+              <li *ngIf="log">
+                <a class="dropdown-item"  [routerLink]="['/profile']" routerLinkActive="active">My profile</a>
               </li>
               <li *ngIf="!log">
                 <!-- button submit -->
@@ -80,6 +80,7 @@
                   type="button"
                   class="btn btn-link px-3 me-2"
                   [routerLink]="['/register']"
+                  routerLinkActive="active"
                 >
                   Registrati
                 </button>
