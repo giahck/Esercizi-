@@ -12,6 +12,8 @@ export class MouvieComponent implements OnInit{
   films: MoviesPopular[] = [];
   coruselfilm: MoviesPopular[][] = [];
   coruselfilmTop: MoviesPopular[][] = [];
+  muviFavorite: MoviesPopular[] = [];
+  activeMipiace: boolean = false;
   url: string = 'http://image.tmdb.org/t/p/w500';
   constructor(private muvieSrv: MuvieSService, private favSrv: FavoriteService) { }
   ngOnInit(): void {
@@ -33,9 +35,17 @@ export class MouvieComponent implements OnInit{
       (err) => {
         console.log(err.error);
       });
+      this.favSrv.muviFavoriti.subscribe((data) => {
+        this.muviFavorite = data;
+      }
+      );
+     
   }
-  favorit(id:number){
-    this.favSrv.addFavorite(id);    
+  exchange(id: number) {
+    console.log(id);
+    
+   this.favSrv.cambioFavorito(id);
+   
   }
 
 }

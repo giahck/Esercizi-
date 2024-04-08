@@ -1,31 +1,40 @@
+
 import { environment } from 'src/environments/environment.development';
 
 import { Component, OnInit } from '@angular/core';
-import { MoviesPopular, MoviesToprated } from 'src/app/models/db-interface';
+import { Favorite, MoviesPopular, MoviesToprated } from 'src/app/models/db-interface';
 import { FavoriteService } from 'src/app/services/favorite.service';
+import { FavoriteModule } from './favorite.module';
 @Component({
   selector: 'app-favorite',
   templateUrl: './favorite.component.html',
-  styleUrls: ['./favorite.component.scss']
+  styleUrls: ['./favorite.component.scss'],
 })
-export class FavoriteComponent implements OnInit{
-  validate: boolean = false;
-  movie:MoviesToprated[]|MoviesPopular[] = [];
-  apiUrl=environment.apiURL;
-  imgUrl=environment.urlimg; 
-  constructor(private favSrv:FavoriteService) { 
-  }
+export class FavoriteComponent implements OnInit {
+  urlimg=environment.urlimg;
+  favorit: Favorite[] = [];
+  muviFavorit: MoviesPopular[] = [];
+  validate:boolean=false;
+  constructor(private favSrv: FavoriteService) {}
   ngOnInit(): void {
-      
-    this.favSrv.serchFavorite().subscribe((movies) => {
-      // Do something with the movies
-      console.log(movies);
-      this.validate = true;
-      this.movie = movies;
+   this.favSrv.favoriti.subscribe((data) => {
+      this.favorit = data;
+      /* console.log(this.favorit); */
     });
+   this.favSrv.muviFavoriti.subscribe((data) => {
+    console.log(data);
+    
+     data.map(elem=>{
+      
+      
+      this.muviFavorit.push(elem)});
+      console.log(this.muviFavorit);
+      this.validate=true;      
+    })
   }
-  deselezione(key:number)
-  {
-   this.favSrv.disactiveFavorite(key);
-  }
+deselezione(id:number){
+  console.log(id);
+  
+  this.favSrv.cambioFavorito(id);
+}
 }

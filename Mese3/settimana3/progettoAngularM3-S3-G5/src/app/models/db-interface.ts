@@ -21,11 +21,6 @@ export interface Root {
   }
   
   export interface Favorite {
-    concat(result: Favorite): unknown
-    pipe(arg0: any): unknown
-    find(arg0: (favorite: any) => boolean): unknown
-    filter(arg0: (favorite: any) => boolean): unknown
-    map(arg0: (favorite: any) => any): any
     userId: number
     movieId: number
     id: number
@@ -69,3 +64,4 @@ export interface Root {
     vote_average: number
     vote_count: number
   }
+  

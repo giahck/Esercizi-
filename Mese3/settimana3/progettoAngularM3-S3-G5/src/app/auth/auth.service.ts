@@ -36,6 +36,8 @@ export class AuthService {
       this.authSub.next(JSON.parse(userLocalStorage));
       const userId = (JSON.parse(userLocalStorage)).user.id as unknown as number;
       this.favSrv.iniUser(userId);
+      console.log('ciao');
+      
     }
   }
   logout() {

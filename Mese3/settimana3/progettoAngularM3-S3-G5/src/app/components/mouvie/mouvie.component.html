@@ -18,11 +18,6 @@
   <h2>Movies TopTread</h2>
   <mdb-carousel-item *ngFor="let key of coruselfilmTop">
     <div class="row m-2">
-      <!--  <img *ngFor="let opt of key"
-                  src="{{url+opt.poster_path}}"
-                  class="col-2 w-25"
-                  alt="..."
-                /> -->
       <div *ngFor="let opt of key" class="col-6 col-sm-4 p-0">
         <div class="card m-2">
           <div class="row g-0">
@@ -31,6 +26,7 @@
                 src="{{ url + opt.poster_path }}"
                 class="img-fluid rounded-start"
                 alt="..." 
+                (click)="exchange(opt.id)"
               />
             </div>
             <div class="col-md-6">
@@ -43,10 +39,17 @@
                     class="btn btn-sm btn-danger"
                     mdbPopover="{{opt.overview}}"
                     mdbPopoverTitle="{{ opt.title }}"
+                    
                   >
                     Leggi
                   </a>
-                  <button type="button" class="btn btn-sm btn-info mx-2" (click)="favorit(opt.id)" mdbRipple>mi piace</button>
+
+                <div *ngFor="let muvie of muviFavorite">
+                  <span *ngIf="muvie.id==opt.id">
+                    <button type="button" class="btn btn-sm btn-info mx-2" mdbRipple>mi piace</button>
+                  </span>
+                </div>
+
                 </span>
                   <p><strong>lenguage:</strong> {{opt.original_language}}</p>
 

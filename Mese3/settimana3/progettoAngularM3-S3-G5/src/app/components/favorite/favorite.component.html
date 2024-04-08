@@ -1,15 +1,21 @@
-<div class="container"  *ngIf="validate">
+<div class="container" *ngIf="validate">
   <h2>Lista Favoriti</h2>
   <h5>nb se vui rimuovere dalla lista fai tap sulla card</h5>
-    <div class="row">
-        <div class=" col-3" *ngFor="let key of movie">
-            <div class="card" style="width: 10rem;" (click)="deselezione(key.id)">
-                <img src="{{imgUrl+key.poster_path}}" class="card-img-top" alt="Sunset Over the Sea"/>
-                <div class="card-body">
-                  <p class="card-title"><strong>{{key.title}}</strong></p>
-                  <p class="card-text">{{key.overview.slice(0,70)}}</p>
-                </div>
-              </div>
+  <div class="row">
+    <div class="col-3" *ngFor="let key of muviFavorit">
+      <div class="card" style="width: 10rem" (click)="deselezione(key.id)">
+        <img
+          src="{{urlimg + key.poster_path }}"
+          class="card-img-top"
+          alt="Sunset Over the Sea"
+        />
+        <div class="card-body">
+          <p class="card-title">
+            <strong>{{ key.title }}</strong>
+          </p>
+          <p class="card-text">{{ key.overview.slice(0, 70) }}</p>
         </div>
+      </div>
     </div>
+  </div>
 </div>

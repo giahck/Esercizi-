@@ -1,8 +1,13 @@
+import { map } from 'rxjs/operators';
 import { MuvieSService } from 'src/app/services/muvie-s.service';
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Favorite, MoviesPopular } from '../models/db-interface';
+import { Injectable, OnInit } from '@angular/core';
+import {
+  Favorite,
+  MoviesPopular,
+  MoviesToprated,
+} from '../models/db-interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 //chiamo apena faccio login
@@ -10,120 +15,85 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root',
 })
 export class FavoriteService {
-  private favorite = new BehaviorSubject<Favorite[]>([]);
-  favorite$ = this.favorite.asObservable();
-  constructor(private http: HttpClient, private muvSrv: MuvieSService) {}
+  favoriti = new BehaviorSubject<Favorite[]>([]);
+  muviFavoriti = new BehaviorSubject<MoviesToprated[]>([]);
+  constructor(private muvSrv: MuvieSService, private http: HttpClient) {}
   iniUser(id: number) {
-    this.http
-      .get<Favorite[]>(environment.apiURL + `favorites?userId=${id}`)
-      .subscribe((result) => {
-        this.favorite.next(result);
-        console.log(this.favorite.value);
-      });
-  }
+    //carico tutto il file dei favoriti del user connesso viene dichiarato nel ahuth service
 
-
-  
-  addFavorite(mouviId: number) {
-    //faccio anche una post e modifico il db pero uso il behavior subject per aggiornare la pagina e riprendermelo senza fare get
-    let idUser;
-    let favoriteId = this.favorite.value.find((favorite) => {
-      idUser = favorite.userId;
-      if (favorite.movieId === mouviId) {
-        return favorite.userId;
-      }
-      return null;
-    });
-
-    if (favoriteId === undefined) {
-      /* console.log(this.favorite.getValue()); */
-
-      this.http
-        .post<Favorite>(environment.apiURL + 'favorites', {
-          userId: idUser,
-          movieId: mouviId,
-        })
-        .subscribe((result) => {
-          const currentFavorites = this.favorite.getValue();
-          const updatedFavorites = currentFavorites.concat(result);
-          this.favorite.next(updatedFavorites);
-        });
-    }
-  }
-  serchFavorite(): Observable<MoviesPopular[]> {
-    console.log(this.favorite.value);
     
-    //ritorna un observable di array di movies linterfaccia e uguale
-    let muvie: MoviesPopular[] = []; //dal momento che la get la faccio in un service differente mi apro un oservabole in modo che atendo anche dal component la get
-    return new Observable((observer) => {
-      const favoritesLength = this.favorite.value.length;
-      let count = 0;
-      this.favorite.value.forEach((favorite) => {
-        this.muvSrv.ricercaMuvie(favorite.movieId.toString()).subscribe((result) => {result.forEach((res) => { muvie.push(res);});
-            this.muvSrv.ricercaMuvieToprated(favorite.movieId.toString()).subscribe((result) => { result.forEach((res) => { muvie.push(res); });
-                count++;
-                if (count === favoritesLength) {
-                  observer.next(muvie);
-                  observer.complete();
-                }
+    let arr: MoviesToprated[] = [];
+    this.http
+      .get<Favorite[]>(environment.apiURL + 'favorites?userId=' + id)
+      .subscribe((elem) => {
+        
+        
+        if(elem.length!==0){
+        this.favoriti.next(elem);
+      
+        this.favoriti.getValue().map((elem) => {
+          this.muvSrv
+            .ricercaMuvieToprated(elem.movieId)
+            .subscribe((elemMovi) => {
+              elemMovi.map((el) => {
+
+                arr.push(el);
               });
+            });
+          this.muvSrv.ricercaMuvie(elem.movieId).subscribe((elemMovi) => {
+            elemMovi.map((el) => {
+              arr.push(el);
+            });
+            if (this.favoriti.getValue().length == arr.length){
+              /* console.log(this.favoriti.getValue()); */
+              
+              this.muviFavoriti.next(arr);}
           });
+        });
+      }else{        
+        this.muviFavoriti.next([]);}
+
       });
-    });
+    /* this.http.get<MoviesToprated[]>(environment.apiURL + 'favorites?userId'+id).subscribe(
+      (elem)=>{this.muviFavoriti.next(elem);}); */
+  }
+  cambioFavorito(id: number) {
+    let filtrato = this.favoriti.getValue().filter((el) => el.movieId == id);
+  /*   console.log(filtrato[0]); */
+    if (filtrato.length == 0) {
+      this.addFavorite(id);
+    } else this.deleteFavorite(filtrato[0]);//deve essere per forza 0 ce ne sara uno solo
+  }
+  addFavorite(id: number) {
+    const userJson = localStorage.getItem('user');
+    let user = userJson ? JSON.parse(userJson) : null;
+    this.http
+      .post<Favorite>(environment.apiURL + 'favorites', {
+        userId: user.user.id,
+        movieId: id,
+      })
+      .subscribe((elem) => {
+        this.favoriti.next([...this.favoriti.getValue(), elem]);
+        this.iniUser(user.user.id);
+      });
   }
   
-  disactiveFavorite(id: number) {
-    this.favorite.getValue().find((favorite) => {
-      console.log(favorite);
-      if (favorite.movieId === id) {
-        this.http.delete(environment.apiURL + `favorites/${favorite.id}`) .subscribe();
-         /* console.log( */
-          /* this.favorite.value.filter(favorite => favorite.movieId !== id)); */
-        this.favorite.next(this.favorite.value.filter(favorite => favorite.movieId !== id));
-        this.serchFavorite()
+  deleteFavorite(filtrato: Favorite) {
+    console.log(this.favoriti.getValue());
+    
+    this.http.delete(environment.apiURL + 'favorites/' + filtrato.id).subscribe(
+      (elem) => {
         
-        /*  const currentFavorites = this.favorite.getValue();
-        
-        const updatedFavorites = currentFavorites.filter((favorite) => favorite.id === id);
-        console.log(updatedFavorites); */
-        
-        /* this.favorite.next(updatedFavorites); */
-        /*   }); */
-        
-      }  
-    }
-  );
-  this.serchFavorite();
-  
+       
+     /* this.favoriti.next( this.favoriti.getValue().splice(this.favoriti.getValue().indexOf(filtrato),1)); */
+
+     
+     /* this.muviFavoriti.next(this.muviFavoriti.getValue().splice(this.muviFavoriti.getValue().findIndex(el=>el.id==filtrato.movieId),1)); */
+           this.iniUser(filtrato.userId);   
+      }
+
+      
+    );
+    
+  }
 }
-}
-
-//questa soluzione con muvie messa in un behavior subject in modo che caricoo i favoriti una sola volta pero deve essere inizializata appena faccio login un po come ho fatto con addfavorite
-//la funzione é stata testata ed é funzionante
-//riscontrato un problema che se la inizializo sul component ogni volta che io acedo al component mi fa una get e mi duplica i favoriti per questo questa funzio deve esere messa solo al login o appena parte il primo component in modo che metto in ascolto solo muvie dichiarato nel caso con funzioni estese
-//il codice testato neglialtri component li ho cancellati perche non erano necessaro basta aprire un .sub sulla funzione e ti sara restituito tutto arrey, magari ci si aggiunge anche mouvetoptread ed é completo
-/*   serchFavorite(): Observable<MoviesPopular[]> {
-  return new Observable(observer => {
-    const favoritesLength = this.favorite.value.length;
-    let count = 0;
-
-    this.favorite.value.forEach((favorite) => { 
-      this.muvSrv.ricercaMuvie(favorite.movieId.toString()).subscribe((result) => {
-        
-        result.forEach((res) => {
-          console.log(res);
-          
-          this.muvie.next([...this.muvie.value, res]); 
-        });
-
-        count++;
-        if (count === favoritesLength) {
-          console.log(this.muvie.value);
-          
-          observer.next(this.muvie.value);
-          observer.complete();
-        }
-      });
-    });
-  });
-} */

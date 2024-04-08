@@ -14,10 +14,10 @@ export class MuvieSService {
   getMoviesToprated(){
    return this.http.get<MoviesToprated[]>('http://localhost:4201/movies-toprated');
   }
-  ricercaMuvie(query:string){
+  ricercaMuvie(query:number){
     return this.http.get<MoviesPopular[]>('http://localhost:4201/movies-popular?id='+query);
   }
-  ricercaMuvieToprated(query:string){
+  ricercaMuvieToprated(query:number){
     return this.http.get<MoviesToprated[]>('http://localhost:4201/movies-toprated?id='+query);
   }
 
