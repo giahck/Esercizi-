@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class Main {//esercizio 1 e 2 insieme il 3 é separato
     static String[] fiveString = new String[5];
     static Scanner scanner = new Scanner(System.in);
 
