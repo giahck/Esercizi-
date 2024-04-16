@@ -91,6 +91,7 @@ public class esercizio1 {
         System.out.println("inserisci Numero di partenza per il timer:");
         int n = sc.nextInt();
 
+
         for (int i = n; i >= 0; i--) {
             try {
                 System.out.println(i);
