@@ -6,19 +6,13 @@ class Triangolo {
         float a = (float) Math.sqrt((l1 + l2 + l3) / 2 * ((l1 + l2 + l3) / 2 - l1) * ((l1 + l2 + l3) / 2 - l2) * ((l1 + l2 + l3) / 2 - l3));
         return a;
     }
-
-
         public void stampa ( float resulArea){
             System.out.println("l'area del triangolo é " + resulArea);
         }
-
-
 }
-
 public class Main {//esercizio 1 e 2 insieme il 3 é separato
     static String[] fiveString = new String[5];
     static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
         stampa();
         popolaArrey();
