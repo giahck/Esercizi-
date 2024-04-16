@@ -67,7 +67,7 @@ public class esercizi {
         while (!insertString.equals(":q")) {//finchè la stringa inserita non è uguale a :q
             System.out.println("Inserisci una stringa");
             insertString = sc.nextLine();
-            for (char i : insertString.toCharArray()) {//scorro la stringa inserita
+            for (char i : insertString.toCharArray()) {//scorro la stringa inserita, do while nel caso non alloco fuori la variabile
                 if (i != ' ')
                     System.out.print(i + ",");
                 else
