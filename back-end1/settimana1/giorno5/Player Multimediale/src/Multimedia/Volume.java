@@ -5,7 +5,6 @@ public interface Volume {
     public int volume=5; //VOLUME IMPOSTATO A 5 di default
     public void alzaVolume();
     public void abbassaVolume();
-    public void setVolume(int volume);
     public void getVolume();
     void play();
 }

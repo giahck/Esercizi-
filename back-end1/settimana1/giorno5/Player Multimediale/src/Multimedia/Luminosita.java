@@ -6,4 +6,5 @@ public interface Luminosita {
     public void alzaLume();
     public void abbassaLume();
     public void getLume();
+    public void show();
 }

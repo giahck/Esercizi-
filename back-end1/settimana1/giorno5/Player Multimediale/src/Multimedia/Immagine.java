@@ -7,7 +7,9 @@ public class Immagine extends Multimediale implements Luminosita {
     }
     @Override
     public void scegli(){
-        System.out.println();
+        System.out.println("-------------------------------------------");
+        this.show();
+        System.out.println("-------------------------------------------");
     }
     @Override
     public void alzaLume() {
@@ -24,6 +26,16 @@ public class Immagine extends Multimediale implements Luminosita {
     @Override
     public void getLume() {
         System.out.println("Il volume é impostato a: "+this.lume);
+    }
+
+    @Override
+    public void show() {
+        String count = "IMAGGINE "+this.titolo;
+        for (int i = 0; i < this.lume; i++) {
+            count += "*";
+        }
+        System.out.println(count);
+
     }
 }
 
