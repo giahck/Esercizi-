@@ -8,4 +8,5 @@ abstract class Multimediale {
     public String getTitolo(){
         return this.titolo;
     }
+    public abstract void scegli();
 }

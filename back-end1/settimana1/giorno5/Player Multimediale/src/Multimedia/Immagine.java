@@ -5,7 +5,10 @@ public class Immagine extends Multimediale implements Luminosita {
     public Immagine(String Titolo) {
         super(Titolo);
     }
-
+    @Override
+    public void scegli(){
+        System.out.println();
+    }
     @Override
     public void alzaLume() {
         System.out.println("Alza la Luminosita di 1");

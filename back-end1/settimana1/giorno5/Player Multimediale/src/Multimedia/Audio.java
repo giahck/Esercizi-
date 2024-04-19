@@ -9,11 +9,13 @@ public class Audio extends Multimediale implements Volume {
     }
     @Override
     public void play(){
-            System.out.print(this.titolo);
-        for (int i=this.durata;i>=0;i--){
+            System.out.println(this.titolo);
+        for (int i=this.durata;i>=0;i--){//va a capo ogni secondo stampando tante * in base al volume
         try {
-            Thread.sleep(100); //sospensione di 1 secondo
-            System.out.print("*");//aggiunge un * per oogni secondo passato
+            Thread.sleep(1000); //sospensione di 1 secondo
+            for (int j=this.volume;j>=0;j--)
+                System.out.print("*");
+            System.out.println();
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
         }
@@ -41,4 +43,8 @@ public class Audio extends Multimediale implements Volume {
         System.out.println("Il volume é impostato a: "+this.volume);
     }
 
+    @Override
+    public void scegli() {
+        this.play();
+    }
 }
