@@ -6,91 +6,110 @@ import java.util.Scanner;
 public class Main {
         static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Quanti Elementi vuoi creare?");
         int nElem = scanner.nextInt();
         scanner.nextLine(); // Consuma il carattere di nuova riga rimasto nel buffer
         Multimediale[] multimedia = new Multimediale[nElem];
+       /* multimedia[0]=new Video("sad",5);
+        multimedia[1]=new Video("Ciao",5);
+        multimedia[2]=new Video("Cisdg",5);*/
         for (int i = 0; i < nElem; i++) {
-            multimedia[i] = creaElementoDaInput(scanner, i);
+            multimedia[i] = instanElement(i);
         }
-       /* for (Multimediale media : multimedia) {
-            media.scegli();
-        }*/
-        String stringa;
-        do {
-            System.out.println("Scegli cosa vuoi vedere o sentire");
-            System.out.println("Se vuoi uscire inserisci :q");
-            stringa=scanner.nextLine();
-        } while (!stringa.equals(":q"));
+
+        String stringa="";
+        while (!stringa.equals(":q")){
+            stringa="";
+            for (int i=0; i<nElem;i++) {
+                System.out.println(multimedia[i].titolo);
+            }
+            System.out.println("Scegli cosa vuoi vedere o sentire digitando tra 1 e"+nElem);
+                int n = scanner.nextInt();
+            if (nElem>=n) {
+                multimedia[n - 1].scegli();
+                System.out.println("Se vuoi uscire inserisci :q");
+                scanner.nextLine();
+                stringa=scanner.nextLine();
+            }else {
+                System.out.println("Se vuoi uscire inserisci :q");
+            scanner.nextLine();
+                stringa=scanner.nextLine().toLowerCase();
+            }
+        };
         scanner.close();
 
     }
 
-    public static Multimediale creaElementoDaInput(Scanner scanner, int index) {
-        System.out.println(index + "  Premi un tasto per scegliere tra: V (Video), I (Immagine), A (Audio)");
-        String elem = scanner.nextLine();
+    public static Multimediale instanElement( int id) {
+        System.out.println(id + "  Premi un tasto per scegliere tra: V (Video), I (Immagine), A (Audio)");
+        String elem = scanner.nextLine().toUpperCase();
         switch (elem) {
             case "V":
-                return creaVideoDaInput(scanner);
+                return videoIn();//accetta sia il volume che la luminosita
             case "I":
-                return creaImmagineDaInput(scanner);
+                return immagineIn();//accetta solo la luminosita
             case "A":
-                return creaAudioDaInput(scanner);
+                return audioIn();//accetta solo il volume
             default:
                 System.out.println("Scelta non valida. Riprova.");
-                return creaElementoDaInput(scanner, index); // Richiama ricorsivamente il metodo per ripetere la scelta
+                return instanElement( id);
         }
     }
 
-    public static Video creaVideoDaInput(Scanner scanner) {
+    public static Video videoIn() {//quindi richiama sia luminosita che volume
         System.out.println("Inserisci titolo video e durata (intero):");
         String titolo = scanner.nextLine();
         int durata = scanner.nextInt();
-        scanner.nextLine(); // Consuma il carattere di nuova riga rimasto nel buffer
+        scanner.nextLine();
         Video video = new Video(titolo, durata);
-        gestisciVolume(scanner, video);
+        gestisciVolume( video);
+        gestisciLuminosita(video);
         return video;
     }
 
-    public static Immagine creaImmagineDaInput(Scanner scanner) {
+    public static Immagine immagineIn() {//chiama  solo luminosita
         System.out.println("Inserisci titolo Immagine:");
         String titolo = scanner.nextLine();
         Immagine immagine = new Immagine(titolo);
-        gestisciLuminosita(scanner, immagine);
+        gestisciLuminosita( immagine);
         return immagine;
     }
 
-    public static Audio creaAudioDaInput(Scanner scanner) {
+    public static Audio audioIn() {//chiama solo volume
         System.out.println("Inserisci titolo Audio e durata (intero):");
         String titolo = scanner.nextLine();
         int durata = scanner.nextInt();
-        scanner.nextLine(); // Consuma il carattere di nuova riga rimasto nel buffer
-        return new Audio(titolo, durata);
+        scanner.nextLine();
+        Audio audio=new Audio(titolo,durata);
+        gestisciVolume(audio);
+        return audio;
     }
 
-    public static void gestisciVolume(Scanner scanner, Video video) {
+    public static void gestisciVolume(Volume media) {//modifica il volume in base all'oggeto passato fa riferimento all interffacia volume
         String scelta;
         do {
-            System.out.println("Se vuoi impostare il volume premi S, se vuoi abbassarlo premi T, premi N per uscire:"+video.volume);
-            scelta = scanner.nextLine();
+            media.getVolume();
+            System.out.println("Se vuoi alsare il volume premi S, se vuoi abbassarlo premi T, premi N per uscire:");
+            scelta = scanner.nextLine().toUpperCase();//ACCETTA SIA s CHE S
             if (scelta.equals("S")) {
-                video.alzaVolume();
+                media.alzaVolume();
             } else if (scelta.equals("T")) {
-                video.abbassaVolume();
+                media.abbassaVolume();
             }
         } while (!scelta.equals("N"));
     }
 
-    public static void gestisciLuminosita(Scanner scanner, Immagine immagine) {
+    public static void gestisciLuminosita( Luminosita luminosita) {///modifica la luminosita in base all'oggeto passato fa riferimento all interffacia Luminosita
         String scelta;
         do {
-            System.out.println("Se vuoi impostare la luminosita premi S, se vuoi abbassarla premi T, premi N per uscire:"+immagine.lume);
-            scelta = scanner.nextLine();
+            luminosita.getLume();
+            System.out.println("Se vuoi alzare la luminosita premi S, se vuoi abbassarla premi T, premi N per uscire:");
+            scelta = scanner.nextLine().toUpperCase();
             if (scelta.equals("S")) {
-                immagine.alzaLume();
+                luminosita.alzaLume();
             } else if (scelta.equals("T")) {
-                immagine.abbassaLume();
+                luminosita.abbassaLume();
             }
         } while (!scelta.equals("N"));
     }
