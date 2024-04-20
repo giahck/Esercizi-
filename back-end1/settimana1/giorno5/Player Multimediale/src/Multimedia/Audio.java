@@ -12,10 +12,10 @@ public class Audio extends Multimediale implements Volume {
     @Override
     public void play() {
         System.out.print("TRACCIA "+this.titolo);
-        for (int i = this.durata; i >= 0; i--) {//va a capo ogni secondo stampando tante * in base al volume
+        for (int i = this.durata; i > 0; i--) {//va a capo ogni secondo stampando tante * in base al volume
             try {
                 Thread.sleep(1000); //sospensione di 1 secondo
-                for (int j = this.volume; j >= 0; j--)
+                for (int j = this.volume; j >0; j--)
                     System.out.print("*");
                 System.out.print(" ");
             } catch (InterruptedException e) {

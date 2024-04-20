@@ -62,7 +62,7 @@ public class Video extends Multimediale implements Volume,Luminosita{
 
     @Override
     public void getLume() {
-        System.out.println("Il volume é impostato a: "+this.lume);
+        System.out.println("La luminosita é impostato a: "+this.lume);
     }
 
     @Override
