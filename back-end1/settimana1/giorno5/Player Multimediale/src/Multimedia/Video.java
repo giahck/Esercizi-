@@ -69,9 +69,9 @@ public class Video extends Multimediale implements Volume,Luminosita{
     public void show() {
         String count = "luminosita impostata:"+this.titolo;
         for (int i = 0; i < this.lume; i++) {
-            count += "*";
-        }
+            count += "!";
         System.out.println(count);
+        }
 
     }
 }

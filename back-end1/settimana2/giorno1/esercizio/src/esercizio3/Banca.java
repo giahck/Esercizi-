@@ -15,7 +15,7 @@ public class Banca {
 
             System.out.println("Saldo conto: " + conto1.restituisciSaldo());
         } catch (BancaException e) {
-            logger.error("Errore durante il prelievo: " + e);
+            logger.warn("Errore durante il prelievo: " + e);
 
             /*e.printStackTrace();*/
         }
@@ -30,8 +30,8 @@ public class Banca {
             conto2.stampaSaldo();
 
         } catch (BancaException e) {
-            System.out.println("Errore durante il prelievo: " + e);
-           /* e.printStackTrace();*/
+            logger.error("Errore durante il prelievo: " + e);
+            e.printStackTrace();
         }
     }
 }
