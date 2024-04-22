@@ -6,16 +6,17 @@ import org.slf4j.LoggerFactory;
 import java.util.Scanner;
 
 public class esercizio2 {
-    static Logger logger = LoggerFactory.getLogger("logger");
+    static Logger logger = LoggerFactory.getLogger("logger1");
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
         Kilometri km=new Kilometri();
         try {
-            System.out.println(km.calcoloLitri(5,3));
+
+            System.out.println(km.calcoloLitri(scan.nextInt(),scan.nextInt()));
 
         } catch (Eccezione e) {
-            logger.error(e.getMessage());
+            logger.warn(e.getMessage());
         }
     }
 }
