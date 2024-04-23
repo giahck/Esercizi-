@@ -1,0 +1,4 @@
+2024-04-22 17:06:54,479 ERROR [main] logger1 [esercizio2.java:18] -- Litri cannot be zero
+2024-04-22 17:08:07,311 ERROR [main] logger1 [esercizio2.java:18] -- Litri cannot be zero
+2024-04-22 17:09:36,654 ERROR [main] logger1 [esercizio2.java:19] -- Litri cannot be zero
+2024-04-22 17:10:25,782 WARN [main] logger1 [esercizio2.java:19] -- Litri cannot be zero
