@@ -1,1 +1,3 @@
 2024-04-22 17:12:51,263 WARN [main] logger1 [esercizio2.java:19] -- Litri cannot be zero
+2024-04-22 17:20:12,549 WARN [main] logger1 [Banca.java:18] -- Errore durante il prelievo: esercizio3.BancaException: il conto é in rosso
+2024-04-22 17:20:12,557 ERROR [main] logger1 [Banca.java:33] -- Errore durante il prelievo: esercizio3.BancaException: il prelievo non E disponibie

@@ -6,7 +6,7 @@
         </encoder>
     </appender>
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>./src/esercizio3/myApp.log</file>
+        <file>./src/esercizio2/myApp.log</file>
 
         <encoder>
             <pattern>%date %level [%thread] %logger{10} [%file:%line] -%kvp- %msg%n</pattern>
