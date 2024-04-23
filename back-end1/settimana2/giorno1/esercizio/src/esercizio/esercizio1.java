@@ -25,13 +25,15 @@ public class esercizio1 {
     public static void main(String[] args) {
         int[] arr = new int[5];
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = (int) (Math.random() * 10) + 1;
+            arr[i]=new Random().nextInt(1,11);
+            System.out.println(arr[i]);
+            /*arr[i] = (int) (Math.random() * 10) + 1;*/
         }
 
         while (s) {
             try {
                 randomizza(arr);
-            } catch (Exception e) {
+            } catch (ArrayIndexOutOfBoundsException e) {
                 logger.error("error " + e.getMessage() + "retray ");
 
             }
