@@ -53,7 +53,7 @@ public class Main {
         }).toList();
         System.out.println(Boys);
         //stampa i prodoti tra aprile e maggio
-        ordini.stream().filter(p -> p.getDate()
+        ordini.stream().filter(p ->p.getCustomer().getTier()==1&&  p.getDate()
                 .isAfter(LocalDate.of(2021, 1, 31)) && p.getDate().isBefore(LocalDate.of(2021, 5, 1)))
                 .forEach(System.out::println);
     }

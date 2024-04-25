@@ -7,8 +7,8 @@ public class Customer {
 
     public Customer(Long id, String name, int tier) {
         this.id = id;
-        this.name = "";
-        this.tier = 0;
+        this.name = name;
+        this.tier = tier;
     }
     public  long getId(){
         return id;
@@ -28,13 +28,13 @@ public class Customer {
     public void setTier(int tier){
         this.tier = tier;
     }
-/*    @Override
+    @Override
     public String toString(){
         return "Customer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", tier=" + tier +
                 '}';
-    }*/
+    }
 
 }
