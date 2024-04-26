@@ -74,12 +74,16 @@ public class Main {
         System.out.println(strProdotto);
             File file=new File("./persistense/file.txt");
         try{
-        FileUtils.writeStringToFile(file, strProdotto, Charset.defaultCharset(), true);
-            System.out.println( FileUtils.readFileToString(file,"UTF-8"));
+            String str = FileUtils.readFileToString(file, Charset.defaultCharset());
+
+            String[] prodottiStr =  str.split("#");
+      //  FileUtils.writeStringToFile(file, strProdotto, Charset.defaultCharset(), true);
+        //    System.out.println( FileUtils.readFileToString(file,"UTF-8"));
            // FileUtils.deleteQuietly(file); cancella il file
 
         }catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }
