@@ -1,0 +1,23 @@
+100--herry Potter--baby--90.0
+101--Il signore degli anelli--baby--110.0
+102--Hanger games--baby--80.0
+103--Avengers--baby--220.0
+104--Il codice da Vinci--Books--50.0
+105--Il silenzio degli innocenti--Books--130.0
+106--Il miglio verde--Books--70.0
+107--Il sesto senso--Books--130.0
+108--Felpa--Boys--30.0
+109--Pantalone--Boys--40.0
+110--Maglietta--Boys--20.0
+111--Scarpe--Boys--50.0100--herry Potter--baby--90.0
+101--Il signore degli anelli--baby--110.0
+102--Hanger games--baby--80.0
+103--Avengers--baby--220.0
+104--Il codice da Vinci--Books--50.0
+105--Il silenzio degli innocenti--Books--130.0
+106--Il miglio verde--Books--70.0
+107--Il sesto senso--Books--130.0
+108--Felpa--Boys--30.0
+109--Pantalone--Boys--40.0
+110--Maglietta--Boys--20.0
+111--Scarpe--Boys--50.0

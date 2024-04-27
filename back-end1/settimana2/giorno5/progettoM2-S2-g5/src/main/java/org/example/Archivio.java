@@ -6,9 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Archivio {
@@ -19,11 +17,19 @@ public class Archivio {
         this.catalogo = new ArrayList<>();
     }
 
-    public void add(Catlogo... Catlogo) {
-        catalogo.addAll(Arrays.asList(Catlogo));
-        List<Catlogo> ultimoElemento = catalogo.stream().reduce((first, second) -> second).stream().toList();
-        ultimoElemento.forEach(System.out::println);
+    public void add(Catlogo... c) {
+        Set<String> isbnSet = catalogo.stream()
+                .map(Catlogo::getISBN)
+                .collect(Collectors.toSet());
 
+        List<Catlogo> nuoviCataloghi = Arrays.stream(c)
+                .filter(cat -> !isbnSet.contains(cat.getISBN()))
+                .collect(Collectors.toList());
+
+        catalogo.addAll(nuoviCataloghi);
+
+        System.out.println("\nAggiunti:");
+        nuoviCataloghi.forEach(System.out::println);
     }
 
     public void remove(Catlogo Catlogo) {
@@ -88,6 +94,7 @@ public class Archivio {
             e.printStackTrace();
         } finally {
             System.out.println("\n file salvato");
+            catalogo.forEach(System.out::println);
         }
     }
 
