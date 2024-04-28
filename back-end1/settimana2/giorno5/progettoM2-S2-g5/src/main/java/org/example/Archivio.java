@@ -1,6 +1,7 @@
 package org.example;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,28 +9,32 @@ import java.nio.charset.Charset;
 import java.nio.file.NoSuchFileException;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class Archivio {
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(Archivio.class);
     private static List<Catlogo> catalogo;
     static private File file = new File("./persistense/file.txt");
-
+    Logger loger = Logger.getLogger("logger1");
     public Archivio() {
         this.catalogo = new ArrayList<>();
     }
 
     public void add(Catlogo... c) {
+       // Arrays.stream(c).forEach(System.out::println);
+        // Set di tutti gli ISBN presenti nel catalogo
         Set<String> isbnSet = catalogo.stream()
                 .map(Catlogo::getISBN)
                 .collect(Collectors.toSet());
-
+        // Lista dei nuovi cataloghi da aggiungere, controllo se l'ISBN è già presente nel catalogo e lo aggiungo alla lista
         List<Catlogo> nuoviCataloghi = Arrays.stream(c)
                 .filter(cat -> !isbnSet.contains(cat.getISBN()))
                 .collect(Collectors.toList());
-
+       // loger.info("nuoviCataloghi: " + nuoviCataloghi);
         catalogo.addAll(nuoviCataloghi);
-
-        System.out.println("\nAggiunti:");
+        loger.info("Aggiunti:" + nuoviCataloghi.size());
+        System.out.println("\nAggiunti:"+nuoviCataloghi.size());
         nuoviCataloghi.forEach(System.out::println);
     }
 
@@ -50,16 +55,18 @@ public class Archivio {
         /*catalogo.removeIf(c -> c.getISBN().equals(isbn));*/
         catalogo.removeAll(cercaIsbn(isbn));
         System.out.println("\n isbn" + isbn + " canecllato");
-        catalogo.forEach(System.out::println);
+       // catalogo.forEach(System.out::println);
     }
 
     //ricerca per Isbn
     public List<Catlogo> cercaIsbn(String isbn) {
+
         List<Catlogo> cercati = catalogo.stream().filter(c -> c.getISBN().equals(isbn)).toList();
-        System.out.println("\nisbn cercato:" + isbn);
-        cercati.forEach(System.out::println);
+        System.out.println("\n isbn cercato:" + isbn);
+        //cercati.forEach(System.out::println);
         if (cercati.size() == 0)
-            System.out.println(" non trovato");
+            loger.info("isbn" + isbn + " non trovato" );
+
         return cercati;
     }
 
@@ -70,7 +77,7 @@ public class Archivio {
         List<Catlogo> t = catalogo.stream().filter(c -> c.getPublicationDate().getYear() == anno).toList();
         t.forEach(System.out::println);
         if (t.size() == 0)
-            System.out.println(" non trovato");
+            loger.info("anno" + anno + " non trovato" );
     }
 
     //ricerca per autore
@@ -86,13 +93,15 @@ public class Archivio {
 
     //salva su disco
     public void save() throws ArchivioException {
+        // Concatena tutti gli elementi del catalogo in una stringa separata da #
         String strFile = catalogo.stream()
                 .map(Object::toString).collect(Collectors.joining("#"));
         try {
-            FileUtils.writeStringToFile(file, strFile, Charset.defaultCharset(), false);
+            FileUtils.writeStringToFile(this.file, strFile, Charset.defaultCharset(), false);
             System.out.println("\nFile salvato correttamente.");
+            loger.info("File salvato correttamente.");
         } catch (IOException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
             throw new ArchivioException("Errore nel salvataggio del file: " + e.getMessage());
         }
     }
@@ -109,8 +118,8 @@ public class Archivio {
             catal = Arrays.stream(str.split("#"))
                     .map(s -> s.split("@", 0))
                     .map(split -> {
-                        if (split.length >= 4) { // Verifica che ci siano abbastanza elementi dopo lo split
                             String n = split[0];
+                        if (n.length()==13) { // ISBN 13 caratteri
                             switch (n.charAt(11)) {
                                 case '1': // Carica il libro
                                     return new Libro(split[0], split[1], LocalDate.parse(split[2]), Integer.parseInt(split[3]), split[4], split[5]);
@@ -120,7 +129,7 @@ public class Archivio {
                                     throw new IllegalArgumentException("Caso non valido: " + n.charAt(11));
                             }
                         } else {
-                            System.out.println("Formato del file non valido: mancano elementi dopo lo split");
+                            loger.info("Formato del file non valido: mancano elementi dopo lo split");
                             return null; // Ritorna null in caso di formato del file non valido
                         }
                     })
@@ -135,7 +144,10 @@ public class Archivio {
             e.printStackTrace();
             throw new ArchivioException("Errore durante il caricamento del file: " + e.getMessage());
         }
+        finally {
+            loger.info("caricamento completato.");
         return catal;
+        }
     }
 
     @Override
