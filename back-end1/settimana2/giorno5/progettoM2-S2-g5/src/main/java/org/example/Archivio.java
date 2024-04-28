@@ -109,14 +109,19 @@ public class Archivio {
             catal = Arrays.stream(str.split("#"))
                     .map(s -> s.split("@", 0))
                     .map(split -> {
-                        String n = split[0];
-                        switch (n.charAt(11)) {
-                            case '1': // Carica il libro
-                                return new Libro(split[0], split[1], LocalDate.parse(split[2]), Integer.parseInt(split[3]), split[4], split[5]);
-                            case '2':
-                                return new Riviste(split[0], split[1], LocalDate.parse(split[2]), Integer.parseInt(split[3]), Periodicita.valueOf(split[4]));
-                            default:
-                                throw new IllegalArgumentException("Caso non valido: " + n.charAt(11));
+                        if (split.length >= 4) { // Verifica che ci siano abbastanza elementi dopo lo split
+                            String n = split[0];
+                            switch (n.charAt(11)) {
+                                case '1': // Carica il libro
+                                    return new Libro(split[0], split[1], LocalDate.parse(split[2]), Integer.parseInt(split[3]), split[4], split[5]);
+                                case '2':
+                                    return new Riviste(split[0], split[1], LocalDate.parse(split[2]), Integer.parseInt(split[3]), Periodicita.valueOf(split[4]));
+                                default:
+                                    throw new IllegalArgumentException("Caso non valido: " + n.charAt(11));
+                            }
+                        } else {
+                            System.out.println("Formato del file non valido: mancano elementi dopo lo split");
+                            return null; // Ritorna null in caso di formato del file non valido
                         }
                     })
                     .collect(Collectors.toList());

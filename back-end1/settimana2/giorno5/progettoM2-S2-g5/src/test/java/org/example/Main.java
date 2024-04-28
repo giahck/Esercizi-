@@ -32,7 +32,7 @@ public class Main {
             // Aggiunta di un elemento
             Catlogo rivista5 = new Riviste("1111111000024", "Avengers", LocalDate.of(1999, 1, 5), 650, Periodicita.ANNUALE);
             archivio.add(rivista5);
-
+            archivio.save();
             // Carica da file
             List<Catlogo> file = archivio.carica();
             archivio.setCatalogo(file);
