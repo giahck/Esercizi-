@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.NoSuchFileException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -84,25 +85,26 @@ public class Archivio {
     }
 
     //salva su disco
-    public void save() throws IOException {
-
+    public void save() throws ArchivioException {
         String strFile = catalogo.stream()
                 .map(Object::toString).collect(Collectors.joining("#"));
         try {
-            FileUtils.writeStringToFile(this.file, strFile, Charset.defaultCharset(), false);
+            FileUtils.writeStringToFile(file, strFile, Charset.defaultCharset(), false);
+            System.out.println("\nFile salvato correttamente.");
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            System.out.println("\n file salvato");
-            catalogo.forEach(System.out::println);
+            throw new ArchivioException("Errore nel salvataggio del file: " + e.getMessage());
         }
     }
 
     //carica da disco
-    public List<Catlogo> carica() throws IOException {
+    public List<Catlogo> carica() throws ArchivioException {
         List<Catlogo> catal = new ArrayList<>();
         try {
-            System.out.println("\n file caricato");
+            if (!this.file.exists()) {
+                throw new NoSuchFileException(this.file.getAbsolutePath());
+            }
+            System.out.println("\nFile caricato.");
             String str = FileUtils.readFileToString(this.file, Charset.defaultCharset());
             catal = Arrays.stream(str.split("#"))
                     .map(s -> s.split("@", 0))
@@ -118,13 +120,17 @@ public class Archivio {
                         }
                     })
                     .collect(Collectors.toList());
-        } catch (Exception e) {
+        } catch (NoSuchFileException e) {
             e.printStackTrace();
-        } finally {
-            //catal.stream().forEach(System.out::println);
-            return catal;
+            throw new ArchivioException("File non trovato: " + file.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new ArchivioException("Errore durante il caricamento del file: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            throw new ArchivioException("Errore durante il caricamento del file: " + e.getMessage());
         }
-
+        return catal;
     }
 
     @Override
@@ -134,3 +140,4 @@ public class Archivio {
                 '}';
     }
 }
+
