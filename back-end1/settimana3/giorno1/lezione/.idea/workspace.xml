@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="84bf2be3-08d6-40d1-b1a4-41eca9a932e5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../giorno2/esercizio/src/main/java/esercizio/eventi/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../giorno2/esercizio/src/main/java/esercizio/eventi/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/esercizio/src/main/java/esercizio/eventi/dao/EventiDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../giorno2/esercizio/src/main/java/esercizio/eventi/dao/EventiDao.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "giahck"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/giahck/Esercizi-Epicode.git",
+    "accountId": "486af3f7-3fd5-4964-a2ca-cfbce6de46ed"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2foLvErqWXP5F7dwvC5iCnaLfKk" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Debug",
+    "Application.epicode.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "onboarding.tips.debug.path": "C:/Users/giacc/Desktop/epicode/Esercizi-Epicode/back-end1/settimana3/giorno1/lezione/src/main/java/org/example/Main.java"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\giacc\Desktop\epicode\Esercizi-Epicode\back-end1\settimana3\giorno1\lezione\src\main\java\epicode\entity" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="epicode.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="epicode.Main" />
+      <module name="lezione" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.epicode.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="84bf2be3-08d6-40d1-b1a4-41eca9a932e5" name="Changes" comment="" />
+      <created>1714462715081</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714462715081</updated>
+    </task>
+    <servers />
+  </component>
+</project>
