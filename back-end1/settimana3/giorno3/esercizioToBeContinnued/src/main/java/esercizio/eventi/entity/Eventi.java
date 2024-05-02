@@ -22,21 +22,21 @@ public class Eventi {
     private tipoEvento tipoEvento;
     private int numeroPartecipanti;
 
-    @ManyToOne//n eventi possono avere una sola location
+    @OneToOne//n eventi possono avere una sola location
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @OneToMany(mappedBy = "eventi")
+    @OneToMany(mappedBy = "evento")
     private List<Partecipazioni> listaPartecipazioni;
 
 
-    public Eventi(String titolo, LocalDate dataEvento, String descrizione, esercizio.eventi.entity.tipoEvento tipoEvento, int numeroPartecipanti, Location location) {
+    public Eventi(String titolo, LocalDate dataEvento, String descrizione, esercizio.eventi.entity.tipoEvento tipoEvento, int numeroPartecipanti) {
         this.titolo = titolo;
         this.dataEvento = dataEvento;
         this.descrizione = descrizione;
         this.tipoEvento = tipoEvento;
         this.numeroPartecipanti = numeroPartecipanti;
-        this.location = location;
+
     }
 
     public Eventi() {
@@ -96,6 +96,13 @@ public class Eventi {
 
     public void setNumeroPartecipanti(int numeroPartecipanti) {
         this.numeroPartecipanti = numeroPartecipanti;
+    }
+    public List<Partecipazioni> getListaPartecipazioni() {
+        return listaPartecipazioni;
+    }
+
+    public void setListaPartecipazioni(List<Partecipazioni> listaPartecipazioni) {
+        this.listaPartecipazioni = listaPartecipazioni;
     }
 
     @Override

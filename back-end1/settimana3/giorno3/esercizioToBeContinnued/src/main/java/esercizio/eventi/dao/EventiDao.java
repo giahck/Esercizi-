@@ -1,6 +1,7 @@
 package esercizio.eventi.dao;
 
 import esercizio.eventi.entity.Eventi;
+import esercizio.eventi.entity.Persone;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -42,5 +43,18 @@ public class EventiDao {
         // Eseguire la query e ottenere la lista dei risultati
         List<Eventi> result = query.getResultList();
         return  result;
+    }
+    public List<Persone> getPersonaByName(String nome){
+        Query query = em.createNamedQuery("getPersonaByName");
+        query.setParameter("nome", nome);
+        List<Persone> result = query.getResultList();
+        return result;
+    }
+
+    public List<Persone> getPersoneByCognome(String cognome){
+        Query query = em.createQuery("select p from Persone p where p.cognome=:cognome");
+        query.setParameter("cognome", cognome);
+        List<Persone> result = query.getResultList();
+        return result;
     }
 }

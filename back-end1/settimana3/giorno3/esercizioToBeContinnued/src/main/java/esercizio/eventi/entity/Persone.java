@@ -6,6 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "persona")
+@NamedQuery(name="getPersonaByName",query="select p from Persone p where p.nome=:nome")
 public class Persone {
     @Id
     @GeneratedValue
@@ -15,8 +16,16 @@ public class Persone {
     private String email;
     private LocalDate data_di_nascita;
     private char sesso;
-    @OneToMany(mappedBy = "persone")//la relazione è bidirezionale e il campo che mappa la relazione è persona
-    List<Partecipazioni> listaPartecipazioni;
+    @OneToMany(mappedBy = "persone")
+    private List<Partecipazioni> listaPartecipazioni;
+    @OneToMany(mappedBy = "vincitore")
+    private List<GaradiAtletica> gareVinte;
+    @ManyToMany
+    @JoinTable(name = "atleta_gara",
+            joinColumns = @JoinColumn(name = "atleta_id"),
+            inverseJoinColumns = @JoinColumn(name = "gara_id"))
+    private List<GaradiAtletica> gareDiAtletica;
+
     public Persone() {
     }
     public Persone(String nome, String cognome, String email,LocalDate data_di_nascita , char sesso) {
