@@ -25,8 +25,8 @@ public class Studente {
     @JoinColumn(name = "indirizzo_id")
 //nome della colonna che fa riferimento alla chiave primaria della tabella indirizzi foreign key
     private Indirizzo indirizzo;
-    @ManyToOne
-    @JoinColumn(name = "classe_studenti_id")
+    @ManyToOne//relazione molti a uno tra studente e classe_studenti con chiave primaria classe_studenti_id
+    @JoinColumn(name = "classe_studenti_id")//join column serve per specificare il nome della colonna che fa riferimento alla chiave primaria della tabella classe_studenti
     private ClasseStudenti classeStudenti;
 
     @ManyToMany

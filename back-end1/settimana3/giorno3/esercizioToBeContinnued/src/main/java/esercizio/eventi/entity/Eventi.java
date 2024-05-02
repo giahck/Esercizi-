@@ -2,6 +2,7 @@ package esercizio.eventi.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table
@@ -21,16 +22,32 @@ public class Eventi {
     private tipoEvento tipoEvento;
     private int numeroPartecipanti;
 
-    public Eventi(int id, String titolo, LocalDate dataEvento, String descrizione, tipoEvento tipoEvento, int numeroPartecipanti) {
-        this.id = id;
+    @ManyToOne//n eventi possono avere una sola location
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+    @OneToMany(mappedBy = "eventi")
+    private List<Partecipazioni> listaPartecipazioni;
+
+
+    public Eventi(String titolo, LocalDate dataEvento, String descrizione, esercizio.eventi.entity.tipoEvento tipoEvento, int numeroPartecipanti, Location location) {
         this.titolo = titolo;
         this.dataEvento = dataEvento;
         this.descrizione = descrizione;
         this.tipoEvento = tipoEvento;
         this.numeroPartecipanti = numeroPartecipanti;
+        this.location = location;
     }
 
     public Eventi() {
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public int getId() {
