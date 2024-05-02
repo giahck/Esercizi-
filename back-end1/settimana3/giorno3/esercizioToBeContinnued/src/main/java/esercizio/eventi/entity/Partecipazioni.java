@@ -15,7 +15,7 @@ public class Partecipazioni {
     //relazione molti a uno con (un evento può avere molte partecipazioni)
     @ManyToOne
     @JoinColumn(name = "evento_id")
-    private Eventi eventi;
+    private Eventi evento;
 
     @Enumerated(EnumType.STRING)
     private epicode.entities.Stato stato;
@@ -23,9 +23,9 @@ public class Partecipazioni {
     public Partecipazioni() {
     }
 
-    public Partecipazioni(Persone persone, Eventi eventi) {
+    public Partecipazioni(Persone persone, Eventi evento) {
         this.persone = persone;
-        this.eventi = eventi;
+        this.evento = evento;
         this.stato = epicode.entities.Stato.DA_CONFERMARE;
     }
 
@@ -42,11 +42,11 @@ public class Partecipazioni {
     }
 
     public Eventi getEventi() {
-        return eventi;
+        return evento;
     }
 
-    public void setEventi(Eventi eventi) {
-        this.eventi = eventi;
+    public void setEventi(Eventi evento) {
+        this.evento = evento;
     }
 
     public epicode.entities.Stato getStato() {
@@ -61,7 +61,7 @@ public class Partecipazioni {
         return "Partecipazioni{" +
                 "id=" + id +
                 ", persone=" + persone +
-                ", eventi=" + eventi +
+                ", evento=" + evento +
                 ", stato=" + stato +
                 '}';
     }
