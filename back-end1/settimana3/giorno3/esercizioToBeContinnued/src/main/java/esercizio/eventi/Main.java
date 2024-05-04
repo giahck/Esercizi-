@@ -54,7 +54,7 @@ public class Main {
         locationDeo.save(l1);
         e1.setLocation(l1);
         eventiDao.save(e1);*/
-       /* Persone p1=new Persone();
+        Persone p1=new Persone();
         p1.setNome("Mario");
         p1.setCognome("Rossi");
         p1.setEmail("Mario@gmail.com");
@@ -64,50 +64,10 @@ public class Main {
         partecipazioni.setEventi(eventiDao.getById(1));
         partecipazioni.setPersone(p1);
         partecipazioneDeo.save(partecipazioni);
-        System.out.println(partecipazioni.toString());*/
-      /*  Eventi e1=new Eventi();
-        e1.setTitolo("raduno moto");
-        e1.setDataEvento(java.time.LocalDate.of(2024, 07, 25));
-        e1.setDescrizione("raduno moto a teramo");
-        e1.setTipoEvento(tipoEvento.PRIVATO);
-        e1.setNumeroPartecipanti(50);
-        eventiDao.save(e1);
-        Location l1=new Location();
-        l1.setNome("via amedeo");
-        l1.setCitta("Teramo");
-        locationDeo.save(l1);
-        e1.setLocation(l1);
+        System.out.println(partecipazioni.toString());
 
-        Persone p1=new Persone();
-        p1.setNome("Giovanni");
-        p1.setCognome("Battiato");
-        p1.setEmail("sdvs@sdv.com");
-        p1.setSesso('M');
-        personaDeo.save(p1);
-        Persone p2=new Persone();
-        p2.setNome("Rina");
-        p2.setCognome("bastiato");
-        p2.setEmail("sdf@sdv.com");
-        p2.setSesso('F');
-        personaDeo.save(p2);
-        Partecipazioni partecipazioni=new Partecipazioni();
-        partecipazioni.setEventi(e1);
-        partecipazioni.setPersone(p1);
-        partecipazioneDeo.save(partecipazioni);
-        Partecipazioni partecipazioni2=new Partecipazioni();
-        partecipazioni2.setEventi(e1);
-        partecipazioni2.setPersone(p2);
-        partecipazioneDeo.save(partecipazioni2);*/
-        List<Persone> eventiList=eventiDao.getPersonaByName("Rina");
-        eventiList.stream().forEach(System.out::println);
-        List<Persone> eventiList2=eventiDao.getPersoneByCognome("Battiato");
-        eventiList2.stream().forEach(System.out::println);
-       partecipazioneDeo.getPersonaByEvento(eventiDao.getById(20)).stream().forEach(System.out::println);
 
-        //Query q1= em.createQuery("Select c from Concerto c where c.inStreaming=:Valore").setParameter("Valore",true).getResultList().forEach(System.out::println);
-        //em.createQuery("Select p from PartitaDiCalcio p where p.goalsCasa>p.goalsOspite").getResultList().forEach(System.out::println);
-        //em.createQuery("Select p from PartitaDiCalcio p where p.goalsCasa<p.goalsOspite").getResultList().forEach(System.out::println);
-        //em.createQuery("Select g from GaradiAtletica g where g.vincitore=:persona").setParameter("persona",p1).getResultList().forEach(System.out::println);
+
 
     }
 }
