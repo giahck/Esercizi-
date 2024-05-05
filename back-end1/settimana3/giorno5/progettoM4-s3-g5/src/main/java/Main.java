@@ -99,5 +99,7 @@ public class Main {
         c5.stream()
                 .map(prestito -> "Utente: " + prestito.getUtente().getNome() + ", Titolo: " + prestito.getPrestito().getTitolo())
                 .forEach(System.out::println);
+        em.close();
+        emf.close();
     }
 }
