@@ -20,7 +20,11 @@ public class AppConfig {
 
     @Bean
     public Menu menu() {
-        return new Menu(getPizze(), getBevande());
+        Menu menu = new Menu(getPizze(), getBevande());
+        // Stampa di debug
+        System.out.println("Menu created with Pizze: " + menu.getPizze());
+        System.out.println("Menu created with Bevande: " + menu.getBevande());
+        return menu;
     }
 
     @Bean
@@ -40,8 +44,7 @@ public class AppConfig {
     //singolo bean con costruttore vuoto
     @Bean
     public Drink getBevande2() {
-
-
+        
         Drink drink = new Drink();
         drink.setBevande(EnumBevande.COCA_ZERO);
         drink.setPrezzo(EnumBevande.COCA_ZERO.getPrezzo());

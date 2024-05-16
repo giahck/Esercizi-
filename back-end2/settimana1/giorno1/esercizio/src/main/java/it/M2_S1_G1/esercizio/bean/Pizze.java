@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class Pizze {
+    private final int BASE_PRICE = 5;
     private String nome;
     private EnumFormatoPizza formato;
     private List<Topping> toppings;

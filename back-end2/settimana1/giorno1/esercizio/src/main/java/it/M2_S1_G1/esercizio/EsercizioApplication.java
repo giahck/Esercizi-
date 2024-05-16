@@ -16,7 +16,6 @@ public class EsercizioApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EsercizioApplication.class, args);
 		// Start JavaFX application
-		MainApp.launch(MainApp.class, args);
+		new Thread(() -> MainApp.launch(MainApp.class, args)).start();
 	}
-
 }
