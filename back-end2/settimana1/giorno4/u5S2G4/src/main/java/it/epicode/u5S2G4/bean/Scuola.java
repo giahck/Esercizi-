@@ -1,4 +1,4 @@
-package it.epicode.u5w1d2teoria.bean;
+package it.epicode.u5S2G4.bean;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

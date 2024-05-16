@@ -14,7 +14,7 @@ public abstract class Dispositivo {
     private String nome;
     private String marca;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "studente_id")
     private Studente studente;
 }

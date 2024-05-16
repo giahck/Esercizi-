@@ -1,5 +1,6 @@
-package it.epicode.u5w1d2teoria.bean;
+package it.epicode.u5S2G4.bean;
 
+import it.epicode.u5S2G4.bean.Studente;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
