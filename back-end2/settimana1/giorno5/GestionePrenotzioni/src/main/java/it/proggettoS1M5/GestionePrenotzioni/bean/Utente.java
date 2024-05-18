@@ -3,18 +3,22 @@ package it.proggettoS1M5.GestionePrenotzioni.bean;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Data
 @Entity
-@Builder
+@NoArgsConstructor
+@SuperBuilder
 @Table(name = "utente")
 public class Utente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String Username;
+    @Column(name = "username")
+    private String username;
     @Column(name = "nome")
     private List<String> nome;
     private String email;

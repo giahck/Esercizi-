@@ -14,6 +14,7 @@ import java.util.UUID;
 @Data
 @SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "edificio")

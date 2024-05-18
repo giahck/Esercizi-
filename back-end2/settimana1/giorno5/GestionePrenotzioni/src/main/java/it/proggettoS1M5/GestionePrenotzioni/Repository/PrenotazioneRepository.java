@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface PrenotazioneRepository extends JpaRepository<Prenotazione, Integer>{
     @Query("SELECT p FROM Prenotazione p WHERE p.postazione.id = :postazioneId AND p.data = :data")
     Prenotazione findPrenotazioneByPostazioneAndData(@Param("postazioneId") UUID postazioneId, @Param("data") LocalDate data);
+    @Query("SELECT count(p) FROM Prenotazione p WHERE p.utente.username = :username")
+    long countPrenotazioniByUsername(@Param("username") String username);
 }

@@ -18,7 +18,7 @@ import java.util.UUID;
 public class Postazione extends Edificio {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_postazione")
+  //  @Column(name = "id_postazione")
     private UUID id;
 
     private String descrizione;
@@ -31,4 +31,12 @@ public class Postazione extends Edificio {
 
     @OneToOne(mappedBy = "postazione")
     private Prenotazione prenotazione;
+    @Override
+    public String toString() {
+        return "Postazione{" +
+                "id=" + id +
+                ", tipo=" + tipo +
+                // other fields except Prenotazione
+                '}';
+    }
 }
