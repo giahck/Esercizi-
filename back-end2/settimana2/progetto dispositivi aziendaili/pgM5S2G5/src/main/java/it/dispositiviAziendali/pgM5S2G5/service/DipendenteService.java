@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +25,8 @@ public class DipendenteService {
     private DipendenteRepository dipendenteRepository;
     @Autowired
     private Cloudinary cloudinary;
+    @Autowired
+    private JavaMailSenderImpl javaMailSender;
     public String saveDipendente(DipendenteDto dipendenteDto) throws IOException {
         Dipendente dipendente = new Dipendente();
         dipendente.setUsername(dipendenteDto.getUsername());
@@ -37,6 +41,7 @@ public class DipendenteService {
         }
 
         dipendenteRepository.save(dipendente);
+        sendMail(dipendente.getEmail());
         return "Dipendente con id=" + dipendente.getId() + " con username " + dipendente.getUsername() + " salvato correttamente";
     }
     public Page<Dipendente> getDipendenti(int page, int size, String sortBy){
@@ -86,6 +91,14 @@ public class DipendenteService {
             dipendenteRepository.save(dipendente);
             return "Foto profilo caricata con successo";
         }
+    }
+    private void sendMail(String email) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject("Registrazione Servizio rest");
+        message.setText("Registrazione al Catalogo Sei stato inserito con successo");
+
+        javaMailSender.send(message);
     }
 
 }
