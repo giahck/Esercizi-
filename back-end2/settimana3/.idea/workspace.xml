@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="128db80a-5d78-483b-811a-2032fb943e86" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/progetto dispositivi aziendaili.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_05_2024_17_32_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/shelf/Uncommitted_changes_before_Checkout_at_28_05_2024_17_32__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2024_17_28_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2024_17_28__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/pgM5S2G5/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/pgM5S2G5/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/pgM5S2G5/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno1/progetto dispositivi aziendaili/pgM5S2G5/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/env.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/U5w7d2teoriaApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/controller/AuthController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/controller/StudentController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/controller/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/dto/StudentDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/dto/UserDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/dto/UserLoginDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/entity/Error.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/entity/Role.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/entity/Student.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/entity/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/exception/BadRequestException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/exception/CentralizedExceptionHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/exception/NotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/exception/UnauthorizedException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/repository/StudentRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/repository/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/security/Config.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/security/JwtFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/security/JwtTool.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/service/AuthService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/service/StudentService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/lezione/target/classes/it/epicode/u5w7d2teoria/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/giorno2/progetto dispositivi aziendaili/pgM5S2G5/.idea/workspace.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "giahck"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/giahck/Esercizi-Epicode.git",
+    "accountId": "486af3f7-3fd5-4964-a2ca-cfbce6de46ed"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2h6OpxLjanvxX6yquThmH4CoriP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "90a906c6",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/giacc/Desktop/epicode/Esercizi-Epicode/back-end2/settimana3/giorno1/progetto dispositivi aziendaili/pgM5S2G5"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="128db80a-5d78-483b-811a-2032fb943e86" name="Changes" comment="" />
+      <created>1716911246742</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716911246742</updated>
+    </task>
+    <servers />
+  </component>
+</project>
