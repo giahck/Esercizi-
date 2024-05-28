@@ -5,23 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0585f72d-0a6f-465f-b141-2245b81745f9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/env.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/src/main/java/it/epicode/u5w7d2teoria/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/src/main/java/it/epicode/u5w7d2teoria/controller/StudentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/src/main/java/it/epicode/u5w7d2teoria/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/src/main/java/it/epicode/u5w7d2teoria/dto/StudentDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/src/main/java/it/epicode/u5w7d2teoria/entity/Error.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/src/main/java/it/epicode/u5w7d2teoria/entity/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/src/main/java/it/epicode/u5w7d2teoria/repository/StudentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../giorno2/lezione/src/main/java/it/epicode/u5w7d2teoria/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../settimana2/progetto dispositivi aziendaili/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../settimana2/progetto dispositivi aziendaili/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pgM5S2G5/env.properties" beforeDir="false" afterPath="$PROJECT_DIR$/env.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/env.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/PgM5S2G5Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/configuration/AppConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DispositivoController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoDiComputer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoSensore.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoVideo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/StatusDispositivoEnum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/BadRequestException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/ErrorsPayload.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/ExceptionsHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/NotFoundExecution.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/mapper/MapperContainer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dipendente.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dispositivo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/AudioVideo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/Domotica.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/Informatica.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/DipendenteDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/DispositivoDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/ErrorPaylod/ErrorDeiPayload.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/ErrorPaylod/ErrorsPayload.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/AudioVideoDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/DomoticaDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/InformaticaDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/repository/DipendenteRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/repository/DispositivoRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DipendenteService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DispositivoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/test/java/it/dispositiviAziendali/pgM5S2G5/PgM5S2G5ApplicationTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,23 +49,28 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../../../.." value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "giahck"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;giahck&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/giahck/Esercizi-Epicode.git",
-    "accountId": "486af3f7-3fd5-4964-a2ca-cfbce6de46ed"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/giahck/Esercizi-Epicode.git&quot;,
+    &quot;accountId&quot;: &quot;486af3f7-3fd5-4964-a2ca-cfbce6de46ed&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2h5RZf5Q5bqouPoxqOqanV45Rhc" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -53,11 +78,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.PgM5S2G5Application.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "c9ea7ced",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/giacc/Desktop/epicode/Esercizi-Epicode/back-end2/settimana3/giorno2/progetto dispositivi aziendaili"
+    "last_opened_file_path": "C:/Users/giacc/Desktop/epicode/Esercizi-Epicode/back-end2/settimana3/giorno1/progetto dispositivi aziendaili"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -70,5 +96,16 @@
       <updated>1716882009132</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
