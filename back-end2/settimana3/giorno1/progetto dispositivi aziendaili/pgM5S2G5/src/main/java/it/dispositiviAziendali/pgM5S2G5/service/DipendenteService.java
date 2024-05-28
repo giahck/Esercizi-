@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +27,8 @@ public class DipendenteService {
     private Cloudinary cloudinary;
     @Autowired
     private JavaMailSenderImpl javaMailSender;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     public String saveDipendente(DipendenteDto dipendenteDto) throws IOException {
         if (getDipendenteByEmail(dipendenteDto.getEmail()).isEmpty()) {
 
@@ -34,7 +37,7 @@ public class DipendenteService {
             dipendente.setNome(dipendenteDto.getNome());
             dipendente.setCognome(dipendenteDto.getCognome());
             dipendente.setEmail(dipendenteDto.getEmail());
-            dipendente.setPassword(dipendenteDto.getPassword());
+            dipendente.setPassword(passwordEncoder.encode(dipendenteDto.getPassword()));
             MultipartFile fotoProfilo = dipendenteDto.getFotoProfilo();
             if (fotoProfilo != null && !fotoProfilo.isEmpty()) {
                 String url = (String) cloudinary.uploader().upload(fotoProfilo.getBytes(), Collections.emptyMap()).get("url");

@@ -34,5 +34,9 @@ public class JwtTool {
             throw new RuntimeException("Token non valido");
         }
     }
+    public int getIdFromToken(String token){
+        return Integer.parseInt(Jwts.parser().verifyWith(Keys.hmacShaKeyFor(secret.getBytes())).
+                build().parseSignedClaims(token).getPayload().getSubject());
+    }
 
 }

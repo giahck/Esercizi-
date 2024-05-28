@@ -12,7 +12,7 @@ import lombok.Data;
 public class AudioVideoDTO extends DispositivoDto {
     @NotNull(message = "Il tipo di video non può essere nullo")
     private EnumTipoVideo tipoVideo;
-    @NotBlank(message = "La dimensione non può essere vuota")
+    @NotNull(message = "La dimensione non può essere vuota")
     @Min(value = 4, message = "La dimensione deve essere maggiore di 0")
     private int dimensione;
     private String descrizione;
