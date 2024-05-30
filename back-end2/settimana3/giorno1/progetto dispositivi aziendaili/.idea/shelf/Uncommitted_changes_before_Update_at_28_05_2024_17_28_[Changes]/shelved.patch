@@ -1,0 +1,1709 @@
+Index: pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/configuration/AppConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.dispositiviAziendali.pgM5S2G5.configuration;\r\n\r\nimport com.cloudinary.Cloudinary;\r\nimport org.springframework.beans.factory.annotation.Value;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.mail.javamail.JavaMailSenderImpl;\r\nimport org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\n\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\nimport java.util.Properties;\r\n\r\n@Configuration\r\npublic class AppConfig {\r\n    @Bean\r\n    public Cloudinary getCloudinary(@Value(\"${cloudinary.name}\") String name,\r\n                                    @Value(\"${cloudinary.apikey}\") String apikey,\r\n                                    @Value(\"${cloudinary.secret}\") String secret){\r\n        Map<String, String> config = new HashMap<>();\r\n        config.put(\"cloud_name\", name);\r\n        config.put(\"api_key\", apikey);\r\n        config.put(\"api_secret\", secret);\r\n        return new Cloudinary(config);\r\n\r\n    }\r\n\r\n    @Bean\r\n    public JavaMailSenderImpl getJavaMailSender(@Value(\"${gmail.mail.transport.protocol}\" )String protocol,\r\n                                                @Value(\"${gmail.mail.smtp.auth}\" ) String auth,\r\n                                                @Value(\"${gmail.mail.smtp.starttls.enable}\" )String starttls,\r\n                                                @Value(\"${gmail.mail.debug}\" )String debug,\r\n                                                @Value(\"${gmail.mail.from}\" )String from,\r\n                                                @Value(\"${gmail.mail.from.password}\" )String password,\r\n                                                @Value(\"${gmail.smtp.ssl.enable}\" )String ssl,\r\n                                                @Value(\"${gmail.smtp.host}\" )String host,\r\n                                                @Value(\"${gmail.smtp.port}\" )String port){\r\n        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();\r\n        mailSender.setHost(host);\r\n        mailSender.setPort(Integer.parseInt(port));\r\n\r\n        mailSender.setUsername(from);\r\n        mailSender.setPassword(password);\r\n\r\n        Properties props = mailSender.getJavaMailProperties();\r\n        props.put(\"mail.transport.protocol\", protocol);\r\n        props.put(\"mail.smtp.auth\", auth);\r\n        props.put(\"mail.smtp.starttls.enable\", starttls);\r\n        props.put(\"mail.debug\", debug);\r\n        props.put(\"smtp.ssl.enable\",ssl);\r\n\r\n        return mailSender;\r\n\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/configuration/AppConfig.java b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/configuration/AppConfig.java
+--- a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/configuration/AppConfig.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/configuration/AppConfig.java	(date 1716910030895)
+@@ -5,10 +5,6 @@
+ import org.springframework.context.annotation.Bean;
+ import org.springframework.context.annotation.Configuration;
+ import org.springframework.mail.javamail.JavaMailSenderImpl;
+-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+-import org.springframework.security.crypto.password.PasswordEncoder;
+ 
+ import java.util.HashMap;
+ import java.util.Map;
+@@ -55,5 +51,4 @@
+         return mailSender;
+ 
+     }
+-
+ }
+\ No newline at end of file
+Index: pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.dispositiviAziendali.pgM5S2G5.controller;\r\n\r\nimport it.dispositiviAziendali.pgM5S2G5.model.Dipendente;\r\nimport it.dispositiviAziendali.pgM5S2G5.payloads.DipendenteDto;\r\nimport it.dispositiviAziendali.pgM5S2G5.service.DipendenteService;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.data.domain.Page;\r\nimport org.springframework.security.access.prepost.PreAuthorize;\r\nimport org.springframework.validation.BindingResult;\r\nimport org.springframework.validation.annotation.Validated;\r\nimport org.springframework.web.bind.annotation.*;\r\nimport org.springframework.web.multipart.MultipartFile;\r\n\r\nimport java.io.IOException;\r\nimport java.util.Optional;\r\n\r\n@RestController\r\n@RequestMapping(\"/api/dipendenti\")\r\npublic class DipendenteController {\r\n    @Autowired\r\n    private DipendenteService dipendenteService;\r\n\r\n    /*@PostMapping(value = \"\", consumes = \"multipart/form-data\")\r\n    public String saveDipendente(@RequestPart(\"dipendente\") @Validated DipendenteDto dipendenteDto,\r\n                                 @RequestPart(value = \"fotoProfilo\", required = false) MultipartFile fotoProfilo,\r\n                                 BindingResult validation) throws IOException {\r\n\r\n        if (validation.hasErrors()) {\r\n            throw new RuntimeException(\"Richiesta non valida: \" + validation.getAllErrors().stream().map(e -> e.getDefaultMessage()).reduce(\"\", (s1, s2) -> s1 + \"\\n\" + s2));\r\n        }\r\n\r\n        dipendenteDto.setFotoProfilo(fotoProfilo);\r\n        return dipendenteService.saveDipendente(dipendenteDto);\r\n    }*/\r\n\r\n    /*@PostMapping(value = \"\", consumes = \"multipart/form-data\")\r\n    public String saveDipendente(@ModelAttribute @Validated DipendenteDto dipendenteDto, BindingResult validation) throws IOException {\r\n        if (validation.hasErrors()) {\r\n            throw new RuntimeException(\"Richiesta non valida: \" + validation.getAllErrors().stream().map(e -> e.getDefaultMessage()).reduce(\"\", (s1, s2) -> s1 + \"\\n\" + s2));\r\n        }\r\n        return dipendenteService.saveDipendente(dipendenteDto);\r\n    }*/\r\n    /*@PostMapping(\"\")\r\n    public String saveDipendente(@RequestBody @Validated DipendenteDto dipendenteDto, BindingResult validation) throws IOException {\r\n        if (validation.hasErrors()) {\r\n            throw new RuntimeException(\"Richiesta non valida: \" + validation.getAllErrors().stream().map(e -> e.getDefaultMessage()).reduce(\"\", (s1, s2) -> s1 + \"\\n\" + s2));\r\n        }\r\n        return dipendenteService.saveDipendente(dipendenteDto);\r\n    }*/\r\n    @GetMapping(\"\")\r\n    @PreAuthorize(\"hasAuthority('ADMIN')\")\r\n    public Page<Dipendente> getDipendenti(@RequestParam(defaultValue = \"0\") int page,\r\n                                             @RequestParam(defaultValue = \"10\") int size,\r\n                                             @RequestParam(defaultValue = \"id\") String sortBy) {\r\n        return dipendenteService.getDipendenti(page, size, sortBy);\r\n    }\r\n\r\n    @GetMapping(\"/{id}\")\r\n    public Dipendente getDipendenteById(@PathVariable int id) {\r\n        return dipendenteService.getDipendenteById(id);\r\n    }\r\n\r\n    @PutMapping(\"/{id}\")\r\n    public Optional<Dipendente> updateDipendente(@PathVariable int id, @RequestBody @Validated DipendenteDto dipendenteDto, BindingResult validation) {\r\n        if (validation.hasErrors()) {\r\n            throw new RuntimeException(\"Richiesta non valida: \" + validation.getAllErrors().stream().map(e -> e.getDefaultMessage()).reduce(\"\", (s1, s2) -> s1 + \"\\n\" + s2));\r\n        }\r\n        return dipendenteService.updateDipendente(id, dipendenteDto);\r\n    }\r\n    @PreAuthorize(\"hasAuthority('ADMIN')\")\r\n    @DeleteMapping(\"/{id}\")\r\n    public String deleteDipendente(@PathVariable int id) {\r\n        return dipendenteService.deleteDipendente(id);\r\n    }\r\n    @PatchMapping(\"/{id}/fotoProfilo\")\r\n    public String uploadFotoProfilo(@RequestParam(\"fotoProfilo\") MultipartFile file, @PathVariable int id) throws IOException {\r\n        return dipendenteService.uploadFotoProfilo(id, file);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java
+--- a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java	(date 1716910030896)
+@@ -5,7 +5,6 @@
+ import it.dispositiviAziendali.pgM5S2G5.service.DipendenteService;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.data.domain.Page;
+-import org.springframework.security.access.prepost.PreAuthorize;
+ import org.springframework.validation.BindingResult;
+ import org.springframework.validation.annotation.Validated;
+ import org.springframework.web.bind.annotation.*;
+@@ -40,15 +39,14 @@
+         }
+         return dipendenteService.saveDipendente(dipendenteDto);
+     }*/
+-    /*@PostMapping("")
++    @PostMapping("")
+     public String saveDipendente(@RequestBody @Validated DipendenteDto dipendenteDto, BindingResult validation) throws IOException {
+         if (validation.hasErrors()) {
+             throw new RuntimeException("Richiesta non valida: " + validation.getAllErrors().stream().map(e -> e.getDefaultMessage()).reduce("", (s1, s2) -> s1 + "\n" + s2));
+         }
+         return dipendenteService.saveDipendente(dipendenteDto);
+-    }*/
++    }
+     @GetMapping("")
+-    @PreAuthorize("hasAuthority('ADMIN')")
+     public Page<Dipendente> getDipendenti(@RequestParam(defaultValue = "0") int page,
+                                              @RequestParam(defaultValue = "10") int size,
+                                              @RequestParam(defaultValue = "id") String sortBy) {
+@@ -59,7 +57,6 @@
+     public Dipendente getDipendenteById(@PathVariable int id) {
+         return dipendenteService.getDipendenteById(id);
+     }
+-
+     @PutMapping("/{id}")
+     public Optional<Dipendente> updateDipendente(@PathVariable int id, @RequestBody @Validated DipendenteDto dipendenteDto, BindingResult validation) {
+         if (validation.hasErrors()) {
+@@ -67,7 +64,6 @@
+         }
+         return dipendenteService.updateDipendente(id, dipendenteDto);
+     }
+-    @PreAuthorize("hasAuthority('ADMIN')")
+     @DeleteMapping("/{id}")
+     public String deleteDipendente(@PathVariable int id) {
+         return dipendenteService.deleteDipendente(id);
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/ErrorsPayload.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/ErrorsPayload.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/ErrorsPayload.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/ErrorsPayload.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,11 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.exeption;
+-
+-import lombok.Data;
+-
+-import java.time.LocalDateTime;
+-import java.util.Date;
+-@Data
+-public class ErrorsPayload {
+-	private String message;
+-	private LocalDateTime timestamp;
+-}
+\ No newline at end of file
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DipendenteService.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DipendenteService.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DipendenteService.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DipendenteService.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,104 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.service;
+-
+-import com.cloudinary.Cloudinary;
+-import it.dispositiviAziendali.pgM5S2G5.model.Dipendente;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.DipendenteDto;
+-import it.dispositiviAziendali.pgM5S2G5.repository.DipendenteRepository;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.data.domain.Page;
+-import org.springframework.data.domain.PageRequest;
+-import org.springframework.data.domain.Pageable;
+-import org.springframework.data.domain.Sort;
+-import org.springframework.mail.SimpleMailMessage;
+-import org.springframework.mail.javamail.JavaMailSenderImpl;
+-import org.springframework.stereotype.Service;
+-import org.springframework.web.multipart.MultipartFile;
+-
+-import java.io.IOException;
+-import java.util.Collections;
+-import java.util.Map;
+-import java.util.Optional;
+-
+-@Service
+-public class DipendenteService {
+-    @Autowired
+-    private DipendenteRepository dipendenteRepository;
+-    @Autowired
+-    private Cloudinary cloudinary;
+-    @Autowired
+-    private JavaMailSenderImpl javaMailSender;
+-    public String saveDipendente(DipendenteDto dipendenteDto) throws IOException {
+-        Dipendente dipendente = new Dipendente();
+-        dipendente.setUsername(dipendenteDto.getUsername());
+-        dipendente.setNome(dipendenteDto.getNome());
+-        dipendente.setCognome(dipendenteDto.getCognome());
+-        dipendente.setEmail(dipendenteDto.getEmail());
+-
+-        MultipartFile fotoProfilo = dipendenteDto.getFotoProfilo();
+-        if (fotoProfilo != null && !fotoProfilo.isEmpty()) {
+-            String url = (String) cloudinary.uploader().upload(fotoProfilo.getBytes(), Collections.emptyMap()).get("url");
+-            dipendente.setFotoProfilo(url);
+-        }
+-
+-        dipendenteRepository.save(dipendente);
+-        sendMail(dipendente.getEmail());
+-        return "Dipendente con id=" + dipendente.getId() + " con username " + dipendente.getUsername() + " salvato correttamente";
+-    }
+-    public Page<Dipendente> getDipendenti(int page, int size, String sortBy){
+-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+-        return dipendenteRepository.findAll(pageable);
+-    }
+-    public Dipendente getDipendenteById(int id){
+-        return dipendenteRepository.findById(id)
+-                .orElseThrow(() -> new RuntimeException("Dipendente non trovato con id = " + id));
+-    }
+-    public Optional<Dipendente> updateDipendente(int id, DipendenteDto dipendenteDto){
+-        Optional<Dipendente> dipendenteOptional = Optional.ofNullable(getDipendenteById(id));
+-        if(dipendenteOptional.isEmpty()){
+-            throw new RuntimeException("Dipendente non trovato con id = " + id);
+-        }else {
+-            Dipendente dipendente = dipendenteOptional.get();
+-        dipendente.setUsername(dipendenteDto.getUsername());
+-        dipendente.setNome(dipendenteDto.getNome());
+-        dipendente.setCognome(dipendenteDto.getCognome());
+-        dipendente.setEmail(dipendenteDto.getEmail());
+-           /* MultipartFile fotoProfilo = dipendenteDto.getFotoProfilo();
+-            if (fotoProfilo != null && !fotoProfilo.isEmpty()) {
+-                String url = (String) cloudinary.uploader().upload(fotoProfilo.getBytes(), Collections.emptyMap()).get("url");
+-                dipendente.setFotoprofilo(url);
+-            }*/
+-        return Optional.of(dipendenteRepository.save(dipendente));
+-        }
+-    }
+-    public String deleteDipendente(int id){
+-        Dipendente dipendente = getDipendenteById(id);
+-        if (dipendente == null) {
+-            throw new RuntimeException("Dipendente non trovato con id = " + id);
+-        }
+-        else {
+-            dipendenteRepository.delete(dipendente);
+-            return "Dipendente eliminato con successo";
+-        }
+-    }
+-    public String uploadFotoProfilo(int id, MultipartFile file) throws IOException {
+-        Dipendente dipendente = getDipendenteById(id);
+-        if (dipendente == null) {
+-            throw new RuntimeException("Dipendente non trovato con id = " + id);
+-        }
+-        else {
+-            String url = (String) cloudinary.uploader().upload(file.getBytes(), Collections.emptyMap()).get("url");
+-            dipendente.setFotoProfilo(url);
+-            dipendenteRepository.save(dipendente);
+-            return "Foto profilo caricata con successo";
+-        }
+-    }
+-    private void sendMail(String email) {
+-        SimpleMailMessage message = new SimpleMailMessage();
+-        message.setTo(email);
+-        message.setSubject("Registrazione Servizio rest");
+-        message.setText("Registrazione al Catalogo Sei stato inserito con successo");
+-
+-        javaMailSender.send(message);
+-    }
+-
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/pom.xml
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/pom.xml b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/pom.xml
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/pom.xml	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,91 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+-	<modelVersion>4.0.0</modelVersion>
+-	<parent>
+-		<groupId>org.springframework.boot</groupId>
+-		<artifactId>spring-boot-starter-parent</artifactId>
+-		<version>3.2.5</version>
+-		<relativePath/> <!-- lookup parent from repository -->
+-	</parent>
+-	<groupId>it.dispositiviAziendali</groupId>
+-	<artifactId>pgM5S2G5</artifactId>
+-	<version>0.0.1-SNAPSHOT</version>
+-	<name>pgM5S2G5</name>
+-	<description>Demo project for Spring Boot</description>
+-	<properties>
+-		<java.version>22</java.version>
+-	</properties>
+-
+-	<dependencies>
+-		<dependency>
+-			<groupId>org.springframework.boot</groupId>
+-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+-		</dependency>
+-		<dependency>
+-			<groupId>org.springframework.boot</groupId>
+-			<artifactId>spring-boot-starter-mail</artifactId>
+-		</dependency>
+-		<dependency>
+-			<groupId>org.springframework.boot</groupId>
+-			<artifactId>spring-boot-starter-validation</artifactId>
+-		</dependency>
+-		<dependency>
+-			<groupId>org.springframework.boot</groupId>
+-			<artifactId>spring-boot-starter-web</artifactId>
+-		</dependency>
+-
+-		<dependency>
+-			<groupId>org.postgresql</groupId>
+-			<artifactId>postgresql</artifactId>
+-			<scope>runtime</scope>
+-		</dependency>
+-		<dependency>
+-			<groupId>org.projectlombok</groupId>
+-			<artifactId>lombok</artifactId>
+-			<optional>true</optional>
+-		</dependency>
+-		<dependency>
+-			<groupId>org.springframework.boot</groupId>
+-			<artifactId>spring-boot-starter-test</artifactId>
+-			<scope>test</scope>
+-		</dependency>
+-		<!-- https://mvnrepository.com/artifact/com.cloudinary/cloudinary-http44 -->
+-		<dependency>
+-			<groupId>com.cloudinary</groupId>
+-			<artifactId>cloudinary-http44</artifactId>
+-			<version>1.38.0</version>
+-		</dependency>
+-		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
+-		<dependency>
+-			<groupId>org.mapstruct</groupId>
+-			<artifactId>mapstruct-processor</artifactId>
+-			<version>1.5.5.Final</version>
+-		</dependency>
+-		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
+-		<dependency>
+-			<groupId>org.mapstruct</groupId>
+-			<artifactId>mapstruct</artifactId>
+-			<version>1.5.5.Final</version>
+-		</dependency>
+-
+-	</dependencies>
+-
+-	<build>
+-		<plugins>
+-			<plugin>
+-				<groupId>org.springframework.boot</groupId>
+-				<artifactId>spring-boot-maven-plugin</artifactId>
+-				<configuration>
+-					<excludes>
+-						<exclude>
+-							<groupId>org.projectlombok</groupId>
+-							<artifactId>lombok</artifactId>
+-						</exclude>
+-					</excludes>
+-				</configuration>
+-			</plugin>
+-		</plugins>
+-	</build>
+-
+-</project>
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/ErrorPaylod/ErrorDeiPayload.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/ErrorPaylod/ErrorDeiPayload.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/ErrorPaylod/ErrorDeiPayload.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/ErrorPaylod/ErrorDeiPayload.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,11 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.payloads.ErrorPaylod;
+-
+-import java.util.Date;
+-import java.util.List;
+-
+-public record ErrorDeiPayload(
+-        String message,
+-        Date timestamp,
+-        List<String> errorsList
+-) {
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/DispositivoDto.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/DispositivoDto.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/DispositivoDto.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/DispositivoDto.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,39 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.payloads;
+-
+-import it.dispositiviAziendali.pgM5S2G5.enums.StatusDispositivoEnum;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.AudioVideoDTO;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.DomoticaDTO;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.InformaticaDTO;
+-import jakarta.validation.constraints.*;
+-import lombok.AllArgsConstructor;
+-import lombok.Data;
+-import lombok.NoArgsConstructor;
+-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+-import com.fasterxml.jackson.annotation.JsonSubTypes;
+-
+-@JsonTypeInfo(
+-        use = JsonTypeInfo.Id.NAME,
+-        include = JsonTypeInfo.As.PROPERTY,
+-        property = "type")
+-@JsonSubTypes({
+-        @JsonSubTypes.Type(value = AudioVideoDTO.class, name = "audioVideo"),
+-        @JsonSubTypes.Type(value = DomoticaDTO.class, name = "domotica"),
+-        @JsonSubTypes.Type(value = InformaticaDTO.class, name = "informatica")
+-})
+-@Data
+-public abstract class DispositivoDto {
+-        @NotBlank(message = "Il campo nome non può essere vuoto")
+-        @Size(min = 3, max = 15, message = "Nome deve avere minimo 3 caratteri, massimo 15")
+-        private String nome;
+-
+-        @NotBlank(message = "Il campo marca non può essere vuoto")
+-        @Size(min = 3, max = 30, message = "Marca deve avere minimo 3 caratteri, massimo 30")
+-        private String marca;
+-
+-        @NotNull(message = "Il campo status non può essere vuoto")
+-        private StatusDispositivoEnum status;
+-
+-        @NotNull(message = "idDipendente cannot be null")
+-        @Min(value = 1, message = "idDipendente must be greater than 0")
+-        private Integer idDipendente;
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/repository/DispositivoRepository.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/repository/DispositivoRepository.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/repository/DispositivoRepository.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/repository/DispositivoRepository.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,9 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.repository;
+-
+-import it.dispositiviAziendali.pgM5S2G5.model.Dispositivo;
+-import org.springframework.data.jpa.repository.JpaRepository;
+-
+-import java.util.UUID;
+-
+-public interface DispositivoRepository extends JpaRepository<Dispositivo, UUID> {
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/resources/application.properties
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/resources/application.properties b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/resources/application.properties
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/resources/application.properties	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,24 +0,0 @@
+-spring.config.import=file:env.properties
+-
+-spring.application.name=pgM5S2G5
+-spring.datasource.url=jdbc:postgresql://localhost:5432/progettoAziendaDispositivi
+-spring.datasource.username=${spring.datasource.username}
+-spring.datasource.password=${spring.datasource.password}
+-spring.datasource.driver-class-name=org.postgresql.Driver
+-spring.jpa.properties.hibernate.default_schema=public
+-spring.jpa.hibernate.ddl-auto=update
+-spring.jpa.show-sql=true
+-
+-cloudinary.name=${cloudinary.name}
+-cloudinary.apikey=${cloudinary.apikey}
+-cloudinary.secret=${cloudinary.secret}
+-
+-gmail.mail.transport.protocol=smtp
+-gmail.mail.smtp.auth=true
+-gmail.mail.smtp.starttls.enable=true
+-gmail.mail.debug=true
+-gmail.mail.from=${gmail.mail.from}
+-gmail.mail.from.password=${gmail.mail.from.password}
+-gmail.smtp.ssl.enable=true
+-gmail.smtp.host=smtp.gmail.com
+-gmail.smtp.port=587
+\ No newline at end of file
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/ExceptionsHandler.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/ExceptionsHandler.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/ExceptionsHandler.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/ExceptionsHandler.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,39 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.exeption;
+-
+-import it.dispositiviAziendali.pgM5S2G5.payloads.ErrorPaylod.ErrorDeiPayload;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.ErrorPaylod.ErrorsPayload;
+-import lombok.extern.slf4j.Slf4j;
+-import org.springframework.data.crossstore.ChangeSetPersister;
+-import org.springframework.http.HttpStatus;
+-import org.springframework.web.bind.annotation.ExceptionHandler;
+-import org.springframework.web.bind.annotation.ResponseStatus;
+-import org.springframework.web.bind.annotation.RestControllerAdvice;
+-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+-
+-import java.time.LocalDateTime;
+-import java.util.ArrayList;
+-import java.util.Date;
+-import java.util.List;
+-
+-@RestControllerAdvice
+-@Slf4j
+-public class ExceptionsHandler{
+-    @ExceptionHandler(BadRequestException.class)
+-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+-    public ErrorDeiPayload handleBadRequest(BadRequestException e) {
+-        List<String> errorsMessages = new ArrayList<>();
+-        if (e.getErrorsList() != null)
+-            errorsMessages = e.getErrorsList().stream().map(err -> err.getDefaultMessage()).toList();
+-        return new ErrorDeiPayload(e.getMessage(), new Date(), errorsMessages);
+-    }
+-    @ExceptionHandler(ChangeSetPersister.NotFoundException.class)
+-    @ResponseStatus(HttpStatus.NOT_FOUND)
+-    public ErrorsPayload handleNotFound(ChangeSetPersister.NotFoundException e) {
+-        return new ErrorsPayload(e.getMessage(), new Date());
+-    }
+-    @ExceptionHandler(RuntimeException.class)
+-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+-    public ErrorsPayload handleRuntimeException(RuntimeException e) {
+-        return new ErrorsPayload(e.getMessage(), new Date());
+-    }
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/repository/DipendenteRepository.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/repository/DipendenteRepository.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/repository/DipendenteRepository.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/repository/DipendenteRepository.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,9 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.repository;
+-
+-import it.dispositiviAziendali.pgM5S2G5.model.Dipendente;
+-import org.springframework.data.jpa.repository.JpaRepository;
+-
+-import java.util.UUID;
+-
+-public interface DipendenteRepository extends JpaRepository<Dipendente, Integer>{
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoDiComputer.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoDiComputer.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoDiComputer.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoDiComputer.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,5 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.enums;
+-
+-public enum EnumTipoDiComputer {
+-    LAPTOP,FISSO,TABLET
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DispositivoController.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DispositivoController.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DispositivoController.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DispositivoController.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,71 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.controller;
+-
+-
+-import it.dispositiviAziendali.pgM5S2G5.model.Dispositivo;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.DispositivoDto;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.AudioVideoDTO;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.InformaticaDTO;
+-import it.dispositiviAziendali.pgM5S2G5.service.DispositivoService;
+-import jakarta.validation.Valid;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.http.HttpStatus;
+-import org.springframework.http.ResponseEntity;
+-import org.springframework.validation.BindingResult;
+-import org.springframework.web.bind.annotation.*;
+-
+-import java.util.List;
+-import java.util.UUID;
+-
+-@RestController
+-@RequestMapping("/api/dispositivo")
+-public class DispositivoController {
+-    @Autowired
+-    private DispositivoService dispositivoService;
+-
+-    @PostMapping("")
+-    public ResponseEntity<String> saveDispositivo(@Valid @RequestBody DispositivoDto dispositivoDto, BindingResult validation) {
+-       if (validation.hasErrors()) {
+-            return ResponseEntity.badRequest().body("Richiesta non valida: " + validation.getAllErrors().stream().map(e -> e.getDefaultMessage()).reduce("", (s1, s2) -> s1 + "\n" + s2));
+-        }
+-        try {
+-            Dispositivo dispositivo = (Dispositivo) dispositivoService.mapDtoToEntity(dispositivoDto);
+-            String result = dispositivoService.saveDispositivo(dispositivo);
+-            return ResponseEntity.ok(result);
+-        } catch (IllegalArgumentException e) {
+-            return ResponseEntity.badRequest().body(e.getMessage());
+-        }
+-    }
+-    @GetMapping("")
+-    public List<Dispositivo> getDispositivi() {
+-        return dispositivoService.getDispositivi();
+-    }
+-    @GetMapping("/{id}")
+-    public Dispositivo getDispositivoById(@PathVariable UUID id) {
+-        return dispositivoService.getDispositivoById(id);
+-    }
+-    @PutMapping("/{id}")
+-    public ResponseEntity<String> updateDispositivo(@PathVariable UUID id, @Valid @RequestBody DispositivoDto dispositivoDto, BindingResult validation) {
+-        if (validation.hasErrors()) {
+-            return ResponseEntity.badRequest().body(validation.getAllErrors().toString());
+-        }
+-
+-        String result = dispositivoService.updateDispositivo(id, dispositivoDto);
+-        if (result.equals("Dispositivo aggiornato correttamente")) {
+-            return ResponseEntity.ok(result);
+-        } else {
+-            return ResponseEntity.notFound().build();
+-        }
+-    }
+-    @DeleteMapping("/{id}")
+-    @ResponseStatus(HttpStatus.NO_CONTENT)
+-    public ResponseEntity<String> deleteDispositivo(@PathVariable UUID id) {
+-
+-        try {
+-            dispositivoService.deleteDispositivo(id);
+-            return ResponseEntity.ok("Dispositivo eliminato correttamente");
+-        } catch (RuntimeException e) {
+-            return ResponseEntity.notFound().build();
+-        }
+-    }
+-
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DispositivoService.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DispositivoService.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DispositivoService.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DispositivoService.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,74 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.service;
+-
+-import it.dispositiviAziendali.pgM5S2G5.mapper.MapperContainer;
+-import it.dispositiviAziendali.pgM5S2G5.model.Dispositivo;
+-import it.dispositiviAziendali.pgM5S2G5.model.dispositivi.AudioVideo;
+-import it.dispositiviAziendali.pgM5S2G5.model.dispositivi.Domotica;
+-import it.dispositiviAziendali.pgM5S2G5.model.dispositivi.Informatica;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.DispositivoDto;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.AudioVideoDTO;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.DomoticaDTO;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.InformaticaDTO;
+-import it.dispositiviAziendali.pgM5S2G5.repository.DispositivoRepository;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.stereotype.Service;
+-
+-import java.util.List;
+-import java.util.Optional;
+-import java.util.UUID;
+-
+-@Service
+-public class DispositivoService {
+-
+-    @Autowired
+-    private DispositivoRepository dispositivoRepository;
+-
+-    public String saveDispositivo(Dispositivo dispositivo) {
+-        dispositivoRepository.save(dispositivo);
+-        return "Dispositivo salvato correttamente";
+-    }
+-
+-    public Dispositivo mapDtoToEntity(DispositivoDto dispositivoDto) {
+-        if (dispositivoDto instanceof DomoticaDTO) {
+-            return MapperContainer.DomoticaMapper.INSTANCE.toDomotica((DomoticaDTO) dispositivoDto);
+-        } else if (dispositivoDto instanceof AudioVideoDTO) {
+-            return MapperContainer.AudioVideoMapper.INSTANCE.toAudioVideo((AudioVideoDTO) dispositivoDto);
+-        } else if (dispositivoDto instanceof InformaticaDTO) {
+-            return MapperContainer.InformaticaMapper.INSTANCE.toInformatica((InformaticaDTO) dispositivoDto);
+-        } else {
+-            throw new IllegalArgumentException("Tipo di DTO non supportato");
+-        }
+-    }
+-    public List<Dispositivo> getDispositivi() {
+-        return dispositivoRepository.findAll();
+-    }
+-    public Dispositivo getDispositivoById(UUID id) {
+-        return dispositivoRepository.findById(id)
+-                .orElseThrow(() -> new RuntimeException("Dispositivo non trovato con id = " + id));
+-    }
+-    public String updateDispositivo(UUID id, DispositivoDto dispositivoDto) {
+-        Optional<Dispositivo> optionalDispositivo = Optional.ofNullable(getDispositivoById(id));
+-        if (optionalDispositivo.isPresent()) {
+-            Dispositivo dispositivo = optionalDispositivo.get();
+-
+-            if (dispositivoDto instanceof DomoticaDTO) {
+-                MapperContainer.DomoticaMapper.INSTANCE.updateDomoticaFromDto((DomoticaDTO) dispositivoDto, (Domotica) dispositivo);
+-            } else if (dispositivoDto instanceof AudioVideoDTO) {
+-                MapperContainer.AudioVideoMapper.INSTANCE.updateAudioVideoFromDto((AudioVideoDTO) dispositivoDto, (AudioVideo) dispositivo);
+-            } else if (dispositivoDto instanceof InformaticaDTO) {
+-                MapperContainer.InformaticaMapper.INSTANCE.updateInformaticaFromDto((InformaticaDTO) dispositivoDto, (Informatica) dispositivo);
+-            } else {
+-                throw new IllegalArgumentException("Tipo di DTO non supportato");
+-            }
+-
+-            dispositivoRepository.save(dispositivo);
+-            return "Dispositivo aggiornato correttamente";
+-        } else {
+-            return "Dispositivo non trovato";
+-        }
+-    }
+-    public void deleteDispositivo(UUID id) {
+-        Dispositivo dispositivo = getDispositivoById(id);
+-        dispositivoRepository.delete(dispositivo);
+-    }
+-}
+\ No newline at end of file
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/test/java/it/dispositiviAziendali/pgM5S2G5/PgM5S2G5ApplicationTests.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/test/java/it/dispositiviAziendali/pgM5S2G5/PgM5S2G5ApplicationTests.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/test/java/it/dispositiviAziendali/pgM5S2G5/PgM5S2G5ApplicationTests.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/test/java/it/dispositiviAziendali/pgM5S2G5/PgM5S2G5ApplicationTests.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,13 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5;
+-
+-import org.junit.jupiter.api.Test;
+-import org.springframework.boot.test.context.SpringBootTest;
+-
+-@SpringBootTest
+-class PgM5S2G5ApplicationTests {
+-
+-	@Test
+-	void contextLoads() {
+-	}
+-
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/.gitignore
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/.gitignore b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/.gitignore
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/.gitignore	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,33 +0,0 @@
+-HELP.md
+-target/
+-!.mvn/wrapper/maven-wrapper.jar
+-!**/src/main/**/target/
+-!**/src/test/**/target/
+-
+-### STS ###
+-.apt_generated
+-.classpath
+-.factorypath
+-.project
+-.settings
+-.springBeans
+-.sts4-cache
+-
+-### IntelliJ IDEA ###
+-.idea
+-*.iws
+-*.iml
+-*.ipr
+-
+-### NetBeans ###
+-/nbproject/private/
+-/nbbuild/
+-/dist/
+-/nbdist/
+-/.nb-gradle/
+-build/
+-!**/src/main/**/build/
+-!**/src/test/**/build/
+-
+-### VS Code ###
+-.vscode/
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoVideo.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoVideo.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoVideo.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoVideo.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,5 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.enums;
+-
+-public enum EnumTipoVideo {
+-    TELEVISIONE,MONITOR_PC
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/configuration/AppConfig.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/configuration/AppConfig.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/configuration/AppConfig.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/configuration/AppConfig.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,54 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.configuration;
+-
+-import com.cloudinary.Cloudinary;
+-import org.springframework.beans.factory.annotation.Value;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Configuration;
+-import org.springframework.mail.javamail.JavaMailSenderImpl;
+-
+-import java.util.HashMap;
+-import java.util.Map;
+-import java.util.Properties;
+-
+-@Configuration
+-public class AppConfig {
+-    @Bean
+-    public Cloudinary getCloudinary(@Value("${cloudinary.name}") String name,
+-                                    @Value("${cloudinary.apikey}") String apikey,
+-                                    @Value("${cloudinary.secret}") String secret){
+-        Map<String, String> config = new HashMap<>();
+-        config.put("cloud_name", name);
+-        config.put("api_key", apikey);
+-        config.put("api_secret", secret);
+-        return new Cloudinary(config);
+-
+-    }
+-
+-    @Bean
+-    public JavaMailSenderImpl getJavaMailSender(@Value("${gmail.mail.transport.protocol}" )String protocol,
+-                                                @Value("${gmail.mail.smtp.auth}" ) String auth,
+-                                                @Value("${gmail.mail.smtp.starttls.enable}" )String starttls,
+-                                                @Value("${gmail.mail.debug}" )String debug,
+-                                                @Value("${gmail.mail.from}" )String from,
+-                                                @Value("${gmail.mail.from.password}" )String password,
+-                                                @Value("${gmail.smtp.ssl.enable}" )String ssl,
+-                                                @Value("${gmail.smtp.host}" )String host,
+-                                                @Value("${gmail.smtp.port}" )String port){
+-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+-        mailSender.setHost(host);
+-        mailSender.setPort(Integer.parseInt(port));
+-
+-        mailSender.setUsername(from);
+-        mailSender.setPassword(password);
+-
+-        Properties props = mailSender.getJavaMailProperties();
+-        props.put("mail.transport.protocol", protocol);
+-        props.put("mail.smtp.auth", auth);
+-        props.put("mail.smtp.starttls.enable", starttls);
+-        props.put("mail.debug", debug);
+-        props.put("smtp.ssl.enable",ssl);
+-
+-        return mailSender;
+-
+-    }
+-}
+\ No newline at end of file
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/BadRequestException.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/BadRequestException.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/BadRequestException.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/BadRequestException.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,20 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.exeption;
+-
+-import lombok.Data;
+-import org.springframework.validation.ObjectError;
+-
+-import java.util.List;
+-@Data
+-public class BadRequestException extends RuntimeException{
+-
+-    private List<ObjectError> errorsList;
+-
+-    public BadRequestException(String message) {
+-        super(message);
+-    }
+-
+-    public BadRequestException(List<ObjectError> errorsList) {
+-        super("Errori nel body");
+-        this.errorsList = errorsList;
+-    }
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,75 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.controller;
+-
+-import it.dispositiviAziendali.pgM5S2G5.model.Dipendente;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.DipendenteDto;
+-import it.dispositiviAziendali.pgM5S2G5.service.DipendenteService;
+-import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.data.domain.Page;
+-import org.springframework.validation.BindingResult;
+-import org.springframework.validation.annotation.Validated;
+-import org.springframework.web.bind.annotation.*;
+-import org.springframework.web.multipart.MultipartFile;
+-
+-import java.io.IOException;
+-import java.util.Optional;
+-
+-@RestController
+-@RequestMapping("/api/dipendenti")
+-public class DipendenteController {
+-    @Autowired
+-    private DipendenteService dipendenteService;
+-
+-    /*@PostMapping(value = "", consumes = "multipart/form-data")
+-    public String saveDipendente(@RequestPart("dipendente") @Validated DipendenteDto dipendenteDto,
+-                                 @RequestPart(value = "fotoProfilo", required = false) MultipartFile fotoProfilo,
+-                                 BindingResult validation) throws IOException {
+-
+-        if (validation.hasErrors()) {
+-            throw new RuntimeException("Richiesta non valida: " + validation.getAllErrors().stream().map(e -> e.getDefaultMessage()).reduce("", (s1, s2) -> s1 + "\n" + s2));
+-        }
+-
+-        dipendenteDto.setFotoProfilo(fotoProfilo);
+-        return dipendenteService.saveDipendente(dipendenteDto);
+-    }*/
+-
+-    /*@PostMapping(value = "", consumes = "multipart/form-data")
+-    public String saveDipendente(@ModelAttribute @Validated DipendenteDto dipendenteDto, BindingResult validation) throws IOException {
+-        if (validation.hasErrors()) {
+-            throw new RuntimeException("Richiesta non valida: " + validation.getAllErrors().stream().map(e -> e.getDefaultMessage()).reduce("", (s1, s2) -> s1 + "\n" + s2));
+-        }
+-        return dipendenteService.saveDipendente(dipendenteDto);
+-    }*/
+-    @PostMapping("")
+-    public String saveDipendente(@RequestBody @Validated DipendenteDto dipendenteDto, BindingResult validation) throws IOException {
+-        if (validation.hasErrors()) {
+-            throw new RuntimeException("Richiesta non valida: " + validation.getAllErrors().stream().map(e -> e.getDefaultMessage()).reduce("", (s1, s2) -> s1 + "\n" + s2));
+-        }
+-        return dipendenteService.saveDipendente(dipendenteDto);
+-    }
+-    @GetMapping("")
+-    public Page<Dipendente> getDipendenti(@RequestParam(defaultValue = "0") int page,
+-                                             @RequestParam(defaultValue = "10") int size,
+-                                             @RequestParam(defaultValue = "id") String sortBy) {
+-        return dipendenteService.getDipendenti(page, size, sortBy);
+-    }
+-
+-    @GetMapping("/{id}")
+-    public Dipendente getDipendenteById(@PathVariable int id) {
+-        return dipendenteService.getDipendenteById(id);
+-    }
+-    @PutMapping("/{id}")
+-    public Optional<Dipendente> updateDipendente(@PathVariable int id, @RequestBody @Validated DipendenteDto dipendenteDto, BindingResult validation) {
+-        if (validation.hasErrors()) {
+-            throw new RuntimeException("Richiesta non valida: " + validation.getAllErrors().stream().map(e -> e.getDefaultMessage()).reduce("", (s1, s2) -> s1 + "\n" + s2));
+-        }
+-        return dipendenteService.updateDipendente(id, dipendenteDto);
+-    }
+-    @DeleteMapping("/{id}")
+-    public String deleteDipendente(@PathVariable int id) {
+-        return dipendenteService.deleteDipendente(id);
+-    }
+-    @PatchMapping("/{id}/fotoProfilo")
+-    public String uploadFotoProfilo(@RequestParam("fotoProfilo") MultipartFile file, @PathVariable int id) throws IOException {
+-        return dipendenteService.uploadFotoProfilo(id, file);
+-    }
+-}
+\ No newline at end of file
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/DomoticaDTO.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/DomoticaDTO.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/DomoticaDTO.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/DomoticaDTO.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,17 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo;
+-
+-import it.dispositiviAziendali.pgM5S2G5.enums.EnumTipoSensore;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.DispositivoDto;
+-import jakarta.validation.constraints.NotBlank;
+-import jakarta.validation.constraints.NotNull;
+-import lombok.Data;
+-
+-@Data
+-public class DomoticaDTO extends DispositivoDto {
+-    @NotNull(message = "Il tipo di sensore non può essere nullo")
+-    private EnumTipoSensore sensore;
+-    @NotBlank(message = "La compatibilità non può essere vuota")
+-    private String compatibilita;
+-    private String descrizione;
+-}
+-
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/env.properties
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/env.properties b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/env.properties
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/env.properties	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,1 +0,0 @@
+-
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/DipendenteDto.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/DipendenteDto.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/DipendenteDto.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/DipendenteDto.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,25 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.payloads;
+-
+-import jakarta.persistence.GeneratedValue;
+-import jakarta.validation.constraints.Email;
+-import jakarta.validation.constraints.NotBlank;
+-import jakarta.validation.constraints.Size;
+-import lombok.Data;
+-import org.springframework.web.multipart.MultipartFile;
+-
+-@Data
+-public class DipendenteDto {
+-    @NotBlank(message = "il username non può essere null o vuoto o solo spazi")
+-    @Size(min = 4, max = 10, message = "username deve essere tra 2 e 20 caratteri")
+-    private String username;
+-    @NotBlank(message = "il nome non può essere null o vuoto o solo spazi")
+-    @Size(min = 2, max = 20, message = "Nome deve essere tra 2 e 20 caratteri")
+-    private String nome;
+-    @NotBlank(message = "il cognome non può essere null o vuoto o solo spazi")
+-    @Size(min = 2, max = 20, message = "Cognome deve essere tra 2 e 20 caratteri")
+-    private String cognome;
+-    @Email(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "L'email inserita non è valida")
+-    @NotBlank
+-    private String email;
+-    private MultipartFile fotoProfilo;
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/mapper/MapperContainer.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/mapper/MapperContainer.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/mapper/MapperContainer.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/mapper/MapperContainer.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,54 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.mapper;
+-
+-import it.dispositiviAziendali.pgM5S2G5.model.dispositivi.AudioVideo;
+-import it.dispositiviAziendali.pgM5S2G5.model.dispositivi.Domotica;
+-import it.dispositiviAziendali.pgM5S2G5.model.dispositivi.Informatica;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.AudioVideoDTO;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.DomoticaDTO;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.InformaticaDTO;
+-import org.mapstruct.Mapper;
+-import org.mapstruct.Mapping;
+-import org.mapstruct.MappingTarget;
+-import org.mapstruct.factory.Mappers;
+-
+-public class MapperContainer {
+-
+-    @Mapper(componentModel = "spring")
+-    public interface DomoticaMapper {
+-        DomoticaMapper INSTANCE = Mappers.getMapper(DomoticaMapper.class);
+-
+-        @Mapping(source = "idDipendente", target = "dipendente.id")
+-        Domotica toDomotica(DomoticaDTO domoticaDto);
+-
+-        @Mapping(source = "dipendente.id", target = "idDipendente")
+-        DomoticaDTO toDomoticaDTO(Domotica domotica);
+-
+-        void updateDomoticaFromDto(DomoticaDTO domoticaDto, @MappingTarget Domotica domotica);
+-    }
+-
+-    @Mapper(componentModel = "spring")
+-    public interface AudioVideoMapper {
+-        AudioVideoMapper INSTANCE = Mappers.getMapper(AudioVideoMapper.class);
+-
+-        @Mapping(source = "idDipendente", target = "dipendente.id")
+-        AudioVideo toAudioVideo(AudioVideoDTO audioVideoDto);
+-
+-        @Mapping(source = "dipendente.id", target = "idDipendente")
+-        AudioVideoDTO toAudioVideoDTO(AudioVideo audioVideo);
+-
+-        void updateAudioVideoFromDto(AudioVideoDTO audioVideoDto, @MappingTarget AudioVideo audioVideo);
+-    }
+-
+-    @Mapper(componentModel = "spring")
+-    public interface InformaticaMapper {
+-        InformaticaMapper INSTANCE = Mappers.getMapper(InformaticaMapper.class);
+-
+-        @Mapping(source = "idDipendente", target = "dipendente.id")
+-        Informatica toInformatica(InformaticaDTO informaticaDto);
+-
+-        @Mapping(source = "dipendente.id", target = "idDipendente")
+-        InformaticaDTO toInformaticaDTO(Informatica informatica);
+-
+-        void updateInformaticaFromDto(InformaticaDTO informaticaDto, @MappingTarget Informatica informatica);
+-    }
+-}
+\ No newline at end of file
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/InformaticaDTO.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/InformaticaDTO.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/InformaticaDTO.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/InformaticaDTO.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,16 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo;
+-
+-import it.dispositiviAziendali.pgM5S2G5.enums.EnumTipoDiComputer;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.DispositivoDto;
+-import jakarta.validation.constraints.NotNull;
+-import lombok.Data;
+-
+-
+-@Data
+-public class InformaticaDTO extends DispositivoDto {
+-    @NotNull(message = "Il tipo di computer non può essere nullo")
+-    private EnumTipoDiComputer tipoDiComputer;
+-    private String processore;
+-    private int ram;
+-    private String archiviazione;
+-}
+\ No newline at end of file
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/PgM5S2G5Application.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/PgM5S2G5Application.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/PgM5S2G5Application.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/PgM5S2G5Application.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,13 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5;
+-
+-import org.springframework.boot.SpringApplication;
+-import org.springframework.boot.autoconfigure.SpringBootApplication;
+-
+-@SpringBootApplication
+-public class PgM5S2G5Application {
+-
+-	public static void main(String[] args) {
+-		SpringApplication.run(PgM5S2G5Application.class, args);
+-	}
+-
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/ErrorPaylod/ErrorsPayload.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/ErrorPaylod/ErrorsPayload.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/ErrorPaylod/ErrorsPayload.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/ErrorPaylod/ErrorsPayload.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,15 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.payloads.ErrorPaylod;
+-
+-import lombok.AllArgsConstructor;
+-import lombok.Data;
+-
+-import java.util.Date;
+-
+-public record ErrorsPayload(
+-        String message,
+-        Date timestamp) {
+-    public ErrorsPayload(String message, Date timestamp) {
+-        this.message = message;
+-        this.timestamp = timestamp;
+-    }
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/NotFoundExecution.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/NotFoundExecution.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/NotFoundExecution.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/exeption/NotFoundExecution.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,7 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.exeption;
+-
+-public class NotFoundExecution extends RuntimeException {
+-    public NotFoundExecution(String message) {
+-        super(message);
+-    }
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/StatusDispositivoEnum.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/StatusDispositivoEnum.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/StatusDispositivoEnum.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/StatusDispositivoEnum.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,5 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.enums;
+-
+-public enum StatusDispositivoEnum {
+-    DISPONIBILE,ASSEGNATO,IN_MANUTENZIONE,DISMESSO;
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dipendente.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dipendente.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dipendente.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dipendente.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,26 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.model;
+-
+-import com.fasterxml.jackson.annotation.JsonIgnore;
+-import jakarta.persistence.*;
+-import lombok.Data;
+-import lombok.ToString;
+-
+-import java.util.List;
+-
+-@Data
+-@Entity
+-@ToString
+-@Table(name = "dipendenti")
+-public class Dipendente {
+-    @Id
+-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+-    private int id;
+-    private String username;
+-    private String nome;
+-    private String cognome;
+-    private String email;
+-    private String fotoProfilo;
+-    @OneToMany(mappedBy = "dipendente")
+-    @JsonIgnore
+-    private List<Dispositivo> dispositivi;
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/AudioVideo.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/AudioVideo.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/AudioVideo.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/AudioVideo.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,17 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.model.dispositivi;
+-
+-import it.dispositiviAziendali.pgM5S2G5.enums.EnumTipoVideo;
+-import it.dispositiviAziendali.pgM5S2G5.model.Dispositivo;
+-import jakarta.persistence.*;
+-import lombok.Data;
+-
+-@Data
+-@Entity
+-@Table(name = "audio_video")
+-public class AudioVideo extends Dispositivo {
+-    @Enumerated(EnumType.STRING)
+-    @Column(name = "tipo_di_video")
+-    private EnumTipoVideo tipoVideo;
+-    private int dimensione;
+-    private String descrizione;
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dispositivo.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dispositivo.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dispositivo.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dispositivo.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,26 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.model;
+-
+-import it.dispositiviAziendali.pgM5S2G5.enums.StatusDispositivoEnum;
+-import jakarta.persistence.*;
+-import lombok.Data;
+-
+-import java.util.UUID;
+-
+-@Entity
+-@Data
+-@Inheritance(strategy = InheritanceType.JOINED)
+-@Table(name = "dispositivi")
+-public class Dispositivo {
+-    @Id
+-    @GeneratedValue(strategy = GenerationType.AUTO)
+-    private UUID matricola;
+-    private String nome;
+-    private String marca;
+-    @Enumerated(EnumType.STRING)
+-    private StatusDispositivoEnum status;
+-
+-
+-    @ManyToOne
+-    @JoinColumn(name = "dipendente_id")
+-    private Dipendente dipendente;
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/AudioVideoDTO.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/AudioVideoDTO.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/AudioVideoDTO.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/AudioVideoDTO.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,19 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo;
+-
+-import it.dispositiviAziendali.pgM5S2G5.enums.EnumTipoVideo;
+-import it.dispositiviAziendali.pgM5S2G5.payloads.DispositivoDto;
+-import jakarta.validation.constraints.Min;
+-import jakarta.validation.constraints.NotBlank;
+-import jakarta.validation.constraints.NotNull;
+-import lombok.Data;
+-
+-
+-@Data
+-public class AudioVideoDTO extends DispositivoDto {
+-    @NotNull(message = "Il tipo di video non può essere nullo")
+-    private EnumTipoVideo tipoVideo;
+-    @NotBlank(message = "La dimensione non può essere vuota")
+-    @Min(value = 4, message = "La dimensione deve essere maggiore di 0")
+-    private int dimensione;
+-    private String descrizione;
+-}
+\ No newline at end of file
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/Informatica.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/Informatica.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/Informatica.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/Informatica.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,17 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.model.dispositivi;
+-
+-import it.dispositiviAziendali.pgM5S2G5.enums.EnumTipoDiComputer;
+-import it.dispositiviAziendali.pgM5S2G5.model.Dispositivo;
+-import jakarta.persistence.*;
+-import lombok.Data;
+-
+-@Data
+-@Entity
+-@Table(name = "informatica")
+-public class Informatica extends Dispositivo {
+-    @Enumerated(EnumType.STRING)
+-    private EnumTipoDiComputer tipoDiComputer;
+-    private String processore;
+-    private int ram;
+-    private String archiviazione;
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoSensore.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoSensore.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoSensore.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/enums/EnumTipoSensore.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,5 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.enums;
+-
+-public enum EnumTipoSensore {
+-    MOVIMENTO,TEMPERATURA,UMIDITA
+-}
+Index: ../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/Domotica.java
+===================================================================
+diff --git a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/Domotica.java b/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/Domotica.java
+deleted file mode 100644
+--- a/../../giorno2/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/dispositivi/Domotica.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ /dev/null	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
+@@ -1,20 +0,0 @@
+-package it.dispositiviAziendali.pgM5S2G5.model.dispositivi;
+-
+-import it.dispositiviAziendali.pgM5S2G5.enums.EnumTipoSensore;
+-import it.dispositiviAziendali.pgM5S2G5.model.Dispositivo;
+-import jakarta.persistence.Entity;
+-import jakarta.persistence.EnumType;
+-import jakarta.persistence.Enumerated;
+-import jakarta.persistence.Table;
+-import lombok.Data;
+-
+-@Data
+-@Entity
+-@Table(name = "domotica")
+-public class Domotica extends Dispositivo {
+-    @Enumerated(EnumType.STRING)
+-    private EnumTipoSensore sensore;
+-    private String compatibilita;
+-    private String descrizione;
+-
+-}
+Index: pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/JwtFilter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.dispositiviAziendali.pgM5S2G5.security;\r\n\r\nimport it.dispositiviAziendali.pgM5S2G5.model.Dipendente;\r\nimport it.dispositiviAziendali.pgM5S2G5.service.DipendenteService;\r\nimport jakarta.servlet.FilterChain;\r\nimport jakarta.servlet.ServletException;\r\nimport jakarta.servlet.http.HttpServletRequest;\r\nimport jakarta.servlet.http.HttpServletResponse;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.security.authentication.UsernamePasswordAuthenticationToken;\r\nimport org.springframework.security.core.Authentication;\r\nimport org.springframework.security.core.context.SecurityContextHolder;\r\nimport org.springframework.stereotype.Component;\r\nimport org.springframework.util.AntPathMatcher;\r\nimport org.springframework.web.filter.OncePerRequestFilter;\r\n\r\nimport java.io.IOException;\r\nimport java.util.Optional;\r\n\r\n@Component\r\npublic class JwtFilter extends OncePerRequestFilter {\r\n\r\n    @Autowired\r\n    private JwtTool jwtTool;\r\n\r\n    @Autowired\r\n    private DipendenteService dipendenteService;\r\n    @Override\r\n    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {\r\n       //verifico se il token è presente\r\n        String token = request.getHeader(\"Authorization\");\r\n        if (token == null||!token.startsWith(\"Bearer \")) {\r\n            throw new RuntimeException(\"Token non presente\");\r\n        }else\r\n        {\r\n            //estraggo il token, rimuovendo la stringa \"Bearer \"\r\n            token = token.substring(7);\r\n            jwtTool.verifyToken(token);\r\n\r\n\r\n            int userId = jwtTool.getIdFromToken(token);\r\n            Optional<Dipendente>dipendenteOptional = Optional.ofNullable(dipendenteService.getDipendenteById(userId));\r\n            if (dipendenteOptional.isPresent()) {\r\n                Dipendente dipendente = dipendenteOptional.get();\r\n                Authentication authentication = new UsernamePasswordAuthenticationToken(dipendente, null, dipendente.getAuthorities());\r\n                SecurityContextHolder.getContext().setAuthentication(authentication);\r\n\r\n            } else {\r\n                throw new RuntimeException(\"Dipendente non trovato\");\r\n            }\r\n                filterChain.doFilter(request, response);\r\n        }\r\n    }\r\n    @Override\r\n    protected boolean shouldNotFilter(HttpServletRequest request)throws ServletException {\r\n        return new AntPathMatcher().match(\"/auth/**\",request.getServletPath());\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/JwtFilter.java b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/JwtFilter.java
+--- a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/JwtFilter.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/JwtFilter.java	(date 1716910030898)
+@@ -1,22 +1,15 @@
+ package it.dispositiviAziendali.pgM5S2G5.security;
+ 
+-import it.dispositiviAziendali.pgM5S2G5.model.Dipendente;
+-import it.dispositiviAziendali.pgM5S2G5.service.DipendenteService;
+ import jakarta.servlet.FilterChain;
+ import jakarta.servlet.ServletException;
+ import jakarta.servlet.http.HttpServletRequest;
+ import jakarta.servlet.http.HttpServletResponse;
+-
+ import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+-import org.springframework.security.core.Authentication;
+-import org.springframework.security.core.context.SecurityContextHolder;
+ import org.springframework.stereotype.Component;
+ import org.springframework.util.AntPathMatcher;
+ import org.springframework.web.filter.OncePerRequestFilter;
+ 
+ import java.io.IOException;
+-import java.util.Optional;
+ 
+ @Component
+ public class JwtFilter extends OncePerRequestFilter {
+@@ -24,8 +17,6 @@
+     @Autowired
+     private JwtTool jwtTool;
+ 
+-    @Autowired
+-    private DipendenteService dipendenteService;
+     @Override
+     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        //verifico se il token è presente
+@@ -37,19 +28,9 @@
+             //estraggo il token, rimuovendo la stringa "Bearer "
+             token = token.substring(7);
+             jwtTool.verifyToken(token);
+-
+-
+-            int userId = jwtTool.getIdFromToken(token);
+-            Optional<Dipendente>dipendenteOptional = Optional.ofNullable(dipendenteService.getDipendenteById(userId));
+-            if (dipendenteOptional.isPresent()) {
+-                Dipendente dipendente = dipendenteOptional.get();
+-                Authentication authentication = new UsernamePasswordAuthenticationToken(dipendente, null, dipendente.getAuthorities());
+-                SecurityContextHolder.getContext().setAuthentication(authentication);
+-
+-            } else {
+-                throw new RuntimeException("Dipendente non trovato");
+-            }
+-                filterChain.doFilter(request, response);
++            //se il token è valido passo la richiesta al prossimo filtro
++            filterChain.doFilter(request, response);
++
+         }
+     }
+     @Override
+Index: pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DipendenteService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.dispositiviAziendali.pgM5S2G5.service;\r\n\r\nimport com.cloudinary.Cloudinary;\r\nimport it.dispositiviAziendali.pgM5S2G5.model.Dipendente;\r\nimport it.dispositiviAziendali.pgM5S2G5.payloads.DipendenteDto;\r\nimport it.dispositiviAziendali.pgM5S2G5.repository.DipendenteRepository;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.data.domain.Page;\r\nimport org.springframework.data.domain.PageRequest;\r\nimport org.springframework.data.domain.Pageable;\r\nimport org.springframework.data.domain.Sort;\r\nimport org.springframework.mail.SimpleMailMessage;\r\nimport org.springframework.mail.javamail.JavaMailSenderImpl;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.stereotype.Service;\r\nimport org.springframework.web.multipart.MultipartFile;\r\n\r\nimport java.io.IOException;\r\nimport java.util.Collections;\r\nimport java.util.Optional;\r\n\r\n@Service\r\npublic class DipendenteService {\r\n    @Autowired\r\n    private DipendenteRepository dipendenteRepository;\r\n    @Autowired\r\n    private Cloudinary cloudinary;\r\n    @Autowired\r\n    private JavaMailSenderImpl javaMailSender;\r\n    @Autowired\r\n    private PasswordEncoder passwordEncoder;\r\n    public String saveDipendente(DipendenteDto dipendenteDto) throws IOException {\r\n        if (getDipendenteByEmail(dipendenteDto.getEmail()).isEmpty()) {\r\n\r\n            Dipendente dipendente = new Dipendente();\r\n            dipendente.setUsername(dipendenteDto.getUsername());\r\n            dipendente.setNome(dipendenteDto.getNome());\r\n            dipendente.setCognome(dipendenteDto.getCognome());\r\n            dipendente.setEmail(dipendenteDto.getEmail());\r\n            dipendente.setPassword(passwordEncoder.encode(dipendenteDto.getPassword()));\r\n            MultipartFile fotoProfilo = dipendenteDto.getFotoProfilo();\r\n            if (fotoProfilo != null && !fotoProfilo.isEmpty()) {\r\n                String url = (String) cloudinary.uploader().upload(fotoProfilo.getBytes(), Collections.emptyMap()).get(\"url\");\r\n                dipendente.setFotoProfilo(url);\r\n            }\r\n\r\n            dipendenteRepository.save(dipendente);\r\n         //   sendMail(dipendente.getEmail());\r\n            return \"Dipendente con id=\" + dipendente.getId() + \" con username \" + dipendente.getUsername() + \" salvato correttamente\";\r\n        }\r\n        else {\r\n            throw new RuntimeException(\"Dipendente con email \" + dipendenteDto.getEmail() + \" già presente\");\r\n        }\r\n    }\r\n    public Page<Dipendente> getDipendenti(int page, int size, String sortBy){\r\n        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));\r\n        return dipendenteRepository.findAll(pageable);\r\n    }\r\n    public Dipendente getDipendenteById(int id){\r\n        return dipendenteRepository.findById(id)\r\n                .orElseThrow(() -> new RuntimeException(\"Dipendente non trovato con id = \" + id));\r\n    }\r\n    public Optional<Dipendente> updateDipendente(int id, DipendenteDto dipendenteDto){\r\n        Optional<Dipendente> dipendenteOptional = Optional.ofNullable(getDipendenteById(id));\r\n        if(dipendenteOptional.isEmpty()){\r\n            throw new RuntimeException(\"Dipendente non trovato con id = \" + id);\r\n        }else {\r\n            Dipendente dipendente = dipendenteOptional.get();\r\n        dipendente.setUsername(dipendenteDto.getUsername());\r\n        dipendente.setNome(dipendenteDto.getNome());\r\n        dipendente.setCognome(dipendenteDto.getCognome());\r\n        dipendente.setEmail(dipendenteDto.getEmail());\r\n        dipendente.setPassword(dipendenteDto.getPassword());\r\n           /* MultipartFile fotoProfilo = dipendenteDto.getFotoProfilo();\r\n            if (fotoProfilo != null && !fotoProfilo.isEmpty()) {\r\n                String url = (String) cloudinary.uploader().upload(fotoProfilo.getBytes(), Collections.emptyMap()).get(\"url\");\r\n                dipendente.setFotoprofilo(url);\r\n            }*/\r\n        return Optional.of(dipendenteRepository.save(dipendente));\r\n        }\r\n    }\r\n    public String deleteDipendente(int id){\r\n        Dipendente dipendente = getDipendenteById(id);\r\n        if (dipendente == null) {\r\n            throw new RuntimeException(\"Dipendente non trovato con id = \" + id);\r\n        }\r\n        else {\r\n            dipendenteRepository.delete(dipendente);\r\n            return \"Dipendente eliminato con successo\";\r\n        }\r\n    }\r\n    public String uploadFotoProfilo(int id, MultipartFile file) throws IOException {\r\n        Dipendente dipendente = getDipendenteById(id);\r\n        if (dipendente == null) {\r\n            throw new RuntimeException(\"Dipendente non trovato con id = \" + id);\r\n        }\r\n        else {\r\n            String url = (String) cloudinary.uploader().upload(file.getBytes(), Collections.emptyMap()).get(\"url\");\r\n            dipendente.setFotoProfilo(url);\r\n            dipendenteRepository.save(dipendente);\r\n            return \"Foto profilo caricata con successo\";\r\n        }\r\n    }\r\n    private void sendMail(String email) {\r\n        SimpleMailMessage message = new SimpleMailMessage();\r\n        message.setTo(email);\r\n        message.setSubject(\"Registrazione Servizio rest\");\r\n        message.setText(\"Registrazione al Catalogo Sei stato inserito con successo\");\r\n\r\n        javaMailSender.send(message);\r\n    }\r\n    public Optional<Dipendente> getDipendenteByEmail(String email) {\r\n        return dipendenteRepository.findByEmail(email);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DipendenteService.java b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DipendenteService.java
+--- a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DipendenteService.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/DipendenteService.java	(date 1716910030899)
+@@ -11,7 +11,6 @@
+ import org.springframework.data.domain.Sort;
+ import org.springframework.mail.SimpleMailMessage;
+ import org.springframework.mail.javamail.JavaMailSenderImpl;
+-import org.springframework.security.crypto.password.PasswordEncoder;
+ import org.springframework.stereotype.Service;
+ import org.springframework.web.multipart.MultipartFile;
+ 
+@@ -27,8 +26,6 @@
+     private Cloudinary cloudinary;
+     @Autowired
+     private JavaMailSenderImpl javaMailSender;
+-    @Autowired
+-    private PasswordEncoder passwordEncoder;
+     public String saveDipendente(DipendenteDto dipendenteDto) throws IOException {
+         if (getDipendenteByEmail(dipendenteDto.getEmail()).isEmpty()) {
+ 
+@@ -37,7 +34,7 @@
+             dipendente.setNome(dipendenteDto.getNome());
+             dipendente.setCognome(dipendenteDto.getCognome());
+             dipendente.setEmail(dipendenteDto.getEmail());
+-            dipendente.setPassword(passwordEncoder.encode(dipendenteDto.getPassword()));
++            dipendente.setPassword(dipendenteDto.getPassword());
+             MultipartFile fotoProfilo = dipendenteDto.getFotoProfilo();
+             if (fotoProfilo != null && !fotoProfilo.isEmpty()) {
+                 String url = (String) cloudinary.uploader().upload(fotoProfilo.getBytes(), Collections.emptyMap()).get("url");
+Index: pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/AuthService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.dispositiviAziendali.pgM5S2G5.service;\r\n\r\nimport it.dispositiviAziendali.pgM5S2G5.model.Dipendente;\r\nimport it.dispositiviAziendali.pgM5S2G5.payloads.LoginDto;\r\nimport it.dispositiviAziendali.pgM5S2G5.security.JwtTool;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.util.Optional;\r\n\r\n@Service\r\npublic class AuthService {\r\n\r\n    @Autowired\r\n    private JwtTool jwtTool;\r\n\r\n    @Autowired\r\n    private DipendenteService dipendenteService;\r\n\r\n    @Autowired\r\n    private PasswordEncoder passwordEncoder;\r\n    public String authenticateDipendenteandGenerateToken(LoginDto loginDto) {\r\n        Optional<Dipendente> optionalDipendente = dipendenteService.getDipendenteByEmail(loginDto.getEmail());\r\n        if (optionalDipendente.isPresent()) {\r\n            Dipendente dipendente = optionalDipendente.get();\r\n            if (passwordEncoder.matches(loginDto.getPassword(), dipendente.getPassword())) {\r\n                return jwtTool.createToken(dipendente);\r\n            } else {\r\n                throw new RuntimeException(\"Password errata\");\r\n            }\r\n        } else {\r\n            throw new RuntimeException(\"Dipendente non trovato\");\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/AuthService.java b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/AuthService.java
+--- a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/AuthService.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/service/AuthService.java	(date 1716910030899)
+@@ -4,7 +4,6 @@
+ import it.dispositiviAziendali.pgM5S2G5.payloads.LoginDto;
+ import it.dispositiviAziendali.pgM5S2G5.security.JwtTool;
+ import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.security.crypto.password.PasswordEncoder;
+ import org.springframework.stereotype.Service;
+ 
+ import java.util.Optional;
+@@ -18,13 +17,11 @@
+     @Autowired
+     private DipendenteService dipendenteService;
+ 
+-    @Autowired
+-    private PasswordEncoder passwordEncoder;
+     public String authenticateDipendenteandGenerateToken(LoginDto loginDto) {
+         Optional<Dipendente> optionalDipendente = dipendenteService.getDipendenteByEmail(loginDto.getEmail());
+         if (optionalDipendente.isPresent()) {
+             Dipendente dipendente = optionalDipendente.get();
+-            if (passwordEncoder.matches(loginDto.getPassword(), dipendente.getPassword())) {
++            if (dipendente.getPassword().equals(loginDto.getPassword())) {
+                 return jwtTool.createToken(dipendente);
+             } else {
+                 throw new RuntimeException("Password errata");
+Index: pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/JwtTool.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.dispositiviAziendali.pgM5S2G5.security;\r\n\r\nimport io.jsonwebtoken.Jwts;\r\nimport io.jsonwebtoken.security.Keys;\r\nimport it.dispositiviAziendali.pgM5S2G5.model.Dipendente;\r\nimport org.springframework.beans.factory.annotation.Value;\r\nimport org.springframework.stereotype.Component;\r\n\r\nimport java.util.Date;\r\n\r\n@Component\r\npublic class JwtTool {\r\n    @Value(\"${jwt.secret}\")\r\n    private String secret;\r\n\r\n    @Value(\"${jwt.duration}\")\r\n    private long duration;\r\n\r\n    public String createToken(Dipendente dipendente) {\r\n        return Jwts.builder()\r\n                .issuedAt(new Date(System.currentTimeMillis()))\r\n                .expiration(new Date(System.currentTimeMillis() + duration))\r\n                .subject(String.valueOf(dipendente.getId()))\r\n                .signWith(Keys.hmacShaKeyFor(secret.getBytes()))\r\n                .compact();\r\n\r\n    }\r\n\r\n    public void verifyToken(String token) {\r\n        try {\r\n            Jwts.parser().verifyWith(Keys.hmacShaKeyFor(secret.getBytes())).\r\n                    build().parse(token);\r\n        } catch (Exception e) {\r\n            throw new RuntimeException(\"Token non valido\");\r\n        }\r\n    }\r\n    public int getIdFromToken(String token){\r\n        return Integer.parseInt(Jwts.parser().verifyWith(Keys.hmacShaKeyFor(secret.getBytes())).\r\n                build().parseSignedClaims(token).getPayload().getSubject());\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/JwtTool.java b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/JwtTool.java
+--- a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/JwtTool.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/JwtTool.java	(date 1716910030899)
+@@ -34,9 +34,5 @@
+             throw new RuntimeException("Token non valido");
+         }
+     }
+-    public int getIdFromToken(String token){
+-        return Integer.parseInt(Jwts.parser().verifyWith(Keys.hmacShaKeyFor(secret.getBytes())).
+-                build().parseSignedClaims(token).getPayload().getSubject());
+-    }
+ 
+ }
+Index: pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/AudioVideoDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo;\r\n\r\nimport it.dispositiviAziendali.pgM5S2G5.enums.EnumTipoVideo;\r\nimport it.dispositiviAziendali.pgM5S2G5.payloads.DispositivoDto;\r\nimport jakarta.validation.constraints.Min;\r\nimport jakarta.validation.constraints.NotBlank;\r\nimport jakarta.validation.constraints.NotNull;\r\nimport lombok.Data;\r\n\r\n\r\n@Data\r\npublic class AudioVideoDTO extends DispositivoDto {\r\n    @NotNull(message = \"Il tipo di video non può essere nullo\")\r\n    private EnumTipoVideo tipoVideo;\r\n    @NotNull(message = \"La dimensione non può essere vuota\")\r\n    @Min(value = 4, message = \"La dimensione deve essere maggiore di 0\")\r\n    private int dimensione;\r\n    private String descrizione;\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/AudioVideoDTO.java b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/AudioVideoDTO.java
+--- a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/AudioVideoDTO.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/payloads/sottoclassdispositivo/AudioVideoDTO.java	(date 1716910030897)
+@@ -12,7 +12,7 @@
+ public class AudioVideoDTO extends DispositivoDto {
+     @NotNull(message = "Il tipo di video non può essere nullo")
+     private EnumTipoVideo tipoVideo;
+-    @NotNull(message = "La dimensione non può essere vuota")
++    @NotBlank(message = "La dimensione non può essere vuota")
+     @Min(value = 4, message = "La dimensione deve essere maggiore di 0")
+     private int dimensione;
+     private String descrizione;
+Index: pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DispositivoController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.dispositiviAziendali.pgM5S2G5.controller;\r\n\r\n\r\nimport it.dispositiviAziendali.pgM5S2G5.model.Dispositivo;\r\nimport it.dispositiviAziendali.pgM5S2G5.payloads.DispositivoDto;\r\nimport it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.AudioVideoDTO;\r\nimport it.dispositiviAziendali.pgM5S2G5.payloads.sottoclassdispositivo.InformaticaDTO;\r\nimport it.dispositiviAziendali.pgM5S2G5.service.DispositivoService;\r\nimport jakarta.validation.Valid;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.security.access.prepost.PreAuthorize;\r\nimport org.springframework.validation.BindingResult;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.List;\r\nimport java.util.UUID;\r\n\r\n@RestController\r\n@RequestMapping(\"/api/dispositivo\")\r\npublic class DispositivoController {\r\n    @Autowired\r\n    private DispositivoService dispositivoService;\r\n\r\n    @PostMapping(\"\")\r\n    public ResponseEntity<String> saveDispositivo(@Valid @RequestBody DispositivoDto dispositivoDto, BindingResult validation) {\r\n       if (validation.hasErrors()) {\r\n            return ResponseEntity.badRequest().body(\"Richiesta non valida: \" + validation.getAllErrors().stream().map(e -> e.getDefaultMessage()).reduce(\"\", (s1, s2) -> s1 + \"\\n\" + s2));\r\n        }\r\n        try {\r\n            Dispositivo dispositivo = (Dispositivo) dispositivoService.mapDtoToEntity(dispositivoDto);\r\n            String result = dispositivoService.saveDispositivo(dispositivo);\r\n            return ResponseEntity.ok(result);\r\n        } catch (IllegalArgumentException e) {\r\n            return ResponseEntity.badRequest().body(e.getMessage());\r\n        }\r\n    }\r\n    @GetMapping(\"\")\r\n    public List<Dispositivo> getDispositivi() {\r\n        return dispositivoService.getDispositivi();\r\n    }\r\n    @GetMapping(\"/{id}\")\r\n    @PreAuthorize(\"hasAuthority('ADMIN') or hasAuthority('AUDIOVIDEO') or hasAuthority('INFORMATICA')\")\r\n    public Dispositivo getDispositivoById(@PathVariable UUID id) {\r\n        return dispositivoService.getDispositivoById(id);\r\n    }\r\n    @PutMapping(\"/{id}\")\r\n    @PreAuthorize(\"hasAuthority('ADMIN') or hasAuthority('AUDIOVIDEO') or hasAuthority('INFORMATICA')\")\r\n    public ResponseEntity<String> updateDispositivo(@PathVariable UUID id, @Valid @RequestBody DispositivoDto dispositivoDto, BindingResult validation) {\r\n        if (validation.hasErrors()) {\r\n            return ResponseEntity.badRequest().body(validation.getAllErrors().toString());\r\n        }\r\n\r\n        String result = dispositivoService.updateDispositivo(id, dispositivoDto);\r\n        if (result.equals(\"Dispositivo aggiornato correttamente\")) {\r\n            return ResponseEntity.ok(result);\r\n        } else {\r\n            return ResponseEntity.notFound().build();\r\n        }\r\n    }\r\n    @DeleteMapping(\"/{id}\")\r\n\r\n    @ResponseStatus(HttpStatus.NO_CONTENT)\r\n    public ResponseEntity<String> deleteDispositivo(@PathVariable UUID id) {\r\n\r\n        try {\r\n            dispositivoService.deleteDispositivo(id);\r\n            return ResponseEntity.ok(\"Dispositivo eliminato correttamente\");\r\n        } catch (RuntimeException e) {\r\n            return ResponseEntity.notFound().build();\r\n        }\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DispositivoController.java b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DispositivoController.java
+--- a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DispositivoController.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DispositivoController.java	(date 1716910030896)
+@@ -10,7 +10,6 @@
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+-import org.springframework.security.access.prepost.PreAuthorize;
+ import org.springframework.validation.BindingResult;
+ import org.springframework.web.bind.annotation.*;
+ 
+@@ -41,12 +40,10 @@
+         return dispositivoService.getDispositivi();
+     }
+     @GetMapping("/{id}")
+-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('AUDIOVIDEO') or hasAuthority('INFORMATICA')")
+     public Dispositivo getDispositivoById(@PathVariable UUID id) {
+         return dispositivoService.getDispositivoById(id);
+     }
+     @PutMapping("/{id}")
+-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('AUDIOVIDEO') or hasAuthority('INFORMATICA')")
+     public ResponseEntity<String> updateDispositivo(@PathVariable UUID id, @Valid @RequestBody DispositivoDto dispositivoDto, BindingResult validation) {
+         if (validation.hasErrors()) {
+             return ResponseEntity.badRequest().body(validation.getAllErrors().toString());
+@@ -60,7 +57,6 @@
+         }
+     }
+     @DeleteMapping("/{id}")
+-
+     @ResponseStatus(HttpStatus.NO_CONTENT)
+     public ResponseEntity<String> deleteDispositivo(@PathVariable UUID id) {
+ 
+Index: pgM5S2G5/env.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.datasource.username=postgres\r\nspring.datasource.password=gianluca\r\n\r\ncloudinary.apikey=896147786559725\r\ncloudinary.name=druqqvsaz\r\ncloudinary.secret=PpRIkTrhII0A9AzBkYahsqCb3II\r\n\r\ngmail.mail.from=gianluca.giacchetta@gmail.com\r\ngmail.mail.from.password=sylg whfi qfji nerp\r\n\r\nenv.jwt.secret= Dfeb43h8a2Dfeb43h8a2Dfeb43h8a2!!
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/pgM5S2G5/env.properties b/pgM5S2G5/env.properties
+--- a/pgM5S2G5/env.properties	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/pgM5S2G5/env.properties	(date 1716910030895)
+@@ -1,11 +1,1 @@
+-spring.datasource.username=postgres
+-spring.datasource.password=gianluca
+-
+-cloudinary.apikey=896147786559725
+-cloudinary.name=druqqvsaz
+-cloudinary.secret=PpRIkTrhII0A9AzBkYahsqCb3II
+-
+-gmail.mail.from=gianluca.giacchetta@gmail.com
+-gmail.mail.from.password=sylg whfi qfji nerp
+ 
+-env.jwt.secret= Dfeb43h8a2Dfeb43h8a2Dfeb43h8a2!!
+\ No newline at end of file
+Index: ../../../settimana2/progetto dispositivi aziendaili/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"53b88590-a0aa-473e-9ba7-1d09bd889a8b\" name=\"Changes\" comment=\"ed\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$/../../..\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/../../..\" />\r\n    <option name=\"UPDATE_TYPE\" value=\"REBASE\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;giahck&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/giahck/Esercizi-Epicode.git&quot;,\r\n    &quot;accountId&quot;: &quot;486af3f7-3fd5-4964-a2ca-cfbce6de46ed&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 8\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2h5NoMx47PZPLXyhMiUsz0QdZVq\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"dart.analysis.tool.window.visible\": \"false\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/giacc/Desktop/epicode/Esercizi-Epicode/back-end2/settimana3/giorno2/progetto dispositivi aziendaili/pgM5S2G5\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"53b88590-a0aa-473e-9ba7-1d09bd889a8b\" name=\"Changes\" comment=\"\" />\r\n      <created>1716880151636</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1716880151636</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"ed\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1716880749175</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1716880749175</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"ed\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"ed\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../../../settimana2/progetto dispositivi aziendaili/.idea/workspace.xml b/../../../settimana2/progetto dispositivi aziendaili/.idea/workspace.xml
+--- a/../../../settimana2/progetto dispositivi aziendaili/.idea/workspace.xml	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/../../../settimana2/progetto dispositivi aziendaili/.idea/workspace.xml	(date 1716910030895)
+@@ -4,9 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="53b88590-a0aa-473e-9ba7-1d09bd889a8b" name="Changes" comment="ed">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-    </list>
++    <list default="true" id="53b88590-a0aa-473e-9ba7-1d09bd889a8b" name="Changes" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -41,15 +39,15 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "dart.analysis.tool.window.visible": "false",
+-    "git-widget-placeholder": "main",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/giacc/Desktop/epicode/Esercizi-Epicode/back-end2/settimana3/giorno2/progetto dispositivi aziendaili/pgM5S2G5"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/giacc/Desktop/epicode/Esercizi-Epicode/back-end2/settimana2/progetto dispositivi aziendaili&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -59,19 +57,6 @@
+       <option name="presentableId" value="Default" />
+       <updated>1716880151636</updated>
+     </task>
+-    <task id="LOCAL-00001" summary="ed">
+-      <option name="closed" value="true" />
+-      <created>1716880749175</created>
+-      <option name="number" value="00001" />
+-      <option name="presentableId" value="LOCAL-00001" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1716880749175</updated>
+-    </task>
+-    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+-  <component name="VcsManagerConfiguration">
+-    <MESSAGE value="ed" />
+-    <option name="LAST_COMMIT_MESSAGE" value="ed" />
+-  </component>
+ </project>
+\ No newline at end of file
+Index: pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dipendente.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.dispositiviAziendali.pgM5S2G5.model;\r\n\r\nimport com.fasterxml.jackson.annotation.JsonIgnore;\r\nimport it.dispositiviAziendali.pgM5S2G5.enums.Role;\r\nimport jakarta.persistence.*;\r\nimport lombok.Data;\r\nimport lombok.ToString;\r\nimport org.springframework.security.core.GrantedAuthority;\r\nimport org.springframework.security.core.authority.SimpleGrantedAuthority;\r\nimport org.springframework.security.core.userdetails.UserDetails;\r\n\r\nimport java.util.Collection;\r\nimport java.util.List;\r\n\r\n@Data\r\n@Entity\r\n@ToString\r\n@Table(name = \"dipendenti\")\r\npublic class Dipendente implements UserDetails {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private int id;\r\n    private String username;\r\n    private String nome;\r\n    private String cognome;\r\n    private String email;\r\n    private String fotoProfilo;\r\n    private String password;\r\n    @Enumerated(EnumType.STRING)\r\n    private Role role;\r\n    @OneToMany(mappedBy = \"dipendente\")\r\n    @JsonIgnore\r\n    private List<Dispositivo> dispositivi;\r\n\r\n    @Override\r\n    public Collection<? extends GrantedAuthority> getAuthorities() {\r\n        return List.of(new SimpleGrantedAuthority(role.name()));\r\n    }\r\n    @Override\r\n    public String getUsername() {\r\n        return email;\r\n    }\r\n    @Override\r\n    public boolean isAccountNonExpired() {\r\n        return true;\r\n    }\r\n\r\n    @Override\r\n    public boolean isAccountNonLocked() {\r\n        return true;\r\n    }\r\n\r\n    @Override\r\n    public boolean isCredentialsNonExpired() {\r\n        return true;\r\n    }\r\n\r\n    @Override\r\n    public boolean isEnabled() {\r\n        return true;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dipendente.java b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dipendente.java
+--- a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dipendente.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/model/Dipendente.java	(date 1716910030897)
+@@ -1,22 +1,17 @@
+ package it.dispositiviAziendali.pgM5S2G5.model;
+ 
+ import com.fasterxml.jackson.annotation.JsonIgnore;
+-import it.dispositiviAziendali.pgM5S2G5.enums.Role;
+ import jakarta.persistence.*;
+ import lombok.Data;
+ import lombok.ToString;
+-import org.springframework.security.core.GrantedAuthority;
+-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+-import org.springframework.security.core.userdetails.UserDetails;
+ 
+-import java.util.Collection;
+ import java.util.List;
+ 
+ @Data
+ @Entity
+ @ToString
+ @Table(name = "dipendenti")
+-public class Dipendente implements UserDetails {
++public class Dipendente {
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private int id;
+@@ -26,37 +21,7 @@
+     private String email;
+     private String fotoProfilo;
+     private String password;
+-    @Enumerated(EnumType.STRING)
+-    private Role role;
+     @OneToMany(mappedBy = "dipendente")
+     @JsonIgnore
+     private List<Dispositivo> dispositivi;
+-
+-    @Override
+-    public Collection<? extends GrantedAuthority> getAuthorities() {
+-        return List.of(new SimpleGrantedAuthority(role.name()));
+-    }
+-    @Override
+-    public String getUsername() {
+-        return email;
+-    }
+-    @Override
+-    public boolean isAccountNonExpired() {
+-        return true;
+-    }
+-
+-    @Override
+-    public boolean isAccountNonLocked() {
+-        return true;
+-    }
+-
+-    @Override
+-    public boolean isCredentialsNonExpired() {
+-        return true;
+-    }
+-
+-    @Override
+-    public boolean isEnabled() {
+-        return true;
+-    }
+ }
+Index: pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/ConfigSecurity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.dispositiviAziendali.pgM5S2G5.security;\r\n\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.http.HttpMethod;\r\nimport org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\n\r\nimport java.security.Security;\r\n\r\n@Configuration\r\n@EnableWebSecurity(debug = true)\r\n@EnableMethodSecurity\r\npublic class ConfigSecurity {\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {\r\n        httpSecurity.formLogin(e->e.disable()); // SENZA FRONT END SI BLOCCA\r\n        httpSecurity.csrf(e->e.disable());\r\n        httpSecurity.sessionManagement(e->e.sessionCreationPolicy(SessionCreationPolicy.STATELESS));\r\n        httpSecurity.authorizeHttpRequests(http->http.requestMatchers(HttpMethod.GET, \"/api/**\").permitAll());\r\n        //permetti a tutti di fare get su /auht/**\r\n        httpSecurity.authorizeHttpRequests(http->http.requestMatchers( \"/api/auth/**\").permitAll());\r\n        httpSecurity.authorizeHttpRequests(http->http.requestMatchers(\"/**\").permitAll());\r\n        return httpSecurity.build();\r\n    }\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder(){\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/ConfigSecurity.java b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/ConfigSecurity.java
+--- a/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/ConfigSecurity.java	(revision c9ea7cedf4e24860b384232389f63bbb4039e50f)
++++ b/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/security/ConfigSecurity.java	(date 1716910030898)
+@@ -3,19 +3,15 @@
+ import org.springframework.context.annotation.Bean;
+ import org.springframework.context.annotation.Configuration;
+ import org.springframework.http.HttpMethod;
+-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+ import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+ import org.springframework.security.config.http.SessionCreationPolicy;
+-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+-import org.springframework.security.crypto.password.PasswordEncoder;
+ import org.springframework.security.web.SecurityFilterChain;
+ 
+ import java.security.Security;
+ 
+ @Configuration
+-@EnableWebSecurity(debug = true)
+-@EnableMethodSecurity
++@EnableWebSecurity
+ public class ConfigSecurity {
+     @Bean
+     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+@@ -28,8 +24,4 @@
+         httpSecurity.authorizeHttpRequests(http->http.requestMatchers("/**").permitAll());
+         return httpSecurity.build();
+     }
+-    @Bean
+-    public PasswordEncoder passwordEncoder(){
+-        return new BCryptPasswordEncoder();
+-    }
+ }

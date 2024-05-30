@@ -47,6 +47,7 @@ public class DipendenteController {
         }
         return dipendenteService.saveDipendente(dipendenteDto);
     }*/
+
     @GetMapping("")
     @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Dipendente> getDipendenti(@RequestParam(defaultValue = "0") int page,
