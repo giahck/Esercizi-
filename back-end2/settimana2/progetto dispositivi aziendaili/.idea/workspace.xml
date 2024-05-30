@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
 
     <list default="true" id="53b88590-a0aa-473e-9ba7-1d09bd889a8b" name="Changes" comment="ed">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../settimana3/giorno1/progetto dispositivi aziendaili/env.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../settimana3/giorno1/progetto dispositivi aziendaili/pgM5S2G5/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../settimana3/giorno1/progetto dispositivi aziendaili/pgM5S2G5/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../settimana3/giorno1/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../settimana3/giorno1/progetto dispositivi aziendaili/pgM5S2G5/src/main/java/it/dispositiviAziendali/pgM5S2G5/controller/DipendenteController.java" afterDir="false" />
     </list>
 
     <list default="true" id="53b88590-a0aa-473e-9ba7-1d09bd889a8b" name="Changes" comment="" />
@@ -50,9 +52,9 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "detached8",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/giacc/Desktop/epicode/Esercizi-Epicode/back-end2/settimana3/giorno2/progetto dispositivi aziendaili/pgM5S2G5"
+    "last_opened_file_path": "C:/Users/giacc/Desktop/epicode/Esercizi-Epicode/back-end2/settimana2/progetto dispositivi aziendaili/pgM5S2G5"
   }
 }]]></component>
 

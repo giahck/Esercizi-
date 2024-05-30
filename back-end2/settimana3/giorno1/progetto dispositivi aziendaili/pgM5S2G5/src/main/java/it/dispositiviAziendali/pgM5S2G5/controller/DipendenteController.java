@@ -54,6 +54,7 @@ public class DipendenteController {
         return dipendenteService.saveDipendente(dipendenteDto);
 
     }*/
+
     @GetMapping("")
     @PreAuthorize("hasAuthority('ADMIN')")
 
