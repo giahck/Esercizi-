@@ -10,9 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.security.access.prepost.PreAuthorize;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,16 +41,12 @@ public class DispositivoController {
         return dispositivoService.getDispositivi();
     }
     @GetMapping("/{id}")
-
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('AUDIOVIDEO') or hasAuthority('INFORMATICA')")
-
     public Dispositivo getDispositivoById(@PathVariable UUID id) {
         return dispositivoService.getDispositivoById(id);
     }
     @PutMapping("/{id}")
-
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('AUDIOVIDEO') or hasAuthority('INFORMATICA')")
-
     public ResponseEntity<String> updateDispositivo(@PathVariable UUID id, @Valid @RequestBody DispositivoDto dispositivoDto, BindingResult validation) {
         if (validation.hasErrors()) {
             return ResponseEntity.badRequest().body(validation.getAllErrors().toString());

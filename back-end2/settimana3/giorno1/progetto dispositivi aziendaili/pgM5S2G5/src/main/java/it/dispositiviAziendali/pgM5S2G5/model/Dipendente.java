@@ -1,7 +1,6 @@
 package it.dispositiviAziendali.pgM5S2G5.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import it.dispositiviAziendali.pgM5S2G5.enums.Role;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,23 +10,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.ToString;
-
-
 import java.util.List;
 
 @Data
 @Entity
 @ToString
 @Table(name = "dipendenti")
-
 public class Dipendente implements UserDetails {
-
-public class Dipendente {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -37,7 +26,6 @@ public class Dipendente {
     private String email;
     private String fotoProfilo;
     private String password;
-
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToMany(mappedBy = "dipendente")
@@ -71,9 +59,4 @@ public class Dipendente {
     public boolean isEnabled() {
         return true;
     }
-
-    @OneToMany(mappedBy = "dipendente")
-    @JsonIgnore
-    private List<Dispositivo> dispositivi;
-
 }
